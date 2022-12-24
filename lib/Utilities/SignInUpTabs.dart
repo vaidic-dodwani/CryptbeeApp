@@ -9,32 +9,56 @@ class SignInUpTabs extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
+        SizedBox(
           height: 44,
           width: 156,
-          decoration: BoxDecoration(
-              color: choice == 0 ? Palette.neutralBlack : Colors.transparent,
-              borderRadius: BorderRadius.circular(15)),
-          child: Center(
-            child: Text(
-              "Sign In",
-              style: titleSmall(fontColor: Palette.secondaryOffWhiteColor),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 42,
+                child: Center(
+                  child: Text(
+                    "Sign In",
+                    style: titleSmall(
+                        fontColor: choice == 0
+                            ? Palette.secondaryOffWhiteColor
+                            : Palette.neutralGrey),
+                  ),
+                ),
+              ),
+              Container(
+                height: 2,
+                color: choice == 0 ? Palette.primaryColor : Colors.transparent,
+              )
+            ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 44,
           width: 156,
-          decoration: BoxDecoration(
-              color: choice == 1 ? Palette.neutralBlack : Colors.transparent,
-              borderRadius: BorderRadius.circular(15)),
-          child: Center(
-            child: Text(
-              "Sign Up",
-              style: titleSmall(fontColor: Palette.secondaryOffWhiteColor),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 42,
+                child: Center(
+                  child: Text(
+                    "Sign Up",
+                    style: titleSmall(
+                        fontColor: choice == 1
+                            ? Palette.secondaryOffWhiteColor
+                            : Palette.neutralGrey),
+                  ),
+                ),
+              ),
+              Container(
+                height: 2,
+                color: choice == 1 ? Palette.primaryColor : Colors.transparent,
+              )
+            ],
           ),
-        )
+        ),
       ],
     );
   }

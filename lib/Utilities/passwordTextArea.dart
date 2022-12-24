@@ -1,29 +1,32 @@
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
 
-class TextArea extends StatefulWidget {
+class PasswordTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
 
-  TextArea({super.key, required this.labelText, required this.hintText});
+  PasswordTextArea(
+      {super.key, required this.labelText, required this.hintText});
 
   @override
-  State<TextArea> createState() => _TextAreaState();
+  State<PasswordTextArea> createState() => _PasswordTextAreaState();
 }
 
-class _TextAreaState extends State<TextArea> {
+class _PasswordTextAreaState extends State<PasswordTextArea> {
+  bool _passwordShow = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 0.85 * MediaQuery.of(context).size.width,
       child: TextFormField(
+          obscureText: !_passwordShow,
           controller: widget.controller,
           style: bodyMedium(),
           decoration: InputDecoration(
-            floatingLabelBehavior: FloatingLabelBehavior.always,
             hintStyle: bodyMedium(),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: widget.labelText,
             hintText: widget.hintText,
             labelStyle: labelMedium(),
@@ -47,6 +50,19 @@ class _TextAreaState extends State<TextArea> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(
                     color: Palette.secondaryOffWhiteColor, width: 2)),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _passwordShow
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: Palette.secondaryOffWhiteColor,
+              ),
+              onPressed: () {
+                setState(() {
+                  _passwordShow = !_passwordShow;
+                });
+              },
+            ),
             prefixIcon: const Icon(
               Icons.person_outline_sharp,
               color: Palette.secondaryOffWhiteColor,
