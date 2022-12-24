@@ -63,10 +63,6 @@ class _PasswordTextAreaState extends State<PasswordTextArea> {
                 });
               },
             ),
-            prefixIcon: const Icon(
-              Icons.person_outline_sharp,
-              color: Palette.secondaryOffWhiteColor,
-            ),
           )),
     );
   }

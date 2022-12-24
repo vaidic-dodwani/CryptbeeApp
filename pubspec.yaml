@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.1.6
+  go_router: ^6.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

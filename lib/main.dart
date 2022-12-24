@@ -1,4 +1,5 @@
-import 'package:cryptbee/Screens/SignInPage.dart';
+import 'package:cryptbee/Routing/routing.dart';
+import 'package:cryptbee/Screens/SignUpPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: SignInPage(),
+      routerConfig: AppRouter().router,
     );
   }
 }

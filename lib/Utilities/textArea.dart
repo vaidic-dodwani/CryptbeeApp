@@ -47,10 +47,6 @@ class _TextAreaState extends State<TextArea> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(
                     color: Palette.secondaryOffWhiteColor, width: 2)),
-            prefixIcon: const Icon(
-              Icons.person_outline_sharp,
-              color: Palette.secondaryOffWhiteColor,
-            ),
           )),
     );
   }
