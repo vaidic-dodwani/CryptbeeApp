@@ -1,5 +1,5 @@
 import 'package:cryptbee/Utilities/passwordTextArea.dart';
-import 'package:cryptbee/Utilities/textArea.dart';
+import 'package:cryptbee/Utilities/emailTextArea.dart';
 import 'package:flutter/material.dart';
 import '../Utilities/SignInUpTabs.dart';
 import '../Utilities/authHeading.dart';
@@ -16,7 +16,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  TextArea emailField = TextArea(
+  EmailTextArea emailField = EmailTextArea(
     labelText: "Email Address",
     hintText: "  Enter Email",
   );
@@ -59,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 20),
                 const ForgetPasswordButton(),
                 const SizedBox(height: 16),
-                const logInButton(),
+                logInButton(),
                 const SizedBox(height: 20),
                 authCenterText("Or Login With"),
                 const SizedBox(height: 20),

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
 
@@ -5,10 +8,14 @@ class PasswordTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
+  PassErrorNotifier? passErrorNotifier;
   final Color fontColor = Colors.black;
 
   PasswordTextArea(
-      {super.key, required this.labelText, required this.hintText});
+      {super.key,
+      required this.labelText,
+      required this.hintText,
+      this.passErrorNotifier});
 
   @override
   State<PasswordTextArea> createState() => _PasswordTextAreaState();
@@ -18,12 +25,17 @@ class _PasswordTextAreaState extends State<PasswordTextArea> {
   bool _passwordShow = false;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 0.85 * MediaQuery.of(context).size.width,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
           obscureText: !_passwordShow,
           controller: widget.controller,
           style: bodyMedium(),
+          onChanged: (password) {
+            if (widget.passErrorNotifier != null) {
+              widget.passErrorNotifier!.isStrong(password);
+            }
+          },
           decoration: InputDecoration(
             hintStyle: bodyMedium(),
             floatingLabelBehavior: FloatingLabelBehavior.always,

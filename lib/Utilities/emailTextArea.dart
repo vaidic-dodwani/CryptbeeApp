@@ -1,25 +1,37 @@
+import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
 
-class TextArea extends StatefulWidget {
+class EmailTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
+  EmailErrorNotifier? emailErrorNotifier;
 
-  TextArea({super.key, required this.labelText, required this.hintText});
+  EmailTextArea(
+      {super.key,
+      required this.labelText,
+      required this.hintText,
+      this.emailErrorNotifier});
 
   @override
-  State<TextArea> createState() => _TextAreaState();
+  State<EmailTextArea> createState() => _EmailTextAreaState();
 }
 
-class _TextAreaState extends State<TextArea> {
+class _EmailTextAreaState extends State<EmailTextArea> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 0.85 * MediaQuery.of(context).size.width,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
+          onChanged: (text) {
+            if (widget.emailErrorNotifier != null) {
+              widget.emailErrorNotifier!.isValid(text);
+            }
+          },
           controller: widget.controller,
+          keyboardType: TextInputType.emailAddress,
           style: bodyMedium(),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
