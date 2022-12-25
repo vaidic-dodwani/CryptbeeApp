@@ -1,36 +1,36 @@
+import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
+import 'package:cryptbee/Utilities/formErrors.dart';
 import 'package:cryptbee/Utilities/passwordTextArea.dart';
 import 'package:cryptbee/Utilities/emailTextArea.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Utilities/SignInUpTabs.dart';
 import '../Utilities/authHeading.dart';
-import '../Utilities/forgetPasswordButton.dart';
 import '../Utilities/logInButton.dart';
 import '../Utilities/logoWithName.dart';
 import '../Utilities/oAuthButton.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends ConsumerState<SignUpPage> {
   EmailTextArea emailField = EmailTextArea(
     labelText: "Email Address",
     hintText: "  Enter Email",
+    emailErrorNotifier: signUpEmailErrorNotifer,
   );
-  PasswordTextArea passwordField = PasswordTextArea(
-    labelText: "Password",
-    hintText: "  At least 8 characters.",
-  );
-  PasswordTextArea confirmPasswordField = PasswordTextArea(
-    labelText: "Password",
-    hintText: "  At least 8 characters.",
+  ErrorLines emailError = ErrorLines(
+    errorProvider: signUpEmailErrorProvider,
   );
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final emailErrorMsg = ref.watch(signUpEmailErrorProvider);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -52,16 +52,23 @@ class _SignUpPageState extends State<SignUpPage> {
                 authHeading("Register Now"),
                 const SizedBox(height: 24),
                 emailField,
-                const SizedBox(height: 32),
-                passwordField,
-                const SizedBox(height: 32),
-                confirmPasswordField,
+                const SizedBox(height: 4),
+                emailError,
+                const SizedBox(height: 12),
+                logInButton(
+                  text: "Sign Up",
+                  loaderProvider: signUpEmailButtonLoaderProvider,
+                  function: () async {
+                    if (emailErrorMsg == " ") {
+                      signUpEmailButtonLoaderNotifier.toggle();
+                      Future.delayed(const Duration(milliseconds: 500), () {
+                        signUpEmailButtonLoaderNotifier.toggle();
+                      });
+                    }
+                  },
+                ),
                 const SizedBox(height: 20),
-                const ForgetPasswordButton(),
-                const SizedBox(height: 16),
-                logInButton(),
-                const SizedBox(height: 20),
-                authCenterText("Or Login With"),
+                authCenterText("Or Sign Up With"),
                 const SizedBox(height: 20),
                 const OAuthButton(),
               ],

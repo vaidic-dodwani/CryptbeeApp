@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:isolate';
-
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/SignInUpTabs.dart';
 import 'package:cryptbee/Utilities/forgetPasswordButton.dart';
@@ -73,11 +70,9 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 const ForgetPasswordButton(),
                 const SizedBox(height: 16),
                 logInButton(
+                  text: "Login",
                   loaderProvider: signInButtonLoaderProvider,
                   function: () async {
-                    log("emailError msg =\"$emailErrorMsg\"");
-                    log("passError msg =\"$passErrorMsg\"");
-
                     if (emailErrorMsg == " " && passErrorMsg == " ") {
                       signInButtonLoaderNotifier.toggle();
                       Future.delayed(const Duration(milliseconds: 500), () {

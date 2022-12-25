@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'Riverpod/riverpod_classes.dart';
 
 class logInButton extends ConsumerWidget {
+  String text;
   void Function()? function;
   StateNotifierProvider<buttonLoaderNotifier, bool>? loaderProvider;
   bool isloading = false;
 
-  logInButton({super.key, this.function, this.loaderProvider});
+  logInButton(
+      {super.key, required this.text, this.function, this.loaderProvider});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +34,7 @@ class logInButton extends ConsumerWidget {
                     ),
                   ),
                   child: Text(
-                    "Login",
+                    text,
                     style: titleMedium(),
                   )),
             ),
