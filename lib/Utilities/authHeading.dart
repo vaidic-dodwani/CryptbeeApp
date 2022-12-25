@@ -23,3 +23,13 @@ Align authCenterText(String text) {
     ),
   );
 }
+
+Align authTitleLargeText(String text) {
+  return Align(
+    alignment: Alignment.center,
+    child: Text(
+      text,
+      style: titleLarge(),
+    ),
+  );
+}

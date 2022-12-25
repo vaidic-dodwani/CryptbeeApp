@@ -1,4 +1,6 @@
 import 'package:cryptbee/Routing/route_names.dart';
+import 'package:cryptbee/Screens/ForgetPasswordPage.dart';
+import 'package:cryptbee/Screens/MobileNumberPage.dart';
 import 'package:cryptbee/Screens/SetPasswordPage.dart';
 import 'package:cryptbee/Screens/SignUpPage.dart';
 import 'package:cryptbee/Screens/home.dart';
@@ -15,7 +17,7 @@ class AppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return const MaterialPage(
-            child: OnboardingPage(),
+            child: MobileNumberPage(),
           );
         },
       ),
@@ -52,6 +54,24 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: SetPasswordPage(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteNames.forgetPassword,
+        path: '/forgetpassword',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: ForgetPasswordPage(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouteNames.mobileNumber,
+        path: '/mobilenumber',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: MobileNumberPage(),
           );
         },
       ),

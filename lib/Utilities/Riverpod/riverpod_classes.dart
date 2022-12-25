@@ -52,13 +52,24 @@ class PassErrorNotifier extends StateNotifier<String> {
   }
 }
 
+class MobileNumberErrorNotifier extends StateNotifier<String> {
+  MobileNumberErrorNotifier() : super(" ");
+
+  void isValid(text) {
+    if (text.length == 0)
+      state = "";
+    else if (RegExp(r'^[0-9]{10}$').hasMatch(text)) {
+      state = " ";
+    } else {
+      state = "Invalid Mobile Number";
+    }
+  }
+}
+
 class buttonLoaderNotifier extends StateNotifier<bool> {
   buttonLoaderNotifier() : super(false);
 
   void toggle() {
-    log("state.toString()");
-    log("hello");
-
     state = !state;
   }
 }

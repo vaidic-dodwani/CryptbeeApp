@@ -49,3 +49,19 @@ final setPassConfirmPasswordErrorNotifer = PassErrorNotifier();
 final setPassConfirmPasswordErrorProvider =
     StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => setPassConfirmPasswordErrorNotifer);
+
+//FORGET PASSWORD
+
+final forgetPassSignUpEmailErrorNotifer = EmailErrorNotifier();
+
+final forgetPassSignUpEmailErrorProvider =
+    StateNotifierProvider<EmailErrorNotifier, String>(
+        (ref) => forgetPassSignUpEmailErrorNotifer);
+
+//MOBILENUMBER
+
+final mobileNumberMobileErrorNotifier = MobileNumberErrorNotifier();
+
+final mobileNumberMobileErrorProvider =
+    StateNotifierProvider<MobileNumberErrorNotifier, String>(
+        (ref) => mobileNumberMobileErrorNotifier);
