@@ -37,7 +37,7 @@ TextStyle titleLarge({Color fontColor = Colors.white}) => TextStyle(
       fontSize: 22,
       color: fontColor,
       fontFamily: "Poppins",
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w700,
     );
 
 TextStyle titleMedium({Color fontColor = Colors.white}) => TextStyle(

@@ -15,9 +15,11 @@ class ErrorLines extends ConsumerWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              ref.watch(errorProvider!).toString(),
+              errorProvider != null
+                  ? ref.watch(errorProvider!).toString()
+                  : "No Provider",
               maxLines: 2,
               style: labelMedium(
                 fontColor: Palette.secondaryErrorColor,

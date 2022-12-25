@@ -46,6 +46,10 @@ class PassErrorNotifier extends StateNotifier<String> {
       }
     }
   }
+
+  void setVal(String text) {
+    state = text;
+  }
 }
 
 class buttonLoaderNotifier extends StateNotifier<bool> {
