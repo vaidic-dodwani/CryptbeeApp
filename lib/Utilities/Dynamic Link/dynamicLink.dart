@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,15 +16,13 @@ Future<void> initDynamicLink() async {
 
   dynamicLinks.onLink.listen((dynamicLinkData) {
     data = dynamicLinkData;
-    App.navigatorKey.currentContext!.goNamed(RouteNames.verifier);
-    // final success = true;
-    // if (success) {
-    //   final prefs = await SharedPreferences.getInstance();
-    //   await prefs.setBool('openedLink', true);
-    //   if (await prefs.setBool('verified', true)) log("set");
-    // } else {}
+
+    App.navigatorKey.currentContext!
+        .goNamed(RouteNames.verifier, params: {'id': "opened"});
   });
   if (data != null) {
-    App.navigatorKey.currentContext!.goNamed(RouteNames.verifier);
+    log(data!.link.query);
+    App.navigatorKey.currentContext!
+        .goNamed(RouteNames.verifier, params: {'id': "dead"});
   }
 }

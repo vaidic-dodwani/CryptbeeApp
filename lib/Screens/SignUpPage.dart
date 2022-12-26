@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/formErrors.dart';
 import 'package:cryptbee/Utilities/emailTextArea.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../Utilities/SignInUpTabs.dart';
 import '../Utilities/authHeading.dart';
 import '../Utilities/logInButton.dart';
@@ -93,7 +95,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                       if (confirmPassErrorMsg == " ") {
                         if (passArea.controller.text ==
                             confirmPassArea.controller.text) {
-                          log("attempt register");
+                          context.goNamed(RouteNames.mailOpener);
                         } else {
                           signUpConfirmPasswordErrorNotifer
                               .setVal("Passwords Dont Match");

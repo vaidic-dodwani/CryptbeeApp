@@ -17,9 +17,13 @@ Align authHeading(String text) {
 Align authCenterText(String text) {
   return Align(
     alignment: Alignment.center,
-    child: Text(
-      text,
-      style: bodyMedium(),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: bodyMedium(),
+      ),
     ),
   );
 }
@@ -29,6 +33,7 @@ Align authTitleLargeText(String text) {
     alignment: Alignment.center,
     child: Text(
       text,
+      textAlign: TextAlign.center,
       style: titleLarge(),
     ),
   );
