@@ -63,3 +63,12 @@ final mobileNumberMobileErrorNotifier = MobileNumberErrorNotifier();
 final mobileNumberMobileErrorProvider =
     StateNotifierProvider<MobileNumberErrorNotifier, String>(
         (ref) => mobileNumberMobileErrorNotifier);
+
+//OTP BOX
+
+final twoFactorTimerNotifer = TimerNotifier();
+
+final twoFactorTimerProvider =
+    StateNotifierProvider<TimerNotifier, int?>((ref) {
+  return twoFactorTimerNotifer;
+});

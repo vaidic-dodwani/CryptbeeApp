@@ -73,3 +73,19 @@ class buttonLoaderNotifier extends StateNotifier<bool> {
     state = !state;
   }
 }
+
+class TimerNotifier extends StateNotifier<int?> {
+  TimerNotifier() : super(DateTime.now().millisecondsSinceEpoch + 60000);
+
+  void increaseTime(int sec) {
+    if (state == null) {
+      state = DateTime.now().millisecondsSinceEpoch;
+    } else {
+      state = DateTime.now().millisecondsSinceEpoch + (sec * 1000);
+    }
+  }
+
+  void initTime() {
+    state ??= DateTime.now().millisecondsSinceEpoch + 60000;
+  }
+}

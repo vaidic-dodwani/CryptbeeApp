@@ -36,9 +36,11 @@ dependencies:
   firebase_dynamic_links: ^5.0.10
   flutter:
     sdk: flutter
+  flutter_countdown_timer: ^4.1.0
   flutter_riverpod: ^2.1.2
   flutter_svg: ^1.1.6
   go_router: ^6.0.0
+  pinput: ^2.2.20
   shared_preferences: ^2.0.15
   toast: ^0.3.0
 

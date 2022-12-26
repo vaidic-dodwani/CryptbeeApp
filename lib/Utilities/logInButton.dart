@@ -20,7 +20,7 @@ class logInButton extends ConsumerWidget {
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: SizedBox(
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               height: 48,
               child: ElevatedButton(
                   onPressed: function,

@@ -6,4 +6,5 @@ class RouteNames {
   static const String mobileNumber = "mobileNumber";
   static const String verifier = "verifier";
   static const String mailOpener = "mailopener";
+  static const String twoFactor = "twofactor";
 }

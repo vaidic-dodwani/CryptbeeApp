@@ -2,6 +2,7 @@ import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Screens/ForgetPasswordPage.dart';
 import 'package:cryptbee/Screens/MobileNumberPage.dart';
 import 'package:cryptbee/Screens/SignUpPage.dart';
+import 'package:cryptbee/Screens/TwoFactorPage.dart';
 import 'package:cryptbee/Screens/mailOpener.dart';
 import 'package:cryptbee/Screens/onboarding.dart';
 import 'package:cryptbee/Screens/verificationChecker.dart';
@@ -42,6 +43,15 @@ class AppRouter {
                       );
                     },
                   ),
+                  GoRoute(
+                    name: RouteNames.twoFactor,
+                    path: 'twofactor',
+                    pageBuilder: (context, state) {
+                      return const MaterialPage(
+                        child: TwoFactorPage(),
+                      );
+                    },
+                  ),
                 ]),
             GoRoute(
                 name: RouteNames.signUp,
@@ -54,7 +64,7 @@ class AppRouter {
                 routes: [
                   GoRoute(
                     name: RouteNames.mailOpener,
-                    path: '/mailopener',
+                    path: 'mailopener',
                     pageBuilder: (context, state) {
                       return const MaterialPage(
                         child: MailOpener(),
