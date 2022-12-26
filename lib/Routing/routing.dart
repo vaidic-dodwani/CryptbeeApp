@@ -14,49 +14,43 @@ class AppRouter {
     navigatorKey: App.navigatorKey,
     routes: [
       GoRoute(
-        path: '/',
-        pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: OnboardingPage(),
-          );
-        },
-      ),
-      GoRoute(
-        name: RouteNames.onBoarding,
-        path: '/onboarding',
-        pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: OnboardingPage(),
-          );
-        },
-      ),
-      GoRoute(
-        name: RouteNames.signIn,
-        path: '/signin',
-        pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: SignInPage(),
-          );
-        },
-      ),
-      GoRoute(
-        name: RouteNames.signUp,
-        path: '/signup',
-        pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: SignUpPage(),
-          );
-        },
-      ),
-      GoRoute(
-        name: RouteNames.forgetPassword,
-        path: '/forgetpassword',
-        pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: ForgetPasswordPage(),
-          );
-        },
-      ),
+          name: RouteNames.onBoarding,
+          path: '/',
+          pageBuilder: (context, state) {
+            return const MaterialPage(
+              child: OnboardingPage(),
+            );
+          },
+          routes: [
+            GoRoute(
+                name: RouteNames.signIn,
+                path: 'signin',
+                pageBuilder: (context, state) {
+                  return const MaterialPage(
+                    child: SignInPage(),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    name: RouteNames.forgetPassword,
+                    path: 'forgetpassword',
+                    pageBuilder: (context, state) {
+                      return const MaterialPage(
+                        child: ForgetPasswordPage(),
+                      );
+                    },
+                  ),
+                ]),
+            GoRoute(
+              name: RouteNames.signUp,
+              path: 'signup',
+              pageBuilder: (context, state) {
+                return const MaterialPage(
+                  child: SignUpPage(),
+                );
+              },
+            ),
+          ]),
       GoRoute(
         name: RouteNames.mobileNumber,
         path: '/mobilenumber',

@@ -1,5 +1,7 @@
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgetPasswordButton extends StatelessWidget {
   const ForgetPasswordButton({super.key});
@@ -7,7 +9,9 @@ class ForgetPasswordButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.goNamed(RouteNames.forgetPassword);
+      },
       child: Padding(
         padding: const EdgeInsets.only(right: 16.0),
         child: Align(
