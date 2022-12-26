@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "388001539441",
+    "project_id": "cryptbee-f281d",
+    "storage_bucket": "cryptbee-f281d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388001539441:android:8c1aeba187ea2b146882d0",
+        "android_client_info": {
+          "package_name": "com.example.cryptbee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388001539441-ktcis4tjoo6mrfsnvli60ocdqtu1r7hk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cryptbee",
+            "certificate_hash": "8a8935b61ac1cec170a2ebc172b18b8f60ddd939"
+          }
+        },
+        {
+          "client_id": "388001539441-v0ut7p7v68c2nflc3fn28ri3tljiscnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeitwgYAYlTYCouR15JlIfyTwM1tayxME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388001539441-v0ut7p7v68c2nflc3fn28ri3tljiscnf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

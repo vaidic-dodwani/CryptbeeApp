@@ -1,23 +1,23 @@
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Screens/ForgetPasswordPage.dart';
 import 'package:cryptbee/Screens/MobileNumberPage.dart';
-import 'package:cryptbee/Screens/SetPasswordPage.dart';
 import 'package:cryptbee/Screens/SignUpPage.dart';
-import 'package:cryptbee/Screens/home.dart';
 import 'package:cryptbee/Screens/onboarding.dart';
+import 'package:cryptbee/Utilities/Dynamic%20Link/dynamicLink.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../Screens/SignInPage.dart';
 
 class AppRouter {
-  GoRouter router = GoRouter(
+  static GoRouter router = GoRouter(
+    navigatorKey: App.navigatorKey,
     routes: [
       GoRoute(
         path: '/',
         pageBuilder: (context, state) {
           return const MaterialPage(
-            child: MobileNumberPage(),
+            child: OnboardingPage(),
           );
         },
       ),
@@ -45,15 +45,6 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: SignUpPage(),
-          );
-        },
-      ),
-      GoRoute(
-        name: RouteNames.setPassword,
-        path: '/setpassword',
-        pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: SetPasswordPage(),
           );
         },
       ),

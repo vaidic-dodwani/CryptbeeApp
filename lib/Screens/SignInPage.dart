@@ -42,6 +42,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
     final emailErrorMsg = ref.watch(signInEmailErrorProvider);
     final passErrorMsg = ref.watch(signInPasswordErrorProvider);
     final size = MediaQuery.of(context).size;
+    // openedDynaLink(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,

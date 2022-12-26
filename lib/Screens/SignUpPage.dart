@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/formErrors.dart';
-import 'package:cryptbee/Utilities/passwordTextArea.dart';
 import 'package:cryptbee/Utilities/emailTextArea.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import '../Utilities/authHeading.dart';
 import '../Utilities/logInButton.dart';
 import '../Utilities/logoWithName.dart';
 import '../Utilities/oAuthButton.dart';
+import '../Utilities/passwordTextArea.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
@@ -25,11 +27,34 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   );
   ErrorLines emailError = ErrorLines(
     errorProvider: signUpEmailErrorProvider,
+    height: 35,
   );
+  final passArea = PasswordTextArea(
+    labelText: "Password",
+    hintText: "Atleast 8 characters",
+    passErrorNotifier: signUpPasswordErrorNotifer,
+  );
+
+  ErrorLines passErrorLines = ErrorLines(
+    errorProvider: signUpPasswordErrorProvider,
+    height: 35,
+  );
+
+  final confirmPassArea = PasswordTextArea(
+    labelText: "Password",
+    hintText: "Atleast 8 characters",
+    passErrorNotifier: signUpConfirmPasswordErrorNotifer,
+  );
+  ErrorLines confirmPassErrorLines = ErrorLines(
+    errorProvider: signUpConfirmPasswordErrorProvider,
+    height: 35,
+  );
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final emailErrorMsg = ref.watch(signUpEmailErrorProvider);
+    final confirmPassErrorMsg = ref.watch(signUpConfirmPasswordErrorProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -52,18 +77,32 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 authHeading("Register Now"),
                 const SizedBox(height: 24),
                 emailField,
-                const SizedBox(height: 4),
                 emailError,
+                const SizedBox(height: 16),
+                passArea,
+                passErrorLines,
+                const SizedBox(height: 16),
+                confirmPassArea,
+                confirmPassErrorLines,
                 const SizedBox(height: 12),
                 logInButton(
                   text: "Sign Up",
                   loaderProvider: signUpEmailButtonLoaderProvider,
                   function: () async {
                     if (emailErrorMsg == " ") {
-                      signUpEmailButtonLoaderNotifier.toggle();
-                      Future.delayed(const Duration(milliseconds: 500), () {
+                      if (confirmPassErrorMsg == " ") {
+                        if (passArea.controller.text ==
+                            confirmPassArea.controller.text) {
+                          log("attempt register");
+                        } else {
+                          signUpConfirmPasswordErrorNotifer
+                              .setVal("Passwords Dont Match");
+                        }
                         signUpEmailButtonLoaderNotifier.toggle();
-                      });
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          signUpEmailButtonLoaderNotifier.toggle();
+                        });
+                      }
                     }
                   },
                 ),

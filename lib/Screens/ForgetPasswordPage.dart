@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cryptbee/Utilities/Dynamic%20Link/dynamicLink.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/authHeading.dart';
 import 'package:cryptbee/Utilities/emailTextArea.dart';

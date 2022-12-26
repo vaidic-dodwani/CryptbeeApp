@@ -31,11 +31,15 @@ environment:
 dependencies:
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
+  firebase_core: ^2.4.0
+  firebase_dynamic_links: ^5.0.10
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.1.2
   flutter_svg: ^1.1.6
   go_router: ^6.0.0
+  shared_preferences: ^2.0.15
+  toast: ^0.3.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

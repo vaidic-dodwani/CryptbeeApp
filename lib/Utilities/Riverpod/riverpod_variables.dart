@@ -36,19 +36,17 @@ final signUpEmailButtonLoaderProvider =
   return signUpEmailButtonLoaderNotifier;
 });
 
-// SET PASSWORD
+final signUpPasswordErrorNotifer = PassErrorNotifier();
 
-final setPassPasswordErrorNotifer = PassErrorNotifier();
-
-final setPassPasswordErrorProvider =
+final signUpPasswordErrorProvider =
     StateNotifierProvider<PassErrorNotifier, String>(
-        (ref) => setPassPasswordErrorNotifer);
+        (ref) => signUpPasswordErrorNotifer);
 
-final setPassConfirmPasswordErrorNotifer = PassErrorNotifier();
+final signUpConfirmPasswordErrorNotifer = PassErrorNotifier();
 
-final setPassConfirmPasswordErrorProvider =
+final signUpConfirmPasswordErrorProvider =
     StateNotifierProvider<PassErrorNotifier, String>(
-        (ref) => setPassConfirmPasswordErrorNotifer);
+        (ref) => signUpConfirmPasswordErrorNotifer);
 
 //FORGET PASSWORD
 

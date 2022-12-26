@@ -1,11 +1,12 @@
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/logInButton.dart';
 import 'package:cryptbee/Utilities/logoWithName.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -73,7 +74,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
 
               const SizedBox(height: 38),
-              logInButton(text: "Login"),
+              logInButton(
+                text: "Login",
+                function: () {
+                  context.goNamed(RouteNames.signIn);
+                },
+              ),
               const SizedBox(height: 38),
               GestureDetector(
                 onTap: (() {
