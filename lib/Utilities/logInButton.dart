@@ -7,11 +7,15 @@ import 'Riverpod/riverpod_classes.dart';
 class logInButton extends ConsumerWidget {
   String text;
   void Function()? function;
-  StateNotifierProvider<buttonLoaderNotifier, bool>? loaderProvider;
+  StateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
   bool isloading = false;
-
+  double? width;
   logInButton(
-      {super.key, required this.text, this.function, this.loaderProvider});
+      {super.key,
+      required this.text,
+      this.function,
+      this.loaderProvider,
+      this.width});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +24,7 @@ class logInButton extends ConsumerWidget {
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: SizedBox(
-              width: MediaQuery.of(context).size.width,
+              width: width ?? MediaQuery.of(context).size.width,
               height: 48,
               child: ElevatedButton(
                   onPressed: function,

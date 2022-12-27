@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/logInButton.dart';
@@ -82,9 +81,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
               const SizedBox(height: 38),
               GestureDetector(
-                onTap: (() {
-                  log("skip");
-                }),
+                onTap: (() {}),
                 child: Text(
                   "Skip",
                   style: titleMedium(),

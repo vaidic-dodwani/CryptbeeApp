@@ -6,9 +6,9 @@ class EmailErrorNotifier extends StateNotifier<String> {
   EmailErrorNotifier() : super(" ");
 
   void isValid(text) {
-    if (text.length == 0)
+    if (text.length == 0) {
       state = "";
-    else if (RegExp(
+    } else if (RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(text)) {
       state = " ";
@@ -56,9 +56,9 @@ class MobileNumberErrorNotifier extends StateNotifier<String> {
   MobileNumberErrorNotifier() : super(" ");
 
   void isValid(text) {
-    if (text.length == 0)
+    if (text.length == 0) {
       state = "";
-    else if (RegExp(r'^[0-9]{10}$').hasMatch(text)) {
+    } else if (RegExp(r'^[0-9]{10}$').hasMatch(text)) {
       state = " ";
     } else {
       state = "Invalid Mobile Number";
@@ -66,8 +66,8 @@ class MobileNumberErrorNotifier extends StateNotifier<String> {
   }
 }
 
-class buttonLoaderNotifier extends StateNotifier<bool> {
-  buttonLoaderNotifier() : super(false);
+class ButtonLoaderNotifier extends StateNotifier<bool> {
+  ButtonLoaderNotifier() : super(false);
 
   void toggle() {
     state = !state;
@@ -87,5 +87,33 @@ class TimerNotifier extends StateNotifier<int?> {
 
   void initTime() {
     state ??= DateTime.now().millisecondsSinceEpoch + 60000;
+  }
+}
+
+class PanErrorNotifier extends StateNotifier<String> {
+  PanErrorNotifier() : super(" ");
+
+  void isValid(text) {
+    if (text.length == 0) {
+      state = "";
+    } else if (RegExp(r"[A-Z]{5}[0-9]{4}[A-Z]{1}").hasMatch(text)) {
+      state = " ";
+    } else {
+      state = "Invalid Pan Number";
+    }
+  }
+}
+
+class NameErrorNotifier extends StateNotifier<String> {
+  NameErrorNotifier() : super(" ");
+
+  void isValid(text) {
+    if (text.length == 0) {
+      state = "";
+    } else if (!RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(text)) {
+      state = " ";
+    } else {
+      state = "Enter Valid Name";
+    }
   }
 }

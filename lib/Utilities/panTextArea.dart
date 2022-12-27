@@ -2,41 +2,39 @@ import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
 
-class PasswordTextArea extends StatefulWidget {
+class PanTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
-  PassErrorNotifier? passErrorNotifier;
   final Color fontColor = Colors.black;
+  PanErrorNotifier? panErrorNotifier;
 
-  PasswordTextArea(
+  PanTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.passErrorNotifier});
+      this.panErrorNotifier});
 
   @override
-  State<PasswordTextArea> createState() => _PasswordTextAreaState();
+  State<PanTextArea> createState() => _PanTextAreaState();
 }
 
-class _PasswordTextAreaState extends State<PasswordTextArea> {
-  bool _passwordShow = false;
+class _PanTextAreaState extends State<PanTextArea> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
-          obscureText: !_passwordShow,
-          controller: widget.controller,
-          style: bodyMedium(),
-          onChanged: (password) {
-            if (widget.passErrorNotifier != null) {
-              widget.passErrorNotifier!.isStrong(password);
+          onChanged: (text) {
+            if (widget.panErrorNotifier != null) {
+              widget.panErrorNotifier!.isValid(text);
             }
           },
+          controller: widget.controller,
+          style: bodyMedium(),
           decoration: InputDecoration(
-            hintStyle: bodyMedium(),
             floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintStyle: bodyMedium(),
             labelText: widget.labelText,
             hintText: widget.hintText,
             labelStyle: labelMedium(),
@@ -60,19 +58,6 @@ class _PasswordTextAreaState extends State<PasswordTextArea> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(
                     color: Palette.secondaryOffWhiteColor, width: 2)),
-            suffixIcon: IconButton(
-              icon: Icon(
-                _passwordShow
-                    ? Icons.visibility_outlined
-                    : Icons.visibility_off_outlined,
-                color: Palette.secondaryOffWhiteColor,
-              ),
-              onPressed: () {
-                setState(() {
-                  _passwordShow = !_passwordShow;
-                });
-              },
-            ),
           )),
     );
   }

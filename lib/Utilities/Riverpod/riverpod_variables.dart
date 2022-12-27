@@ -14,10 +14,10 @@ final signInPasswordErrorProvider =
     StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => signInPasswordErrorNotifer);
 
-final signInButtonLoaderNotifier = buttonLoaderNotifier();
+final signInButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final signInButtonLoaderProvider =
-    StateNotifierProvider<buttonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return signInButtonLoaderNotifier;
 });
 
@@ -29,10 +29,10 @@ final signUpEmailErrorProvider =
     StateNotifierProvider<EmailErrorNotifier, String>(
         (ref) => signUpEmailErrorNotifer);
 
-final signUpEmailButtonLoaderNotifier = buttonLoaderNotifier();
+final signUpEmailButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final signUpEmailButtonLoaderProvider =
-    StateNotifierProvider<buttonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return signUpEmailButtonLoaderNotifier;
 });
 
@@ -71,4 +71,20 @@ final twoFactorTimerNotifer = TimerNotifier();
 final twoFactorTimerProvider =
     StateNotifierProvider<TimerNotifier, int?>((ref) {
   return twoFactorTimerNotifer;
+});
+
+// PanNumberPage
+
+final panNumberPanErrorNotifier = PanErrorNotifier();
+
+final panNumberPanErrorProvider =
+    StateNotifierProvider<PanErrorNotifier, String>((ref) {
+  return panNumberPanErrorNotifier;
+});
+
+final panNumberNameErrorNotifier = NameErrorNotifier();
+
+final panNumberNameErrorProvider =
+    StateNotifierProvider<NameErrorNotifier, String>((ref) {
+  return panNumberNameErrorNotifier;
 });

@@ -1,9 +1,10 @@
-import 'package:android_intent_plus/android_intent.dart';
+
 import 'package:cryptbee/Utilities/authHeading.dart';
 import 'package:cryptbee/Utilities/logInButton.dart';
 import 'package:cryptbee/Utilities/logoWithName.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MailOpener extends StatelessWidget {
   const MailOpener({super.key});
@@ -34,11 +35,11 @@ class MailOpener extends StatelessWidget {
             const SizedBox(height: 16),
             logInButton(
               text: "Open Your Gmail",
-              function: () {
-                AndroidIntent intent = const AndroidIntent(
-                    action: 'android.intent.action.MAIN',
-                    category: 'android.intent.category.APP_EMAIL');
-                intent.launch();
+              function: () async {
+                final url = Uri.parse('mailto:');
+                if (!await launchUrl(url)) {
+                  throw 'Could not launch $url';
+                }
               },
             )
           ],

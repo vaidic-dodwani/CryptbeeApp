@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Utilities/logInButton.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
@@ -82,8 +80,7 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
                   GestureDetector(
                     onTap: () {
                       final nowTime = DateTime.now().millisecondsSinceEpoch;
-                      log((nowTime - endTime!).toString());
-                      if (nowTime >= endTime) {
+                      if (nowTime >= endTime!) {
                         widget.timerNotifier.increaseTime(60);
                       }
                     },

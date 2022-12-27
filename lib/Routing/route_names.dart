@@ -1,4 +1,6 @@
 class RouteNames {
+  static const String tester = "tester";
+//
   static const String onBoarding = "onboarding";
   static const String signIn = "signin";
   static const String signUp = "signup";
@@ -7,4 +9,5 @@ class RouteNames {
   static const String verifier = "verifier";
   static const String mailOpener = "mailopener";
   static const String twoFactor = "twofactor";
+  static const String panNumber = "pannumber";
 }

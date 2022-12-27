@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/utilities.dart';
 import 'package:flutter/material.dart';
