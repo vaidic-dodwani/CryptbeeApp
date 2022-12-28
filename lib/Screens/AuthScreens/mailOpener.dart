@@ -1,7 +1,6 @@
-
-import 'package:cryptbee/Utilities/authHeading.dart';
-import 'package:cryptbee/Utilities/logInButton.dart';
-import 'package:cryptbee/Utilities/logoWithName.dart';
+import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
+import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
+import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,7 +12,11 @@ class MailOpener extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        Image.asset("assests/background.png"),
+        Image.asset(
+          "assests/background.png",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+        ),
         Column(
           children: [
             const SizedBox(height: 38),

@@ -1,36 +1,38 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+
 import 'package:flutter/material.dart';
 
-class PanTextArea extends StatefulWidget {
+class EmailTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
-  PanErrorNotifier? panErrorNotifier;
+  EmailErrorNotifier? emailErrorNotifier;
 
-  PanTextArea(
+  EmailTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.panErrorNotifier});
+      this.emailErrorNotifier});
 
   @override
-  State<PanTextArea> createState() => _PanTextAreaState();
+  State<EmailTextArea> createState() => _EmailTextAreaState();
 }
 
-class _PanTextAreaState extends State<PanTextArea> {
+class _EmailTextAreaState extends State<EmailTextArea> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
           onChanged: (text) {
-            if (widget.panErrorNotifier != null) {
-              widget.panErrorNotifier!.isValid(text);
+            if (widget.emailErrorNotifier != null) {
+              widget.emailErrorNotifier!.isValid(text);
             }
           },
           controller: widget.controller,
+          keyboardType: TextInputType.emailAddress,
           style: bodyMedium(),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,

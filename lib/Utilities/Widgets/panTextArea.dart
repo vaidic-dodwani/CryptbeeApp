@@ -1,41 +1,39 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+
 import 'package:flutter/material.dart';
 
-class MobileTextArea extends StatefulWidget {
+class PanTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
-  MobileNumberErrorNotifier? mobileNumberErrorNotifier;
+  PanErrorNotifier? panErrorNotifier;
 
-  MobileTextArea(
+  PanTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.mobileNumberErrorNotifier});
+      this.panErrorNotifier});
 
   @override
-  State<MobileTextArea> createState() => _MobileTextAreaState();
+  State<PanTextArea> createState() => _PanTextAreaState();
 }
 
-class _MobileTextAreaState extends State<MobileTextArea> {
+class _PanTextAreaState extends State<PanTextArea> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
           onChanged: (text) {
-            if (widget.mobileNumberErrorNotifier != null) {
-              widget.mobileNumberErrorNotifier!.isValid(text);
+            if (widget.panErrorNotifier != null) {
+              widget.panErrorNotifier!.isValid(text);
             }
           },
           controller: widget.controller,
-          keyboardType: TextInputType.number,
-          maxLength: 10,
           style: bodyMedium(),
           decoration: InputDecoration(
-            counterText: "",
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintStyle: bodyMedium(),
             labelText: widget.labelText,

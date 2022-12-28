@@ -1,15 +1,19 @@
+import 'package:cryptbee/Config/apiIntegration.dart';
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
-import 'package:cryptbee/Utilities/SignInUpTabs.dart';
-import 'package:cryptbee/Utilities/forgetPasswordButton.dart';
-import 'package:cryptbee/Utilities/formErrors.dart';
-import 'package:cryptbee/Utilities/logInButton.dart';
-import 'package:cryptbee/Utilities/logoWithName.dart';
-import 'package:cryptbee/Utilities/oAuthButton.dart';
-import 'package:cryptbee/Utilities/emailTextArea.dart';
-import 'package:cryptbee/Utilities/authHeading.dart';
-import 'package:cryptbee/Utilities/passwordTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/SignInUpTabs.dart';
+import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
+import 'package:cryptbee/Utilities/Widgets/emailTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/forgetPasswordButton.dart';
+import 'package:cryptbee/Utilities/Widgets/formErrors.dart';
+import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
+import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
+import 'package:cryptbee/Utilities/Widgets/oAuthButton.dart';
+import 'package:cryptbee/Utilities/Widgets/passwordTextArea.dart';
+import 'package:cryptbee/Utilities/apiFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage extends ConsumerStatefulWidget {
   const SignInPage({super.key});
@@ -53,6 +57,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
           ),
           Column(
             children: [
+              SizedBox(height: 38),
               const CenterLogo(),
               const SizedBox(height: 40),
               const SignInUpTabs(choice: 0),
@@ -74,9 +79,21 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 function: () async {
                   if (emailErrorMsg == " " && passErrorMsg == " ") {
                     signInButtonLoaderNotifier.toggle();
-                    Future.delayed(const Duration(milliseconds: 500), () {
-                      signInButtonLoaderNotifier.toggle();
-                    });
+                    final response = await ApiCalls.signIn(
+                        emailField.controller.text,
+                        passwordField.controller.text);
+                    signInButtonLoaderNotifier.toggle();
+                    if (response == noInternet) {
+                      internetHandler(context);
+                    } else {
+                      if (response['statusCode'] == 200) {
+                        await saveData(response);
+                        context.goNamed(RouteNames.homePage);
+                      } else {
+                        signInPasswordErrorNotifer
+                            .setVal(response['non_field_errors'][0]);
+                      }
+                    }
                   }
                 },
               ),

@@ -1,41 +1,43 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+
 import 'package:flutter/material.dart';
 
-class EmailTextArea extends StatefulWidget {
+class PasswordTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   TextEditingController controller = TextEditingController();
+  PassErrorNotifier? passErrorNotifier;
   final Color fontColor = Colors.black;
-  EmailErrorNotifier? emailErrorNotifier;
 
-  EmailTextArea(
+  PasswordTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.emailErrorNotifier});
+      this.passErrorNotifier});
 
   @override
-  State<EmailTextArea> createState() => _EmailTextAreaState();
+  State<PasswordTextArea> createState() => _PasswordTextAreaState();
 }
 
-class _EmailTextAreaState extends State<EmailTextArea> {
+class _PasswordTextAreaState extends State<PasswordTextArea> {
+  bool _passwordShow = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
-          onChanged: (text) {
-            if (widget.emailErrorNotifier != null) {
-              widget.emailErrorNotifier!.isValid(text);
+          obscureText: !_passwordShow,
+          controller: widget.controller,
+          style: bodyMedium(),
+          onChanged: (password) {
+            if (widget.passErrorNotifier != null) {
+              widget.passErrorNotifier!.isStrong(password);
             }
           },
-          controller: widget.controller,
-          keyboardType: TextInputType.emailAddress,
-          style: bodyMedium(),
           decoration: InputDecoration(
-            floatingLabelBehavior: FloatingLabelBehavior.always,
             hintStyle: bodyMedium(),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: widget.labelText,
             hintText: widget.hintText,
             labelStyle: labelMedium(),
@@ -59,6 +61,19 @@ class _EmailTextAreaState extends State<EmailTextArea> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(
                     color: Palette.secondaryOffWhiteColor, width: 2)),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _passwordShow
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: Palette.secondaryOffWhiteColor,
+              ),
+              onPressed: () {
+                setState(() {
+                  _passwordShow = !_passwordShow;
+                });
+              },
+            ),
           )),
     );
   }

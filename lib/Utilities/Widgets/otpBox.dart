@@ -1,6 +1,7 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Utilities/logInButton.dart';
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

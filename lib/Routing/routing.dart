@@ -8,6 +8,8 @@ import 'package:cryptbee/Screens/AuthScreens/TwoFactorPage.dart';
 import 'package:cryptbee/Screens/AuthScreens/mailOpener.dart';
 import 'package:cryptbee/Screens/AuthScreens/onboarding.dart';
 import 'package:cryptbee/Screens/AuthScreens/verificationChecker.dart';
+import 'package:cryptbee/Screens/Homepage/homePage.dart';
+import 'package:cryptbee/Screens/setPassword.dart';
 import 'package:cryptbee/Screens/tester.dart';
 
 import 'package:cryptbee/Utilities/Dynamic%20Link/dynamicLink.dart';
@@ -19,33 +21,33 @@ class AppRouter {
     navigatorKey: App.navigatorKey,
     routes: [
       GoRoute(
-          name: RouteNames.tester,
-          path: '/',
-          pageBuilder: (context, state) {
-            return const MaterialPage(
-              child: tester(),
-            );
-          },
-          routes: [
-            GoRoute(
-                name: RouteNames.onBoarding,
-                path: 'onboarding',
-                pageBuilder: (context, state) {
-                  return const MaterialPage(
-                    child: OnboardingPage(),
-                  );
-                },
-                routes: [
-                  GoRoute(
-                      name: RouteNames.signIn,
-                      path: 'signin',
-                      pageBuilder: (context, state) {
-                        return const MaterialPage(
-                          child: SignInPage(),
-                        );
-                      },
-                      routes: [
-                        GoRoute(
+        name: RouteNames.tester,
+        path: '/',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: tester(),
+          );
+        },
+        routes: [
+          GoRoute(
+              name: RouteNames.onBoarding,
+              path: 'onboarding',
+              pageBuilder: (context, state) {
+                return const MaterialPage(
+                  child: OnboardingPage(),
+                );
+              },
+              routes: [
+                GoRoute(
+                    name: RouteNames.signIn,
+                    path: 'signin',
+                    pageBuilder: (context, state) {
+                      return const MaterialPage(
+                        child: SignInPage(),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
                           name: RouteNames.forgetPassword,
                           path: 'forgetpassword',
                           pageBuilder: (context, state) {
@@ -53,66 +55,87 @@ class AppRouter {
                               child: ForgetPasswordPage(),
                             );
                           },
-                        ),
-                        GoRoute(
-                          name: RouteNames.twoFactor,
-                          path: 'twofactor',
-                          pageBuilder: (context, state) {
-                            return const MaterialPage(
-                              child: TwoFactorPage(),
-                            );
-                          },
-                        ),
-                      ]),
-                  GoRoute(
-                    name: RouteNames.signUp,
-                    path: 'signup',
-                    pageBuilder: (context, state) {
-                      return const MaterialPage(
-                        child: SignUpPage(),
-                      );
-                    },
-                    routes: [
+                          routes: [
+                            GoRoute(
+                              name: RouteNames.setPassword,
+                              path: 'setpassword',
+                              pageBuilder: (context, state) {
+                                return const MaterialPage(
+                                  child: SetPasswordPage(),
+                                );
+                              },
+                            )
+                          ]),
                       GoRoute(
-                        name: RouteNames.mailOpener,
-                        path: 'mailopener',
+                        name: RouteNames.twoFactor,
+                        path: 'twofactor',
                         pageBuilder: (context, state) {
                           return const MaterialPage(
-                            child: MailOpener(),
+                            child: TwoFactorPage(),
                           );
                         },
                       ),
-                    ],
-                  ),
-                ]),
-            GoRoute(
-              name: RouteNames.mobileNumber,
-              path: 'mobilenumber',
-              pageBuilder: (context, state) {
-                return const MaterialPage(
-                  child: MobileNumberPage(),
-                );
-              },
-            ),
-            GoRoute(
-              name: RouteNames.panNumber,
-              path: 'pannumber',
-              pageBuilder: (context, state) {
-                return const MaterialPage(
-                  child: PanNumberPage(),
-                );
-              },
-            ),
-            GoRoute(
-              name: RouteNames.verifier,
-              path: 'verifier/:id',
-              pageBuilder: (context, state) {
-                return MaterialPage(
-                  child: verificationChecker(id: state.params['id']!),
-                );
-              },
-            ),
-          ]),
+                    ]),
+                GoRoute(
+                  name: RouteNames.signUp,
+                  path: 'signup',
+                  pageBuilder: (context, state) {
+                    return const MaterialPage(
+                      child: SignUpPage(),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      name: RouteNames.mailOpener,
+                      path: 'mailopener',
+                      pageBuilder: (context, state) {
+                        return const MaterialPage(
+                          child: MailOpener(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ]),
+          GoRoute(
+            name: RouteNames.mobileNumber,
+            path: 'mobilenumber',
+            pageBuilder: (context, state) {
+              return const MaterialPage(
+                child: MobileNumberPage(),
+              );
+            },
+          ),
+          GoRoute(
+            name: RouteNames.panNumber,
+            path: 'pannumber',
+            pageBuilder: (context, state) {
+              return const MaterialPage(
+                child: PanNumberPage(),
+              );
+            },
+          ),
+          GoRoute(
+            name: RouteNames.verifier,
+            path: 'verifier/:email/:pass',
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                child: verificationChecker(
+                    email: state.params['email']!, pass: state.params['pass']!),
+              );
+            },
+          ),
+          GoRoute(
+            name: RouteNames.homePage,
+            path: 'homepage',
+            pageBuilder: (context, state) {
+              return const MaterialPage(
+                child: HomePage(),
+              );
+            },
+          ),
+        ],
+      ),
     ],
   );
 }

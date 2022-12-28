@@ -1,9 +1,9 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
-import 'package:cryptbee/Utilities/authHeading.dart';
-import 'package:cryptbee/Utilities/emailTextArea.dart';
-import 'package:cryptbee/Utilities/formErrors.dart';
-import 'package:cryptbee/Utilities/logInButton.dart';
-import 'package:cryptbee/Utilities/logoWithName.dart';
+import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
+import 'package:cryptbee/Utilities/Widgets/emailTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/formErrors.dart';
+import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
+import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';

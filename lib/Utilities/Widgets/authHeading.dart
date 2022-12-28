@@ -1,4 +1,4 @@
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
 
 Align authHeading(String text) {

@@ -1,11 +1,11 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
-import 'package:cryptbee/Utilities/authHeading.dart';
-import 'package:cryptbee/Utilities/formErrors.dart';
-import 'package:cryptbee/Utilities/logInButton.dart';
-import 'package:cryptbee/Utilities/logoWithName.dart';
-import 'package:cryptbee/Utilities/nameTextArea.dart';
-import 'package:cryptbee/Utilities/panTextArea.dart';
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
+import 'package:cryptbee/Utilities/Widgets/formErrors.dart';
+import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
+import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
+import 'package:cryptbee/Utilities/Widgets/nameTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/panTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

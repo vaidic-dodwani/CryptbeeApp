@@ -34,6 +34,11 @@ class tester extends StatelessWidget {
                 child: const Text("Go To forgetPass")),
             ElevatedButton(
                 onPressed: () {
+                  context.goNamed(RouteNames.setPassword);
+                },
+                child: const Text("Go To setPass")),
+            ElevatedButton(
+                onPressed: () {
                   context.goNamed(RouteNames.twoFactor);
                 },
                 child: const Text("Go To 2FA")),

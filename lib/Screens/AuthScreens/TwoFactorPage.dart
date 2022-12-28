@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
-import 'package:cryptbee/Utilities/logoWithName.dart';
-import 'package:cryptbee/Utilities/otpBox.dart';
+import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
+import 'package:cryptbee/Utilities/Widgets/otpBox.dart';
+
 import 'package:flutter/material.dart';
 
 class TwoFactorPage extends StatefulWidget {
@@ -32,7 +32,6 @@ class _TwoFactorPageState extends State<TwoFactorPage> {
                   timerNotifier: twoFactorTimerNotifer,
                   timerProvider: twoFactorTimerProvider,
                   function: (pin) {
-                    log(pin);
                   },
                 ),
               ],

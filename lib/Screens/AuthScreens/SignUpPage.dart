@@ -1,16 +1,22 @@
+import 'dart:developer';
+import 'dart:ffi';
+
+import 'package:cryptbee/Config/apiIntegration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
-import 'package:cryptbee/Utilities/SignInUpTabs.dart';
-import 'package:cryptbee/Utilities/authHeading.dart';
-import 'package:cryptbee/Utilities/formErrors.dart';
-import 'package:cryptbee/Utilities/emailTextArea.dart';
-import 'package:cryptbee/Utilities/logInButton.dart';
-import 'package:cryptbee/Utilities/logoWithName.dart';
-import 'package:cryptbee/Utilities/oAuthButton.dart';
-import 'package:cryptbee/Utilities/passwordTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/SignInUpTabs.dart';
+import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
+import 'package:cryptbee/Utilities/Widgets/emailTextArea.dart';
+import 'package:cryptbee/Utilities/Widgets/formErrors.dart';
+import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
+import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
+import 'package:cryptbee/Utilities/Widgets/oAuthButton.dart';
+import 'package:cryptbee/Utilities/Widgets/passwordTextArea.dart';
+import 'package:cryptbee/Utilities/apiFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
@@ -89,19 +95,33 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 text: "Sign Up",
                 loaderProvider: signUpEmailButtonLoaderProvider,
                 function: () async {
-                  if (emailErrorMsg == " ") {
+                  if (!emailErrorMsg.contains('Password')) {
                     if (confirmPassErrorMsg == " ") {
                       if (passArea.controller.text ==
                           confirmPassArea.controller.text) {
-                        context.goNamed(RouteNames.mailOpener);
+                        signUpEmailButtonLoaderNotifier.toggle();
+                        final response = await ApiCalls.signUp(
+                            emailField.controller.text,
+                            passArea.controller.text);
+                        signUpEmailButtonLoaderNotifier.toggle();
+                        if (response == noInternet) {
+                          internetHandler(context);
+                        } else if (response['statusCode'] == 200) {
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.setString('email', emailField.controller.text);
+                          prefs.setString(
+                              'password', confirmPassArea.controller.text);
+                          context.goNamed(RouteNames.mailOpener);
+                        } else {
+                          if (true) {
+                            signUpConfirmPasswordErrorNotifer
+                                .setVal(response['messsage'][0].toString());
+                          }
+                        }
                       } else {
                         signUpConfirmPasswordErrorNotifer
                             .setVal("Passwords Dont Match");
                       }
-                      signUpEmailButtonLoaderNotifier.toggle();
-                      Future.delayed(const Duration(milliseconds: 500), () {
-                        signUpEmailButtonLoaderNotifier.toggle();
-                      });
                     }
                   }
                 },

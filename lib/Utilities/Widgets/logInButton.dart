@@ -1,8 +1,8 @@
-import 'package:cryptbee/Utilities/utilities.dart';
+import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'Riverpod/riverpod_classes.dart';
 
 class logInButton extends ConsumerWidget {
   String text;
