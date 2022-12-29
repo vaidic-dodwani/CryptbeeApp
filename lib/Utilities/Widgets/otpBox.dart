@@ -1,7 +1,6 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
 import 'package:cryptbee/Utilities/Widgets/utilities.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,16 +8,19 @@ import 'package:pinput/pinput.dart';
 
 class OtpBox extends ConsumerStatefulWidget {
   final TimerNotifier timerNotifier;
-  final StateNotifierProvider<TimerNotifier, int?> timerProvider;
-  void Function(int)? function;
-  StateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
+  final AutoDisposeStateNotifierProvider<TimerNotifier, int?> timerProvider;
+  void Function(int)? buttonFunction;
+  AutoDisposeStateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
+  void Function()? resendFunction;
+
   String sentAt;
   OtpBox(
       {super.key,
       required this.timerNotifier,
       required this.timerProvider,
-      this.function,
+      this.buttonFunction,
       this.loaderProvider,
+      this.resendFunction,
       this.sentAt = 'mobile number'});
 
   @override
@@ -65,7 +67,11 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
               ),
               const SizedBox(height: 24),
               Pinput(
-                onCompleted: (value) => {},
+                onCompleted: (value) {
+                  if (widget.buttonFunction != null) {
+                    widget.buttonFunction!(int.parse(value));
+                  }
+                },
                 keyboardType: TextInputType.number,
                 length: 4,
                 controller: pinController,
@@ -82,10 +88,13 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
                     style: labelSmall(),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       final nowTime = DateTime.now().millisecondsSinceEpoch;
                       if (nowTime >= endTime!) {
                         widget.timerNotifier.increaseTime(60);
+                        if (widget.resendFunction != null) {
+                          widget.resendFunction!();
+                        }
                       }
                     },
                     child: Text(
@@ -121,8 +130,8 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
                   text: "Log In",
                   function: () {
                     if (pinController.text.length >= 4) {
-                      if (widget.function != null) {
-                        widget.function!(int.parse(pinController.text));
+                      if (widget.buttonFunction != null) {
+                        widget.buttonFunction!(int.parse(pinController.text));
                       }
                     }
                   })

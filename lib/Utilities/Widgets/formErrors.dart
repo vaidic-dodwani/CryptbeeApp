@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ErrorLines extends ConsumerWidget {
-  StateNotifierProvider<dynamic, String>? errorProvider;
+  AutoDisposeStateNotifierProvider<dynamic, String>? errorProvider;
   double height;
 
   ErrorLines({super.key, this.errorProvider, this.height = 16});
