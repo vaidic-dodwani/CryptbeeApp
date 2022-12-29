@@ -59,17 +59,19 @@ class _ForgetPasswordPageState extends ConsumerState<ForgetPasswordPage> {
             emailErrorLine,
             const SizedBox(height: 12),
             logInButton(
-              loaderProvider: forgetPassOtpButtonLoaderProvider,
+              loaderProvider: forgetPassButtonLoaderProvider,
               text: "Continue",
               function: () async {
                 if (!emailErrorMsg.toLowerCase().contains('email') &&
                     emailErrorMsg != '') {
-                  forgetPassOtpButtonLoaderNotifier.toggle();
+                  forgetPassButtonLoaderNotifier.toggle();
+
                   final response = await ApiCalls.sendEmailOTP(
                       email: emailTextArea.controller.text);
-                  forgetPassOtpButtonLoaderNotifier.toggle();
+                  forgetPassButtonLoaderNotifier.toggle();
                   if (response['statusCode'] == 200) {
-                    context.goNamed(RouteNames.mailOpener);
+                    context.goNamed(RouteNames.forgetpassOTP,
+                        params: {'email': emailTextArea.controller.text});
                   } else {
                     forgetPassSignUpEmailErrorNotifer
                         .setVal(response[response.keys.first][0]);

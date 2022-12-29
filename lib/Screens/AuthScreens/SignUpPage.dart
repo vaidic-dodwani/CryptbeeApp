@@ -95,8 +95,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 text: "Sign Up",
                 loaderProvider: signUpEmailButtonLoaderProvider,
                 function: () async {
-                  if (!emailErrorMsg.toLowerCase().contains('password')) {
-                    if (confirmPassErrorMsg == " ") {
+                  if (emailErrorMsg == ' ') {
+                    if (!emailErrorMsg.toLowerCase().contains('password')) {
                       if (passArea.controller.text ==
                           confirmPassArea.controller.text) {
                         signUpEmailButtonLoaderNotifier.toggle();
@@ -111,11 +111,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                           prefs.setString('email', emailField.controller.text);
                           prefs.setString(
                               'password', confirmPassArea.controller.text);
-                          context.goNamed(RouteNames.mailOpener);
+                          context.goNamed(RouteNames.mailOpener,
+                              params: {'email': emailField.controller.text});
                         } else {
                           if (true) {
-                            signUpConfirmPasswordErrorNotifer
-                                .setVal(response['messsage'][0].toString());
+                            signUpConfirmPasswordErrorNotifer.setVal(
+                                response[response.keys.first][0].toString());
                           }
                         }
                       } else {

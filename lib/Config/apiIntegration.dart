@@ -1,9 +1,3 @@
-// if (response == 'App_Error:No Internet') {
-//                       ToastContext().init(context);
-//                       Toast.show("No Internet Connection Found!!",
-//                           duration: 5, gravity: Toast.bottom);
-//                     } else {}
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -29,6 +23,8 @@ class ApiCalls {
 
       final output = jsonDecode(response.body);
       output['statusCode'] = response.statusCode;
+      log(output.toString());
+
       return output;
     } on SocketException {
       log("NO Internet Error");
@@ -62,7 +58,7 @@ class ApiCalls {
   static Future<dynamic> verifier(
       {required String email, required String token}) async {
     try {
-      log("Began Verification Check Up Process For $email $token");
+      log("Began Verification Process For $email $token");
       final response = await post(
         Uri.parse(Links.prefixLink + Links.verificationCheckerLink),
         headers: <String, String>{
@@ -96,6 +92,56 @@ class ApiCalls {
         },
         body: jsonEncode(
           <String, dynamic>{"email": email},
+        ),
+      );
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+
+      log(output.toString());
+      return output;
+    } on SocketException {
+      log("NO Internet Error");
+      return noInternet;
+    }
+  }
+
+  static Future<dynamic> verifyEmailOTP(
+      {required String email, required int otp}) async {
+    try {
+      log("Began Otp Verification Process For $email with pin $otp");
+      final response = await post(
+        Uri.parse(Links.prefixLink + Links.verifyEmailOtpLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, dynamic>{"email": email, 'otp': otp},
+        ),
+      );
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+
+      log(output.toString());
+      return output;
+    } on SocketException {
+      log("NO Internet Error");
+      return noInternet;
+    }
+  }
+
+  static Future<dynamic> resetPass(
+      {required String email,
+      required String otp,
+      required String password}) async {
+    try {
+      log("Began Reset Password Process For $email with otp $otp and password $password");
+      final response = await patch(
+        Uri.parse(Links.prefixLink + Links.resetPassLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, dynamic>{"email": email, 'otp': otp, 'password': password},
         ),
       );
       final output = jsonDecode(response.body);

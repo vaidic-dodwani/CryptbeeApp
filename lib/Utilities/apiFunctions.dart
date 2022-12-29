@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
@@ -5,6 +7,7 @@ import 'package:toast/toast.dart';
 const String noInternet = "App_Error:No_Internet";
 
 Future<void> saveData(Map response) async {
+  log("saving response of $response ");
   final prefs = await SharedPreferences.getInstance();
   if (response['access'] != null) {
     prefs.setString('access', response['access']);
@@ -21,6 +24,11 @@ Future<void> saveData(Map response) async {
   if (response['is_verified'] != null) {
     prefs.setBool('is_verified', response['is_verified']);
   }
+}
+
+Future<void> clearData() async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.clear();
 }
 
 void internetHandler(BuildContext context) {

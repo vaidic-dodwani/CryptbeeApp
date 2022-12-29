@@ -9,6 +9,7 @@ import 'package:cryptbee/Screens/AuthScreens/mailOpener.dart';
 import 'package:cryptbee/Screens/AuthScreens/onboarding.dart';
 import 'package:cryptbee/Screens/AuthScreens/verificationChecker.dart';
 import 'package:cryptbee/Screens/Homepage/homePage.dart';
+import 'package:cryptbee/Screens/forgetPassOtpPage.dart';
 import 'package:cryptbee/Screens/setPassword.dart';
 import 'package:cryptbee/Screens/tester.dart';
 
@@ -57,11 +58,25 @@ class AppRouter {
                           },
                           routes: [
                             GoRoute(
-                              name: RouteNames.setPassword,
-                              path: 'setpassword',
+                              name: RouteNames.forgetpassOTP,
+                              path: 'forgetpassotp/:email',
                               pageBuilder: (context, state) {
-                                return const MaterialPage(
-                                  child: SetPasswordPage(),
+                                return MaterialPage(
+                                  child: ForgetPassOtpPage(
+                                    email: state.params['email']!,
+                                  ),
+                                );
+                              },
+                            ),
+                            GoRoute(
+                              name: RouteNames.setPassword,
+                              path: 'setpassword/:email/:otp',
+                              pageBuilder: (context, state) {
+                                return MaterialPage(
+                                  child: SetPasswordPage(
+                                    email: state.params['email']!,
+                                    otp: state.params['otp']!,
+                                  ),
                                 );
                               },
                             )
@@ -87,10 +102,12 @@ class AppRouter {
                   routes: [
                     GoRoute(
                       name: RouteNames.mailOpener,
-                      path: 'mailopener',
+                      path: 'mailopener/:email',
                       pageBuilder: (context, state) {
-                        return const MaterialPage(
-                          child: MailOpener(),
+                        return MaterialPage(
+                          child: MailOpener(
+                            email: state.params['email']!,
+                          ),
                         );
                       },
                     ),

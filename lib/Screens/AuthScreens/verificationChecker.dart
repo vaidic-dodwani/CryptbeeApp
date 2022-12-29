@@ -25,15 +25,19 @@ class _verificationCheckerState extends ConsumerState<verificationChecker> {
   void initState() {
     ApiCalls.verifier(email: widget.email, token: widget.token).then((value) {
       if (value['statusCode'] == 200) {
-        saveData(value).then((value) {
-          ToastContext().init(context);
-          Toast.show("Verified Successfully!! ",
-              duration: 5, gravity: Toast.bottom);
-          context.goNamed(RouteNames.homePage);
-        });
+        clearData().then(
+          (info) {
+            saveData(value).then((value) {
+              ToastContext().init(context);
+              Toast.show("Verified Successfully!! ",
+                  duration: 5, gravity: Toast.bottom);
+              context.goNamed(RouteNames.homePage);
+            });
+          },
+        );
       } else {
         ToastContext().init(context);
-        Toast.show(data[data.keys.first][0],
+        Toast.show(value[value.keys.first][0],
             duration: 5, gravity: Toast.bottom);
         context.goNamed(RouteNames.signIn);
         setState(() {

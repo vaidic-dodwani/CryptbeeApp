@@ -1,14 +1,21 @@
+import 'package:cryptbee/Config/apiIntegration.dart';
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
 import 'package:cryptbee/Utilities/Widgets/formErrors.dart';
 import 'package:cryptbee/Utilities/Widgets/logInButton.dart';
 import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
 import 'package:cryptbee/Utilities/Widgets/passwordTextArea.dart';
+import 'package:cryptbee/Utilities/apiFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:toast/toast.dart';
 
 class SetPasswordPage extends ConsumerStatefulWidget {
-  const SetPasswordPage({super.key});
+  final String email;
+  final String otp;
+  const SetPasswordPage({super.key, required this.email, required this.otp});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -65,15 +72,36 @@ class _SetPasswordPageState extends ConsumerState<SetPasswordPage> {
                 confirmPassErrorLines,
                 const SizedBox(height: 12),
                 logInButton(
+                  loaderProvider: setPassButtonLoaderProvider,
                   text: "Continue",
-                  function: () {
-                    if (confirmPassErrorMsg == " ") {
-                      if (passArea.controller.text ==
-                          confirmPassArea.controller.text) {
-                      } else {
-                        setPassConfirmPasswordErrorNotifer
-                            .setVal("Passwords Dont Match");
+                  function: () async {
+                    if (passArea.controller.text ==
+                        confirmPassArea.controller.text) {
+                      if (confirmPassErrorMsg
+                              .toLowerCase()
+                              .contains('password') ||
+                          confirmPassErrorMsg == " ") {
+                        setPassButtonLoaderNotifier.toggle();
+                        final response = await ApiCalls.resetPass(
+                            email: widget.email,
+                            otp: widget.otp,
+                            password: passArea.controller.text);
+                        setPassButtonLoaderNotifier.toggle();
+                        if (response == noInternet) {
+                          internetHandler(context);
+                        } else if (response['statusCode'] == 200) {
+                          ToastContext().init(context);
+                          Toast.show("Password has been reset",
+                              duration: 5, gravity: Toast.bottom);
+                          context.goNamed(RouteNames.signIn);
+                        } else {
+                          setPassConfirmPasswordErrorNotifer
+                              .setVal(response[response.keys.first][0]);
+                        }
                       }
+                    } else {
+                      setPassConfirmPasswordErrorNotifer
+                          .setVal("Passwords Dont Match");
                     }
                   },
                 )

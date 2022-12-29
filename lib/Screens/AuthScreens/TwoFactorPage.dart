@@ -31,8 +31,7 @@ class _TwoFactorPageState extends State<TwoFactorPage> {
                 OtpBox(
                   timerNotifier: twoFactorTimerNotifer,
                   timerProvider: twoFactorTimerProvider,
-                  function: (pin) {
-                  },
+                  function: (pin) {},
                 ),
               ],
             ),

@@ -10,13 +10,16 @@ import 'package:pinput/pinput.dart';
 class OtpBox extends ConsumerStatefulWidget {
   final TimerNotifier timerNotifier;
   final StateNotifierProvider<TimerNotifier, int?> timerProvider;
-  void Function(String)? function;
-
+  void Function(int)? function;
+  StateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
+  String sentAt;
   OtpBox(
       {super.key,
       required this.timerNotifier,
       required this.timerProvider,
-      this.function});
+      this.function,
+      this.loaderProvider,
+      this.sentAt = 'mobile number'});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _OtpBoxState();
@@ -56,7 +59,7 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Enter The OTP sent at your mobile number",
+                  "Enter The OTP sent at your " + widget.sentAt,
                   style: titleSmall(),
                 ),
               ),
@@ -114,11 +117,12 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
               ),
               const SizedBox(height: 24),
               logInButton(
+                  loaderProvider: widget.loaderProvider,
                   text: "Log In",
                   function: () {
                     if (pinController.text.length >= 4) {
                       if (widget.function != null) {
-                        widget.function!(pinController.text);
+                        widget.function!(int.parse(pinController.text));
                       }
                     }
                   })

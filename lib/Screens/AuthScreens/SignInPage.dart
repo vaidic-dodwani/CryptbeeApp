@@ -91,7 +91,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                         context.goNamed(RouteNames.homePage);
                       } else {
                         signInPasswordErrorNotifer
-                            .setVal(response['non_field_errors'][0]);
+                            .setVal(response[response.keys.first][0]);
                       }
                     }
                   }
