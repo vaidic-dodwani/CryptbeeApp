@@ -16,6 +16,10 @@ class EmailErrorNotifier extends StateNotifier<String> {
       state = "Invalid Email Id";
     }
   }
+
+  void setVal(String text) {
+    state = text;
+  }
 }
 
 class PassErrorNotifier extends StateNotifier<String> {

@@ -1,3 +1,5 @@
+import 'package:cryptbee/Config/apiIntegration.dart';
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
 import 'package:cryptbee/Utilities/Widgets/emailTextArea.dart';
@@ -7,6 +9,7 @@ import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgetPasswordPage extends ConsumerStatefulWidget {
   const ForgetPasswordPage({super.key});
@@ -49,16 +52,29 @@ class _ForgetPasswordPageState extends ConsumerState<ForgetPasswordPage> {
                 width: 164),
             authTitleLargeText("Forgot Password?"),
             const SizedBox(height: 12),
-            authCenterText("Don’t worry, it happens to the best of us."),
+            authCenterText("Don't worry, it happens to the best of us."),
             const SizedBox(height: 40),
             emailTextArea,
             const SizedBox(height: 4),
             emailErrorLine,
             const SizedBox(height: 12),
             logInButton(
+              loaderProvider: forgetPassOtpButtonLoaderProvider,
               text: "Continue",
-              function: () {
-                if (emailErrorMsg == " ") {}
+              function: () async {
+                if (!emailErrorMsg.toLowerCase().contains('email') &&
+                    emailErrorMsg != '') {
+                  forgetPassOtpButtonLoaderNotifier.toggle();
+                  final response = await ApiCalls.sendEmailOTP(
+                      email: emailTextArea.controller.text);
+                  forgetPassOtpButtonLoaderNotifier.toggle();
+                  if (response['statusCode'] == 200) {
+                    context.goNamed(RouteNames.mailOpener);
+                  } else {
+                    forgetPassSignUpEmailErrorNotifer
+                        .setVal(response[response.keys.first][0]);
+                  }
+                }
               },
             )
           ],

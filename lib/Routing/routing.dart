@@ -117,11 +117,12 @@ class AppRouter {
           ),
           GoRoute(
             name: RouteNames.verifier,
-            path: 'verifier/:email/:pass',
+            path: 'verifier/:email/:token',
             pageBuilder: (context, state) {
               return MaterialPage(
                 child: verificationChecker(
-                    email: state.params['email']!, pass: state.params['pass']!),
+                    email: state.params['email']!,
+                    token: state.params['token']!),
               );
             },
           ),

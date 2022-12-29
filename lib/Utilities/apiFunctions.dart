@@ -12,7 +12,7 @@ Future<void> saveData(Map response) async {
   if (response['refresh'] != null) {
     prefs.setString('refresh', response['refresh']);
   }
-  if (response['2fa'] != null) {
+  if (response['two_factor'] != null) {
     prefs.setBool('2fa', response['two_factor']);
   }
   if (response['pan_verify'] != null) {

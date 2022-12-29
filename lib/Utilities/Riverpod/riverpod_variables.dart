@@ -56,6 +56,13 @@ final forgetPassSignUpEmailErrorProvider =
     StateNotifierProvider<EmailErrorNotifier, String>(
         (ref) => forgetPassSignUpEmailErrorNotifer);
 
+final forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final forgetPassOtpButtonLoaderProvider =
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
+  return forgetPassOtpButtonLoaderNotifier;
+});
+
 // SET PASSWORD
 
 final setPassPasswordErrorNotifer = PassErrorNotifier();

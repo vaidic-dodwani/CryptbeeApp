@@ -80,8 +80,8 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                   if (emailErrorMsg == " " && passErrorMsg == " ") {
                     signInButtonLoaderNotifier.toggle();
                     final response = await ApiCalls.signIn(
-                        emailField.controller.text,
-                        passwordField.controller.text);
+                        email: emailField.controller.text,
+                        password: passwordField.controller.text);
                     signInButtonLoaderNotifier.toggle();
                     if (response == noInternet) {
                       internetHandler(context);

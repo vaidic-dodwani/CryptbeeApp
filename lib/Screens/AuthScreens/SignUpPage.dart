@@ -95,14 +95,14 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 text: "Sign Up",
                 loaderProvider: signUpEmailButtonLoaderProvider,
                 function: () async {
-                  if (!emailErrorMsg.contains('Password')) {
+                  if (!emailErrorMsg.toLowerCase().contains('password')) {
                     if (confirmPassErrorMsg == " ") {
                       if (passArea.controller.text ==
                           confirmPassArea.controller.text) {
                         signUpEmailButtonLoaderNotifier.toggle();
                         final response = await ApiCalls.signUp(
-                            emailField.controller.text,
-                            passArea.controller.text);
+                            email: emailField.controller.text,
+                            password: passArea.controller.text);
                         signUpEmailButtonLoaderNotifier.toggle();
                         if (response == noInternet) {
                           internetHandler(context);
