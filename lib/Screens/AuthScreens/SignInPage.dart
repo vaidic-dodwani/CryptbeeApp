@@ -107,4 +107,10 @@ class _SignInPageState extends ConsumerState<SignInPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }

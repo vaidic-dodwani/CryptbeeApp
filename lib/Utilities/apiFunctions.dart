@@ -11,18 +11,23 @@ Future<void> saveData(Map response) async {
   final prefs = await SharedPreferences.getInstance();
   if (response['access'] != null) {
     prefs.setString('access', response['access']);
+    log("saving access of ${response['access']} ");
   }
   if (response['refresh'] != null) {
     prefs.setString('refresh', response['refresh']);
+    log("saving refresh of ${response['refresh']} ");
   }
   if (response['two_factor'] != null) {
     prefs.setBool('2fa', response['two_factor']);
+    log("saving two_factor of ${response['2fa']} ");
   }
   if (response['pan_verify'] != null) {
     prefs.setBool('pan_verify', response['pan_verify']);
+    log("saving pan_verify of ${response['pan_verify']} ");
   }
   if (response['is_verified'] != null) {
     prefs.setBool('is_verified', response['is_verified']);
+    log("saving is_verified of ${response['is_verified']} ");
   }
 }
 

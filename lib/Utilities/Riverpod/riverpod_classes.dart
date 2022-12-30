@@ -95,7 +95,7 @@ class TimerNotifier extends StateNotifier<int?> {
 }
 
 class PanErrorNotifier extends StateNotifier<String> {
-  PanErrorNotifier() : super(" ");
+  PanErrorNotifier() : super("");
 
   void isValid(text) {
     if (text.length == 0) {
@@ -106,10 +106,14 @@ class PanErrorNotifier extends StateNotifier<String> {
       state = "Invalid Pan Number";
     }
   }
+
+  void setVal(text) {
+    state = text;
+  }
 }
 
 class NameErrorNotifier extends StateNotifier<String> {
-  NameErrorNotifier() : super(" ");
+  NameErrorNotifier() : super("");
 
   void isValid(text) {
     if (text.length == 0) {

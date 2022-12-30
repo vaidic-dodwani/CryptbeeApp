@@ -1,5 +1,5 @@
 class RouteNames {
-  static const String tester = "tester";
+  static const String root = "root";
 //
   static const String onBoarding = "onboarding";
   static const String signIn = "signin";

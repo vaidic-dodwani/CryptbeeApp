@@ -154,4 +154,77 @@ class ApiCalls {
       return noInternet;
     }
   }
+
+  static Future<dynamic> panVerify(
+      {required String pan, required String name}) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final email = prefs.getString('email');
+
+      log("Began Pan Connecting Process For $email with pan $pan and name $name");
+      final Response response;
+      if (pan.isNotEmpty && name.isNotEmpty) {
+        response = await post(
+          Uri.parse(Links.prefixLink + Links.resetPassLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            <String, dynamic>{"email": email, 'pan_number': pan, 'name': name},
+          ),
+        );
+      } else if (pan.isEmpty && name.isNotEmpty) {
+        response = await post(
+          Uri.parse(Links.prefixLink + Links.resetPassLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            <String, dynamic>{"email": email, 'name': name},
+          ),
+        );
+      } else {
+        response = await post(
+          Uri.parse(Links.prefixLink + Links.resetPassLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(
+            <String, dynamic>{"email": email, 'pan_number': pan},
+          ),
+        );
+      }
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+
+      log(output.toString());
+      return output;
+    } on SocketException {
+      log("NO Internet Error");
+      return noInternet;
+    }
+  }
+
+  static Future<void> renewToken() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final refresh = prefs.getString('refresh');
+
+      log("Began Token Renew for $refresh");
+      final response = await post(
+        Uri.parse(Links.prefixLink + Links.renewTokenLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, dynamic>{"refresh": refresh},
+        ),
+      );
+      final output = jsonDecode(response.body);
+      log(output.toString());
+      prefs.setString('access', output['access']);
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

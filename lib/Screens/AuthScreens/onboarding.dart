@@ -35,7 +35,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
               const SizedBox(height: 37),
               const CenterLogo(),
               const SizedBox(height: 45),
-              // const SizedBox(height: 404),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: CarouselSlider.builder(
@@ -71,7 +70,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 38),
               logInButton(
                 text: "Login",
@@ -92,6 +90,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 

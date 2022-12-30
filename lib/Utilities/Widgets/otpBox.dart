@@ -8,9 +8,9 @@ import 'package:pinput/pinput.dart';
 
 class OtpBox extends ConsumerStatefulWidget {
   final TimerNotifier timerNotifier;
-  final AutoDisposeStateNotifierProvider<TimerNotifier, int?> timerProvider;
+  final StateNotifierProvider<TimerNotifier, int?> timerProvider;
   void Function(int)? buttonFunction;
-  AutoDisposeStateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
+  StateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
   void Function()? resendFunction;
 
   String sentAt;

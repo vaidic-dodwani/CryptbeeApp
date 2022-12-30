@@ -1,3 +1,5 @@
+import 'package:cryptbee/Config/apiIntegration.dart';
+import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Utilities/Widgets/authHeading.dart';
 import 'package:cryptbee/Utilities/Widgets/formErrors.dart';
@@ -6,8 +8,11 @@ import 'package:cryptbee/Utilities/Widgets/logoWithName.dart';
 import 'package:cryptbee/Utilities/Widgets/nameTextArea.dart';
 import 'package:cryptbee/Utilities/Widgets/panTextArea.dart';
 import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Utilities/apiFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:toast/toast.dart';
 
 class PanNumberPage extends ConsumerStatefulWidget {
   const PanNumberPage({super.key});
@@ -71,19 +76,42 @@ class _PanNumberPageState extends ConsumerState<PanNumberPage> {
                     logInButton(
                       text: "Continue",
                       width: 157,
-                      function: () {
-                        if (nameErrorMsg == " ") {
-                          if (panErrorMsg == " ") {
-                          } else if (panErrorMsg == "") {}
+                      function: () async {
+                        ToastContext().init(context);
+                        if (!(nameErrorMsg == "" && panErrorMsg == "")) {
+                          if (nameErrorMsg != "Enter Valid Name") {
+                            if (panErrorMsg != "Invalid Pan Number") {
+                              final response = await ApiCalls.panVerify(
+                                  pan: panArea.controller.text,
+                                  name: panArea.controller.text);
+
+                              if (response == noInternet) {
+                                internetHandler(context);
+                              } else if (response['statusCode'] == 200) {
+                                Toast.show("Successfully Updated Details",
+                                    duration: 5, gravity: Toast.bottom);
+                                context.goNamed(RouteNames.homePage);
+                              } else {
+                                Toast.show(response[response.keys.first][0],
+                                    duration: 5, gravity: Toast.bottom);
+                              }
+                            }
+                          }
+                        } else {
+                          panNumberPanErrorNotifier
+                              .setVal("Enter either Name or Pan to Proceed");
                         }
                       },
                     ),
-                    Container(
+                    SizedBox(
                       width: 157,
                       child: Center(
-                        child: Text(
-                          "Skip",
-                          style: titleMedium(),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Text(
+                            "Skip",
+                            style: titleMedium(),
+                          ),
                         ),
                       ),
                     )
@@ -95,5 +123,11 @@ class _PanNumberPageState extends ConsumerState<PanNumberPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

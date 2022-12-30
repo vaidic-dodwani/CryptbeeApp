@@ -40,4 +40,10 @@ class _TwoFactorPageState extends State<TwoFactorPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }

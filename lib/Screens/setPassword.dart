@@ -112,4 +112,10 @@ class _SetPasswordPageState extends ConsumerState<SetPasswordPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }

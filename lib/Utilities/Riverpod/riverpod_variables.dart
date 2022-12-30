@@ -5,19 +5,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final signInEmailErrorNotifer = EmailErrorNotifier();
 
 final signInEmailErrorProvider =
-    StateNotifierProvider.autoDispose<EmailErrorNotifier, String>(
+    StateNotifierProvider<EmailErrorNotifier, String>(
         (ref) => signInEmailErrorNotifer);
 
 final signInPasswordErrorNotifer = PassErrorNotifier();
 
 final signInPasswordErrorProvider =
-    StateNotifierProvider.autoDispose<PassErrorNotifier, String>(
+    StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => signInPasswordErrorNotifer);
 
 final signInButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final signInButtonLoaderProvider =
-    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return signInButtonLoaderNotifier;
 });
 
@@ -26,26 +26,26 @@ final signInButtonLoaderProvider =
 final signUpEmailErrorNotifer = EmailErrorNotifier();
 
 final signUpEmailErrorProvider =
-    StateNotifierProvider.autoDispose<EmailErrorNotifier, String>(
+    StateNotifierProvider<EmailErrorNotifier, String>(
         (ref) => signUpEmailErrorNotifer);
 
 final signUpEmailButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final signUpEmailButtonLoaderProvider =
-    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return signUpEmailButtonLoaderNotifier;
 });
 
 final signUpPasswordErrorNotifer = PassErrorNotifier();
 
 final signUpPasswordErrorProvider =
-    StateNotifierProvider.autoDispose<PassErrorNotifier, String>(
+    StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => signUpPasswordErrorNotifer);
 
 final signUpConfirmPasswordErrorNotifer = PassErrorNotifier();
 
 final signUpConfirmPasswordErrorProvider =
-    StateNotifierProvider.autoDispose<PassErrorNotifier, String>(
+    StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => signUpConfirmPasswordErrorNotifer);
 
 //FORGET PASSWORD
@@ -53,13 +53,13 @@ final signUpConfirmPasswordErrorProvider =
 final forgetPassSignUpEmailErrorNotifer = EmailErrorNotifier();
 
 final forgetPassSignUpEmailErrorProvider =
-    StateNotifierProvider.autoDispose<EmailErrorNotifier, String>(
+    StateNotifierProvider<EmailErrorNotifier, String>(
         (ref) => forgetPassSignUpEmailErrorNotifer);
 
 final forgetPassButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final forgetPassButtonLoaderProvider =
-    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return forgetPassButtonLoaderNotifier;
 });
 
@@ -68,14 +68,14 @@ final forgetPassButtonLoaderProvider =
 final forgetPassOtpTimerNotifer = TimerNotifier();
 
 final forgetPassOtpTimerProvider =
-    StateNotifierProvider.autoDispose<TimerNotifier, int?>((ref) {
+    StateNotifierProvider<TimerNotifier, int?>((ref) {
   return forgetPassOtpTimerNotifer;
 });
 
 final forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final forgetPassOtpButtonLoaderProvider =
-    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return forgetPassOtpButtonLoaderNotifier;
 });
 
@@ -84,19 +84,19 @@ final forgetPassOtpButtonLoaderProvider =
 final setPassPasswordErrorNotifer = PassErrorNotifier();
 
 final setPassPasswordErrorProvider =
-    StateNotifierProvider.autoDispose<PassErrorNotifier, String>(
+    StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => setPassPasswordErrorNotifer);
 
 final setPassConfirmPasswordErrorNotifer = PassErrorNotifier();
 
 final setPassConfirmPasswordErrorProvider =
-    StateNotifierProvider.autoDispose<PassErrorNotifier, String>(
+    StateNotifierProvider<PassErrorNotifier, String>(
         (ref) => setPassConfirmPasswordErrorNotifer);
 
 final setPassButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final setPassButtonLoaderProvider =
-    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+    StateNotifierProvider<ButtonLoaderNotifier, bool>((ref) {
   return setPassButtonLoaderNotifier;
 });
 
@@ -105,7 +105,7 @@ final setPassButtonLoaderProvider =
 final mobileNumberMobileErrorNotifier = MobileNumberErrorNotifier();
 
 final mobileNumberMobileErrorProvider =
-    StateNotifierProvider.autoDispose<MobileNumberErrorNotifier, String>(
+    StateNotifierProvider<MobileNumberErrorNotifier, String>(
         (ref) => mobileNumberMobileErrorNotifier);
 
 //OTP BOX
@@ -113,7 +113,7 @@ final mobileNumberMobileErrorProvider =
 final twoFactorTimerNotifer = TimerNotifier();
 
 final twoFactorTimerProvider =
-    StateNotifierProvider.autoDispose<TimerNotifier, int?>((ref) {
+    StateNotifierProvider<TimerNotifier, int?>((ref) {
   return twoFactorTimerNotifer;
 });
 
@@ -122,13 +122,13 @@ final twoFactorTimerProvider =
 final panNumberPanErrorNotifier = PanErrorNotifier();
 
 final panNumberPanErrorProvider =
-    StateNotifierProvider.autoDispose<PanErrorNotifier, String>((ref) {
+    StateNotifierProvider<PanErrorNotifier, String>((ref) {
   return panNumberPanErrorNotifier;
 });
 
 final panNumberNameErrorNotifier = NameErrorNotifier();
 
 final panNumberNameErrorProvider =
-    StateNotifierProvider.autoDispose<NameErrorNotifier, String>((ref) {
+    StateNotifierProvider<NameErrorNotifier, String>((ref) {
   return panNumberNameErrorNotifier;
 });

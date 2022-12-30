@@ -6,4 +6,6 @@ class Links {
   static const String sendEmailOtpLink = "auth/sendemailOTP/";
   static const String verifyEmailOtpLink = "auth/verifyemailOTP/";
   static const String resetPassLink = "auth/resetpassword/";
+  static const String panLink = "auth/verifyPAN/";
+  static const String renewTokenLink = "auth/token/";
 }

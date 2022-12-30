@@ -84,4 +84,9 @@ class _ForgetPasswordPageState extends ConsumerState<ForgetPasswordPage> {
       ]),
     ));
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Utilities/Widgets/utilities.dart';
-
 import 'package:flutter/material.dart';
 
 class PanTextArea extends StatefulWidget {

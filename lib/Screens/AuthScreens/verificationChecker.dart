@@ -31,7 +31,7 @@ class _verificationCheckerState extends ConsumerState<verificationChecker> {
               ToastContext().init(context);
               Toast.show("Verified Successfully!! ",
                   duration: 5, gravity: Toast.bottom);
-              context.goNamed(RouteNames.homePage);
+              context.goNamed(RouteNames.root);
             });
           },
         );
@@ -70,5 +70,11 @@ class _verificationCheckerState extends ConsumerState<verificationChecker> {
                       )))
       ],
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
