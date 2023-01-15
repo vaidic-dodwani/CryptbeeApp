@@ -20,7 +20,7 @@ class EmailErrorNotifier extends StateNotifier<String> {
   }
 }
 
-class PassErrorNotifier extends StateNotifier<String> {
+class PassErrorNotifier extends StateNotifier<String> { 
   PassErrorNotifier() : super(" ");
 
   void isStrong(password) {

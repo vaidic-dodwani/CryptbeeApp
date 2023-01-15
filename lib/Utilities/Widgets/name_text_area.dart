@@ -3,7 +3,7 @@ import 'package:cryptbee/Utilities/Widgets/utilities.dart';
 
 import 'package:flutter/material.dart';
 
-class NameTextArea extends StatefulWidget {
+class NameTextArea extends StatelessWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller = TextEditingController();
@@ -17,30 +17,25 @@ class NameTextArea extends StatefulWidget {
       this.nameErrorNotifier});
 
   @override
-  State<NameTextArea> createState() => _NameTextAreaState();
-}
-
-class _NameTextAreaState extends State<NameTextArea> {
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
           onChanged: (text) {
-            if (widget.nameErrorNotifier != null) {
-              widget.nameErrorNotifier!.isValid(text);
+            if (nameErrorNotifier != null) {
+              nameErrorNotifier!.isValid(text);
             }
           },
           maxLength: 15,
-          controller: widget.controller,
+          controller: controller,
           keyboardType: TextInputType.emailAddress,
           style: bodyMedium(),
           decoration: InputDecoration(
             counterText: "",
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintStyle: bodyMedium(),
-            labelText: widget.labelText,
-            hintText: widget.hintText,
+            labelText: labelText,
+            hintText: hintText,
             labelStyle: labelMedium(),
             errorBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),

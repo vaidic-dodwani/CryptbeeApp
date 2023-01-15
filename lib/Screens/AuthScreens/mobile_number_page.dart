@@ -8,14 +8,9 @@ import 'package:cryptbee/Utilities/Widgets/mobile_text_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MobileNumberPage extends StatefulWidget {
-  const MobileNumberPage({super.key});
+class MobileNumberPage extends StatelessWidget {
+  MobileNumberPage({super.key});
 
-  @override
-  State<MobileNumberPage> createState() => _MobileNumberPageState();
-}
-
-class _MobileNumberPageState extends State<MobileNumberPage> {
   final MobileTextArea mobileNumberArea = MobileTextArea(
     labelText: "Mobile Number",
     hintText: "Enter Mobile Number",
@@ -59,10 +54,5 @@ class _MobileNumberPageState extends State<MobileNumberPage> {
         ],
       )),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

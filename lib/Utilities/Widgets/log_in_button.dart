@@ -9,7 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class LogInButton extends ConsumerWidget {
   final String text;
   final void Function()? function;
-  final StateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
+  final AutoDisposeStateNotifierProvider<ButtonLoaderNotifier, bool>?
+      loaderProvider;
   bool isloading = false;
   final double? width;
   LogInButton(

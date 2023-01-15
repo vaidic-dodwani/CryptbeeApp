@@ -14,14 +14,14 @@ import 'package:cryptbee/Utilities/Widgets/sign_in_up_tabs.dart';
 import 'package:cryptbee/Utilities/api_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart'; 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends ConsumerWidget {
   SignUpPage({super.key});
   final EmailTextArea emailField = EmailTextArea(
     labelText: "Email Address",
-    hintText: "  Enter Email",
+    hintText: "Enter Email",
     emailErrorNotifier: signUpEmailErrorNotifer,
   );
   final ErrorLines emailError = ErrorLines(

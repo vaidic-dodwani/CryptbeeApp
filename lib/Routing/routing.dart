@@ -39,7 +39,7 @@ class AppRouter {
                     name: RouteNames.forgetPassword,
                     path: 'forgetpassword',
                     pageBuilder: (context, state) {
-                      return const MaterialPage(
+                      return MaterialPage(
                         child: ForgetPasswordPage(),
                       );
                     },
@@ -104,7 +104,7 @@ class AppRouter {
             name: RouteNames.mobileNumber,
             path: 'mobilenumber',
             pageBuilder: (context, state) {
-              return const MaterialPage(
+              return MaterialPage(
                 child: MobileNumberPage(),
               );
             },
@@ -113,7 +113,7 @@ class AppRouter {
             name: RouteNames.panNumber,
             path: 'pannumber',
             pageBuilder: (context, state) {
-              return const MaterialPage(
+              return MaterialPage(
                 child: PanNumberPage(),
               );
             },

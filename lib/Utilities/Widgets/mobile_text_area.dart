@@ -3,7 +3,7 @@ import 'package:cryptbee/Utilities/Widgets/utilities.dart';
 
 import 'package:flutter/material.dart';
 
-class MobileTextArea extends StatefulWidget {
+class MobileTextArea extends StatelessWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller = TextEditingController();
@@ -17,21 +17,16 @@ class MobileTextArea extends StatefulWidget {
       this.mobileNumberErrorNotifier});
 
   @override
-  State<MobileTextArea> createState() => _MobileTextAreaState();
-}
-
-class _MobileTextAreaState extends State<MobileTextArea> {
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
           onChanged: (text) {
-            if (widget.mobileNumberErrorNotifier != null) {
-              widget.mobileNumberErrorNotifier!.isValid(text);
+            if (mobileNumberErrorNotifier != null) {
+              mobileNumberErrorNotifier!.isValid(text);
             }
           },
-          controller: widget.controller,
+          controller: controller,
           keyboardType: TextInputType.number,
           maxLength: 10,
           style: bodyMedium(),
@@ -39,8 +34,8 @@ class _MobileTextAreaState extends State<MobileTextArea> {
             counterText: "",
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintStyle: bodyMedium(),
-            labelText: widget.labelText,
-            hintText: widget.hintText,
+            labelText: labelText,
+            hintText: hintText,
             labelStyle: labelMedium(),
             errorBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),

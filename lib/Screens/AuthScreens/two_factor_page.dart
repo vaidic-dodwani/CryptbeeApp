@@ -4,14 +4,9 @@ import 'package:cryptbee/Utilities/Widgets/otp_box.dart';
 
 import 'package:flutter/material.dart';
 
-class TwoFactorPage extends StatefulWidget {
+class TwoFactorPage extends StatelessWidget {
   const TwoFactorPage({super.key});
 
-  @override
-  State<TwoFactorPage> createState() => _TwoFactorPageState();
-}
-
-class _TwoFactorPageState extends State<TwoFactorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +34,5 @@ class _TwoFactorPageState extends State<TwoFactorPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

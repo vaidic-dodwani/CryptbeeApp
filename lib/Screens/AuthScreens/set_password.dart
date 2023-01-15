@@ -14,24 +14,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
 
-class SetPasswordPage extends ConsumerStatefulWidget {
+class SetPasswordPage extends ConsumerWidget {
+  SetPasswordPage({super.key, required this.email, required this.otp});
+
   final String email;
   final String otp;
-  const SetPasswordPage({super.key, required this.email, required this.otp});
-
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SetPasswordPageState();
-}
-
-class _SetPasswordPageState extends ConsumerState<SetPasswordPage> {
   final passArea = PasswordTextArea(
     labelText: "Password",
     hintText: "Atleast 8 characters",
     passErrorNotifier: setPassPasswordErrorNotifer,
   );
 
-  ErrorLines passErrorLines = ErrorLines(
+  final ErrorLines passErrorLines = ErrorLines(
     errorProvider: setPassPasswordErrorProvider,
     height: 35,
   );
@@ -41,12 +35,13 @@ class _SetPasswordPageState extends ConsumerState<SetPasswordPage> {
     hintText: "Atleast 8 characters",
     passErrorNotifier: setPassConfirmPasswordErrorNotifer,
   );
-  ErrorLines confirmPassErrorLines = ErrorLines(
+
+  final ErrorLines confirmPassErrorLines = ErrorLines(
     errorProvider: setPassConfirmPasswordErrorProvider,
     height: 35,
   );
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final confirmPassErrorMsg = ref.watch(setPassConfirmPasswordErrorProvider);
 
     return Scaffold(
@@ -85,8 +80,8 @@ class _SetPasswordPageState extends ConsumerState<SetPasswordPage> {
                           confirmPassErrorMsg == " ") {
                         setPassButtonLoaderNotifier.toggle();
                         final response = await ApiCalls.resetPass(
-                            email: widget.email,
-                            otp: widget.otp,
+                            email: email,
+                            otp: otp,
                             password: passArea.controller.text);
                         setPassButtonLoaderNotifier.toggle();
                         if (response == noInternet) {
@@ -113,10 +108,5 @@ class _SetPasswordPageState extends ConsumerState<SetPasswordPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

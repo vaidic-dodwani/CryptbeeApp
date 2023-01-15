@@ -6,15 +6,17 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpBox extends ConsumerStatefulWidget {
+class OtpBox extends ConsumerWidget {
+  final pinController = TextEditingController();
   final TimerNotifier timerNotifier;
-  final StateNotifierProvider<TimerNotifier, int?> timerProvider;
+  final AutoDisposeStateNotifierProvider<TimerNotifier, int?> timerProvider;
   final void Function(int)? buttonFunction;
-  final StateNotifierProvider<ButtonLoaderNotifier, bool>? loaderProvider;
+  final AutoDisposeStateNotifierProvider<ButtonLoaderNotifier, bool>?
+      loaderProvider;
   final void Function()? resendFunction;
 
   final String sentAt;
-  const OtpBox(
+  OtpBox(
       {super.key,
       required this.timerNotifier,
       required this.timerProvider,
@@ -22,18 +24,10 @@ class OtpBox extends ConsumerStatefulWidget {
       this.loaderProvider,
       this.resendFunction,
       this.sentAt = 'mobile number'});
-
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _OtpBoxState();
-}
-
-class _OtpBoxState extends ConsumerState<OtpBox> {
-  final pinController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    int? endTime = ref.watch(widget.timerProvider);
-    widget.timerNotifier.initTime();
+  Widget build(BuildContext context, WidgetRef ref) {
+    int? endTime = ref.watch(timerProvider);
+    timerNotifier.initTime();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
@@ -61,15 +55,15 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Enter The OTP sent at your ${widget.sentAt}",
+                  "Enter The OTP sent at your $sentAt",
                   style: titleSmall(),
                 ),
               ),
               const SizedBox(height: 24),
               Pinput(
                 onCompleted: (value) {
-                  if (widget.buttonFunction != null) {
-                    widget.buttonFunction!(int.parse(value));
+                  if (buttonFunction != null) {
+                    buttonFunction!(int.parse(value));
                   }
                 },
                 keyboardType: TextInputType.number,
@@ -91,9 +85,9 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
                     onTap: () async {
                       final nowTime = DateTime.now().millisecondsSinceEpoch;
                       if (nowTime >= endTime!) {
-                        widget.timerNotifier.increaseTime(60);
-                        if (widget.resendFunction != null) {
-                          widget.resendFunction!();
+                        timerNotifier.increaseTime(60);
+                        if (resendFunction != null) {
+                          resendFunction!();
                         }
                       }
                     },
@@ -126,12 +120,12 @@ class _OtpBoxState extends ConsumerState<OtpBox> {
               ),
               const SizedBox(height: 24),
               LogInButton(
-                  loaderProvider: widget.loaderProvider,
+                  loaderProvider: loaderProvider,
                   text: "Verify",
                   function: () {
                     if (pinController.text.length >= 4) {
-                      if (widget.buttonFunction != null) {
-                        widget.buttonFunction!(int.parse(pinController.text));
+                      if (buttonFunction != null) {
+                        buttonFunction!(int.parse(pinController.text));
                       }
                     }
                   })

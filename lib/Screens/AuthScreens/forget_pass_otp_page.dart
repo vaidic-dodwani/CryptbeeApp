@@ -10,16 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
 
-class ForgetPassOtpPage extends StatefulWidget {
+class ForgetPassOtpPage extends StatelessWidget {
   final String email;
 
   const ForgetPassOtpPage({super.key, required this.email});
 
-  @override
-  State<ForgetPassOtpPage> createState() => _ForgetPassOtpPageState();
-}
-
-class _ForgetPassOtpPageState extends State<ForgetPassOtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +40,8 @@ class _ForgetPassOtpPageState extends State<ForgetPassOtpPage> {
                     ToastContext().init(context);
 
                     forgetPassOtpButtonLoaderNotifier.toggle();
-                    final response = await ApiCalls.verifyEmailOTP(
-                        email: widget.email, otp: pin);
+                    final response =
+                        await ApiCalls.verifyEmailOTP(email: email, otp: pin);
                     forgetPassOtpButtonLoaderNotifier.toggle();
                     if (response == noInternet) {
                       internetHandler(context);
@@ -54,10 +49,8 @@ class _ForgetPassOtpPageState extends State<ForgetPassOtpPage> {
                       if (response['statusCode'] == 200) {
                         Toast.show("Remember the password this time",
                             duration: 5, gravity: Toast.bottom);
-                        context.goNamed(RouteNames.setPassword, params: {
-                          'email': widget.email,
-                          'otp': pin.toString()
-                        });
+                        context.goNamed(RouteNames.setPassword,
+                            params: {'email': email, 'otp': pin.toString()});
                       } else {
                         Toast.show(response[response.keys.first][0],
                             duration: 5, gravity: Toast.bottom);
@@ -68,8 +61,7 @@ class _ForgetPassOtpPageState extends State<ForgetPassOtpPage> {
                     ToastContext().init(context);
                     forgetPassOtpButtonLoaderNotifier.toggle();
 
-                    final response =
-                        await ApiCalls.sendEmailOTP(email: widget.email);
+                    final response = await ApiCalls.sendEmailOTP(email: email);
                     forgetPassOtpButtonLoaderNotifier.toggle();
 
                     if (response == noInternet) {
@@ -91,10 +83,5 @@ class _ForgetPassOtpPageState extends State<ForgetPassOtpPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

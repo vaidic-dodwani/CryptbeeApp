@@ -16,14 +16,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
 
-class PanNumberPage extends ConsumerStatefulWidget {
-  const PanNumberPage({super.key});
-
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PanNumberPageState();
-}
-
-class _PanNumberPageState extends ConsumerState<PanNumberPage> {
+class PanNumberPage extends ConsumerWidget {
+  PanNumberPage({super.key});
   final nameArea = NameTextArea(
     labelText: "Full Name",
     hintText: "Enter Full Name",
@@ -45,7 +39,7 @@ class _PanNumberPageState extends ConsumerState<PanNumberPage> {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final nameErrorMsg = ref.watch(panNumberNameErrorProvider);
     final panErrorMsg = ref.watch(panNumberPanErrorProvider);
     return Scaffold(
@@ -125,10 +119,5 @@ class _PanNumberPageState extends ConsumerState<PanNumberPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

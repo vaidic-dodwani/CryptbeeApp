@@ -11,27 +11,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class ForgetPasswordPage extends ConsumerStatefulWidget {
-  const ForgetPasswordPage({super.key});
+class ForgetPasswordPage extends ConsumerWidget {
+  ForgetPasswordPage({super.key});
 
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ForgetPasswordPageState();
-}
-
-class _ForgetPasswordPageState extends ConsumerState<ForgetPasswordPage> {
-  EmailTextArea emailTextArea = EmailTextArea(
+  final EmailTextArea emailTextArea = EmailTextArea(
     labelText: "Email Address",
     hintText: "Enter Email",
     emailErrorNotifier: forgetPassSignUpEmailErrorNotifer,
   );
 
-  ErrorLines emailErrorLine = ErrorLines(
+  final ErrorLines emailErrorLine = ErrorLines(
     errorProvider: forgetPassSignUpEmailErrorProvider,
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final emailErrorMsg = ref.watch(forgetPassSignUpEmailErrorProvider);
     return Scaffold(
         body: SingleChildScrollView(
@@ -84,10 +78,5 @@ class _ForgetPasswordPageState extends ConsumerState<ForgetPasswordPage> {
         )
       ]),
     ));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
