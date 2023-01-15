@@ -17,34 +17,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SignInPage extends ConsumerStatefulWidget {
-  const SignInPage({super.key});
+class SignInPage extends ConsumerWidget {
+   SignInPage({super.key});
 
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends ConsumerState<SignInPage> {
-  EmailTextArea emailField = EmailTextArea(
+  final EmailTextArea emailField = EmailTextArea(
       labelText: "Email Address",
-      hintText: "  Enter Email",
+      hintText: "Enter Email",
       emailErrorNotifier: signInEmailErrorNotifer);
 
-  PasswordTextArea passwordField = PasswordTextArea(
+  final PasswordTextArea passwordField = PasswordTextArea(
     labelText: "Password",
     hintText: "  At least 8 characters.",
     passErrorNotifier: signInPasswordErrorNotifer,
   );
-  ErrorLines emailError = ErrorLines(
+  final ErrorLines emailError = ErrorLines(
     errorProvider: signInEmailErrorProvider,
   );
-  ErrorLines passError = ErrorLines(
+  final ErrorLines passError = ErrorLines(
     errorProvider: signInPasswordErrorProvider,
     height: 32,
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final emailErrorMsg = ref.watch(signInEmailErrorProvider);
     final passErrorMsg = ref.watch(signInPasswordErrorProvider);
     final size = MediaQuery.of(context).size;
@@ -108,10 +103,5 @@ class _SignInPageState extends ConsumerState<SignInPage> {
         ]),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

@@ -17,20 +17,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUpPage extends ConsumerStatefulWidget {
-  const SignUpPage({super.key});
-
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends ConsumerState<SignUpPage> {
-  EmailTextArea emailField = EmailTextArea(
+class SignUpPage extends ConsumerWidget {
+  SignUpPage({super.key});
+  final EmailTextArea emailField = EmailTextArea(
     labelText: "Email Address",
     hintText: "  Enter Email",
     emailErrorNotifier: signUpEmailErrorNotifer,
   );
-  ErrorLines emailError = ErrorLines(
+  final ErrorLines emailError = ErrorLines(
     errorProvider: signUpEmailErrorProvider,
     height: 35,
   );
@@ -40,7 +34,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     passErrorNotifier: signUpPasswordErrorNotifer,
   );
 
-  ErrorLines passErrorLines = ErrorLines(
+  final ErrorLines passErrorLines = ErrorLines(
     errorProvider: signUpPasswordErrorProvider,
     height: 35,
   );
@@ -50,13 +44,14 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     hintText: "Atleast 8 characters",
     passErrorNotifier: signUpConfirmPasswordErrorNotifer,
   );
-  ErrorLines confirmPassErrorLines = ErrorLines(
+
+  final ErrorLines confirmPassErrorLines = ErrorLines(
     errorProvider: signUpConfirmPasswordErrorProvider,
     height: 35,
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final emailErrorMsg = ref.watch(signUpEmailErrorProvider);
 
@@ -134,10 +129,5 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         ]),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

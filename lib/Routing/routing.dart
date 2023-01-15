@@ -23,14 +23,14 @@ class AppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return MaterialPage(
-              child: App.isLoggedIn ? const HomePage() : const SignInPage());
+              child: App.isLoggedIn ? const HomePage() : SignInPage());
         },
         routes: [
           GoRoute(
               name: RouteNames.signIn,
               path: 'signin',
               pageBuilder: (context, state) {
-                return const MaterialPage(
+                return MaterialPage(
                   child: SignInPage(),
                 );
               },
@@ -82,7 +82,7 @@ class AppRouter {
             name: RouteNames.signUp,
             path: 'signup',
             pageBuilder: (context, state) {
-              return const MaterialPage(
+              return MaterialPage(
                 child: SignUpPage(),
               );
             },

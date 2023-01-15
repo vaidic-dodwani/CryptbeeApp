@@ -10,7 +10,7 @@ class EmailTextArea extends StatefulWidget {
   final Color fontColor = Colors.black;
   final EmailErrorNotifier? emailErrorNotifier;
 
-  EmailTextArea(
+   EmailTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
