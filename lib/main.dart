@@ -1,12 +1,12 @@
 import 'package:cryptbee/Routing/routing.dart';
-import 'package:cryptbee/Utilities/Dynamic%20Link/dynamicLink.dart';
+import 'package:cryptbee/Utilities/Dynamic%20Link/dynamic_link.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Config/apiIntegration.dart';
+import 'Config/api_integration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
