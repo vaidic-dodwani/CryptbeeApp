@@ -6,7 +6,10 @@ EmailErrorNotifier signInEmailErrorNotifer = EmailErrorNotifier();
 
 final signInEmailErrorProvider =
     StateNotifierProvider.autoDispose<EmailErrorNotifier, String>((ref) {
-  signInEmailErrorNotifer = EmailErrorNotifier();
+  ref.onDispose(() {
+    signInEmailErrorNotifer = EmailErrorNotifier();
+  });
+
   return signInEmailErrorNotifer;
 });
 
@@ -14,7 +17,9 @@ PassErrorNotifier signInPasswordErrorNotifer = PassErrorNotifier();
 
 final signInPasswordErrorProvider =
     StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
-  signInPasswordErrorNotifer = PassErrorNotifier();
+  ref.onDispose(() {
+    signInPasswordErrorNotifer = PassErrorNotifier();
+  });
   return signInPasswordErrorNotifer;
 });
 
@@ -22,7 +27,9 @@ ButtonLoaderNotifier signInButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final signInButtonLoaderProvider =
     StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
-  signInButtonLoaderNotifier = ButtonLoaderNotifier();
+  ref.onDispose(() {
+    signInButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
   return signInButtonLoaderNotifier;
 });
 
@@ -32,7 +39,9 @@ EmailErrorNotifier signUpEmailErrorNotifer = EmailErrorNotifier();
 
 final signUpEmailErrorProvider =
     StateNotifierProvider.autoDispose<EmailErrorNotifier, String>((ref) {
-  signUpEmailErrorNotifer = EmailErrorNotifier();
+  ref.onDispose(() {
+    signUpEmailErrorNotifer = EmailErrorNotifier();
+  });
   return signUpEmailErrorNotifer;
 });
 
@@ -40,7 +49,9 @@ ButtonLoaderNotifier signUpEmailButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final signUpEmailButtonLoaderProvider =
     StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
-  signUpEmailButtonLoaderNotifier = ButtonLoaderNotifier();
+  ref.onDispose(() {
+    signUpEmailButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
   return signUpEmailButtonLoaderNotifier;
 });
 
@@ -48,7 +59,10 @@ PassErrorNotifier signUpPasswordErrorNotifer = PassErrorNotifier();
 
 final signUpPasswordErrorProvider =
     StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
-  signUpPasswordErrorNotifer = PassErrorNotifier();
+  ref.onDispose(() {
+    signUpPasswordErrorNotifer = PassErrorNotifier();
+  });
+
   return signUpPasswordErrorNotifer;
 });
 
@@ -56,7 +70,9 @@ PassErrorNotifier signUpConfirmPasswordErrorNotifer = PassErrorNotifier();
 
 final signUpConfirmPasswordErrorProvider =
     StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
-  signUpConfirmPasswordErrorNotifer = PassErrorNotifier();
+  ref.onDispose(() {
+    signUpConfirmPasswordErrorNotifer = PassErrorNotifier();
+  });
   return signUpConfirmPasswordErrorNotifer;
 });
 
@@ -66,7 +82,10 @@ EmailErrorNotifier forgetPassSignUpEmailErrorNotifer = EmailErrorNotifier();
 
 final forgetPassSignUpEmailErrorProvider =
     StateNotifierProvider.autoDispose<EmailErrorNotifier, String>((ref) {
-  forgetPassSignUpEmailErrorNotifer = EmailErrorNotifier();
+  ref.onDispose(() {
+    forgetPassSignUpEmailErrorNotifer = EmailErrorNotifier();
+  });
+
   return forgetPassSignUpEmailErrorNotifer;
 });
 
@@ -74,7 +93,10 @@ ButtonLoaderNotifier forgetPassButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final forgetPassButtonLoaderProvider =
     StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
-  forgetPassButtonLoaderNotifier = ButtonLoaderNotifier();
+  ref.onDispose(() {
+    forgetPassButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+
   return forgetPassButtonLoaderNotifier;
 });
 
@@ -84,7 +106,10 @@ TimerNotifier forgetPassOtpTimerNotifer = TimerNotifier();
 
 final forgetPassOtpTimerProvider =
     StateNotifierProvider.autoDispose<TimerNotifier, int?>((ref) {
-  forgetPassOtpTimerNotifer = TimerNotifier();
+  ref.onDispose(() {
+    forgetPassOtpTimerNotifer = TimerNotifier();
+  });
+
   return forgetPassOtpTimerNotifer;
 });
 
@@ -92,7 +117,10 @@ ButtonLoaderNotifier forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final forgetPassOtpButtonLoaderProvider =
     StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
-  forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+  ref.onDispose(() {
+    forgetPassOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+
   return forgetPassOtpButtonLoaderNotifier;
 });
 
@@ -102,7 +130,9 @@ PassErrorNotifier setPassPasswordErrorNotifer = PassErrorNotifier();
 
 final setPassPasswordErrorProvider =
     StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
-  setPassPasswordErrorNotifer = PassErrorNotifier();
+  ref.onDispose(() {
+    setPassPasswordErrorNotifer = PassErrorNotifier();
+  });
   return setPassPasswordErrorNotifer;
 });
 
@@ -110,7 +140,9 @@ PassErrorNotifier setPassConfirmPasswordErrorNotifer = PassErrorNotifier();
 
 final setPassConfirmPasswordErrorProvider =
     StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
-  setPassConfirmPasswordErrorNotifer = PassErrorNotifier();
+  ref.onDispose(() {
+    setPassConfirmPasswordErrorNotifer = PassErrorNotifier();
+  });
   return setPassConfirmPasswordErrorNotifer;
 });
 
@@ -118,7 +150,9 @@ ButtonLoaderNotifier setPassButtonLoaderNotifier = ButtonLoaderNotifier();
 
 final setPassButtonLoaderProvider =
     StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
-  setPassButtonLoaderNotifier = ButtonLoaderNotifier();
+  ref.onDispose(() {
+    setPassButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
   return setPassButtonLoaderNotifier;
 });
 
@@ -129,7 +163,9 @@ MobileNumberErrorNotifier mobileNumberMobileErrorNotifier =
 
 final mobileNumberMobileErrorProvider =
     StateNotifierProvider.autoDispose<MobileNumberErrorNotifier, String>((ref) {
-  mobileNumberMobileErrorNotifier = MobileNumberErrorNotifier();
+  ref.onDispose(() {
+    mobileNumberMobileErrorNotifier = MobileNumberErrorNotifier();
+  });
   return mobileNumberMobileErrorNotifier;
 });
 
@@ -139,7 +175,9 @@ TimerNotifier twoFactorTimerNotifer = TimerNotifier();
 
 final twoFactorTimerProvider =
     StateNotifierProvider.autoDispose<TimerNotifier, int?>((ref) {
-  twoFactorTimerNotifer = TimerNotifier();
+  ref.onDispose(() {
+    twoFactorTimerNotifer = TimerNotifier();
+  });
   return twoFactorTimerNotifer;
 });
 
@@ -149,7 +187,9 @@ PanErrorNotifier panNumberPanErrorNotifier = PanErrorNotifier();
 
 final panNumberPanErrorProvider =
     StateNotifierProvider.autoDispose<PanErrorNotifier, String>((ref) {
-  panNumberPanErrorNotifier = PanErrorNotifier();
+  ref.onDispose(() {
+    panNumberPanErrorNotifier = PanErrorNotifier();
+  });
   return panNumberPanErrorNotifier;
 });
 
@@ -157,6 +197,8 @@ NameErrorNotifier panNumberNameErrorNotifier = NameErrorNotifier();
 
 final panNumberNameErrorProvider =
     StateNotifierProvider.autoDispose<NameErrorNotifier, String>((ref) {
-  panNumberNameErrorNotifier = NameErrorNotifier();
+  ref.onDispose(() {
+    panNumberNameErrorNotifier = NameErrorNotifier();
+  });
   return panNumberNameErrorNotifier;
 });
