@@ -23,7 +23,7 @@ class EmailTextArea extends StatelessWidget {
       child: TextFormField(
           onChanged: (text) {
             if (emailErrorNotifier != null) {
-              emailErrorNotifier!.isValid(text);
+              emailErrorNotifier!.checker(text);
             }
           },
           controller: controller,

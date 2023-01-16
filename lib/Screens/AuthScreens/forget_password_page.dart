@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
@@ -26,7 +28,6 @@ class ForgetPasswordPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final emailErrorMsg = ref.watch(forgetPassSignUpEmailErrorProvider);
     return Scaffold(
         body: SingleChildScrollView(
       child: Stack(children: [
@@ -56,15 +57,13 @@ class ForgetPasswordPage extends ConsumerWidget {
               loaderProvider: forgetPassButtonLoaderProvider,
               text: "Continue",
               function: () async {
-                if (!emailErrorMsg.toLowerCase().contains('email') &&
-                    emailErrorMsg != '') {
+                if (forgetPassSignUpEmailErrorNotifer.valid) {
                   forgetPassButtonLoaderNotifier.toggle();
 
                   final response = await ApiCalls.sendEmailOTP(
                       email: emailTextArea.controller.text);
                   forgetPassButtonLoaderNotifier.toggle();
                   if (response['statusCode'] == 200) {
-                    // ignore: use_build_context_synchronously
                     context.goNamed(RouteNames.forgetpassOTP,
                         params: {'email': emailTextArea.controller.text});
                   } else {

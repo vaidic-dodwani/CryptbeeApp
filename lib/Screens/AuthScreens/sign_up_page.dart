@@ -14,7 +14,7 @@ import 'package:cryptbee/Utilities/Widgets/sign_in_up_tabs.dart';
 import 'package:cryptbee/Utilities/api_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart'; 
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends ConsumerWidget {
@@ -53,7 +53,6 @@ class SignUpPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final emailErrorMsg = ref.watch(signUpEmailErrorProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -88,34 +87,30 @@ class SignUpPage extends ConsumerWidget {
                 text: "Sign Up",
                 loaderProvider: signUpEmailButtonLoaderProvider,
                 function: () async {
-                  if (emailErrorMsg == ' ') {
-                    if (!emailErrorMsg.toLowerCase().contains('password')) {
-                      if (passArea.controller.text ==
-                          confirmPassArea.controller.text) {
-                        signUpEmailButtonLoaderNotifier.toggle();
-                        final response = await ApiCalls.signUp(
-                            email: emailField.controller.text,
-                            password: passArea.controller.text);
-                        signUpEmailButtonLoaderNotifier.toggle();
-                        if (response == noInternet) {
-                          internetHandler(context);
-                        } else if (response['statusCode'] == 200) {
-                          final prefs = await SharedPreferences.getInstance();
-                          prefs.setString('email', emailField.controller.text);
-                          prefs.setString(
-                              'password', confirmPassArea.controller.text);
-                          context.goNamed(RouteNames.mailOpener,
-                              params: {'email': emailField.controller.text});
-                        } else {
-                          if (true) {
-                            signUpConfirmPasswordErrorNotifer.setVal(
-                                response[response.keys.first][0].toString());
-                          }
-                        }
+                  if (signUpEmailErrorNotifer.valid) {
+                    if (passArea.controller.text ==
+                        confirmPassArea.controller.text) {
+                      signUpEmailButtonLoaderNotifier.toggle();
+                      final response = await ApiCalls.signUp(
+                          email: emailField.controller.text,
+                          password: passArea.controller.text);
+                      signUpEmailButtonLoaderNotifier.toggle();
+                      if (response == noInternet) {
+                        internetHandler(context);
+                      } else if (response['statusCode'] == 200) {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString('email', emailField.controller.text);
+                        prefs.setString(
+                            'password', confirmPassArea.controller.text);
+                        context.goNamed(RouteNames.mailOpener,
+                            params: {'email': emailField.controller.text});
                       } else {
-                        signUpConfirmPasswordErrorNotifer
-                            .setVal("Passwords Dont Match");
+                        signUpConfirmPasswordErrorNotifer.setVal(
+                            response[response.keys.first][0].toString());
                       }
+                    } else {
+                      signUpConfirmPasswordErrorNotifer
+                          .setVal("Passwords Dont Match");
                     }
                   }
                 },

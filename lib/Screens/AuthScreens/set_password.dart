@@ -42,7 +42,6 @@ class SetPasswordPage extends ConsumerWidget {
   );
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final confirmPassErrorMsg = ref.watch(setPassConfirmPasswordErrorProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -74,10 +73,7 @@ class SetPasswordPage extends ConsumerWidget {
                   function: () async {
                     if (passArea.controller.text ==
                         confirmPassArea.controller.text) {
-                      if (confirmPassErrorMsg
-                              .toLowerCase()
-                              .contains('password') ||
-                          confirmPassErrorMsg == " ") {
+                      if (setPassPasswordErrorNotifer.valid) {
                         setPassButtonLoaderNotifier.toggle();
                         final response = await ApiCalls.resetPass(
                             email: email,

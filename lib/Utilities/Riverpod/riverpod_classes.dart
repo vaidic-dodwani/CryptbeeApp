@@ -2,16 +2,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EmailErrorNotifier extends StateNotifier<String> {
   EmailErrorNotifier() : super(" ");
-
-  void isValid(text) {
+  bool valid = false;
+  void checker(text) {
     if (text.length == 0) {
       state = "";
+      valid = false;
     } else if (RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(text)) {
-      state = " ";
+      valid = true;
+      state = "";
     } else {
       state = "Invalid Email Id";
+      valid = false;
     }
   }
 
@@ -20,31 +23,38 @@ class EmailErrorNotifier extends StateNotifier<String> {
   }
 }
 
-class PassErrorNotifier extends StateNotifier<String> { 
+class PassErrorNotifier extends StateNotifier<String> {
   PassErrorNotifier() : super(" ");
-
+  bool valid = false;
   void isStrong(password) {
     if (password.length == 0) {
+      valid = false;
       state = "";
     } else {
       state = "Password must have ";
       if (!RegExp(r'^(?=.*?[a-z]).*').hasMatch(password)) {
+        valid = false;
         state = "${state}one small character, ";
       }
       if (!RegExp(r'^(?=.*?[A-Z]).*').hasMatch(password)) {
+        valid = false;
         state = "${state}one capital character, ";
       }
       if (!RegExp(r'^.*\W.*').hasMatch(password)) {
+        valid = false;
         state = "${state}one symbol, ";
       }
       if (!RegExp(r'^(?=.*?[0-9]).*').hasMatch(password)) {
+        valid = false;
         state = "${state}one digit, ";
       }
       if (password.length < 8) {
+        valid = false;
         state = "${state}8 characters, ";
       }
       if (state == "Password must have ") {
-        state = " ";
+        valid = true;
+        state = "";
       }
     }
   }

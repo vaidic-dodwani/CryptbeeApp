@@ -18,7 +18,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInPage extends ConsumerWidget {
-   SignInPage({super.key});
+  SignInPage({super.key});
 
   final EmailTextArea emailField = EmailTextArea(
       labelText: "Email Address",
@@ -40,8 +40,6 @@ class SignInPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final emailErrorMsg = ref.watch(signInEmailErrorProvider);
-    final passErrorMsg = ref.watch(signInPasswordErrorProvider);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -74,7 +72,8 @@ class SignInPage extends ConsumerWidget {
                 text: "Login",
                 loaderProvider: signInButtonLoaderProvider,
                 function: () async {
-                  if (emailErrorMsg == " " && passErrorMsg == " ") {
+                  if (signInEmailErrorNotifer.valid &&
+                      signInPasswordErrorNotifer.valid) {
                     signInButtonLoaderNotifier.toggle();
                     final response = await ApiCalls.signIn(
                         email: emailField.controller.text,
