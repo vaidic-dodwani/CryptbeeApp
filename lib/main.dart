@@ -1,5 +1,6 @@
 import 'package:cryptbee/Routing/routing.dart';
 import 'package:cryptbee/Utilities/Dynamic%20Link/dynamic_link.dart';
+import 'package:cryptbee/Utilities/static_classes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -47,6 +48,7 @@ Future _initAuth() async {
       await ApiCalls.renewToken();
     }
     App.isLoggedIn = true;
+    User.name = prefs.getString('name') ?? '';
   } else {
     App.isLoggedIn = false;
     // it doesnt exist

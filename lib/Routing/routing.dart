@@ -10,7 +10,7 @@ import 'package:cryptbee/Screens/AuthScreens/two_factor_page.dart';
 import 'package:cryptbee/Screens/AuthScreens/mail_opener.dart';
 import 'package:cryptbee/Screens/AuthScreens/verification_checker.dart';
 import 'package:cryptbee/Screens/Homepage/home_page.dart';
-import 'package:cryptbee/Utilities/Dynamic%20Link/dynamic_link.dart';
+import 'package:cryptbee/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

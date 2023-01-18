@@ -202,3 +202,10 @@ final panNumberNameErrorProvider =
   });
   return panNumberNameErrorNotifier;
 });
+
+// HomePage
+
+HomeBottomNavNotifier homeBottomNavNotifier = HomeBottomNavNotifier();
+
+final homeBottomNavProvider = StateNotifierProvider<HomeBottomNavNotifier, int>(
+    (ref) => homeBottomNavNotifier);

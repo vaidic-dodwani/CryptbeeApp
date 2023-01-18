@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class Palette {
   static const primaryColor = Color(0xFFF89E31);
-  static const secondaryBlackColor = Color(0xFF131313);
-  static const secondaryOffWhiteColor = Color(0xFFF1F4F6);
+  static const secondaryBlackColor = Color(0xFF17171F);
+  static const secondaryOffWhiteColor = Color(0xFFF5F5FA);
   static const secondaryWhiteColor = Color(0xFFFFFFFF);
   static const secondaryErrorColor = Color(0xFFCF6679);
   static const secondaryCorrectColor = Color(0xFF66DF98);
-  static const neutralBlack = Color(0xFF1D1C26);
+  static const neutralBlack = Color(0xFF0F0F0C);
   static const neutralDarkGrey = Color(0xFF2E2E2E);
   static const neutralGrey = Color(0xFF707070);
 }

@@ -1,8 +1,8 @@
 import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
-import 'package:cryptbee/Utilities/Dynamic%20Link/dynamic_link.dart';
 import 'package:cryptbee/Utilities/Widgets/utilities.dart';
 import 'package:cryptbee/Utilities/api_functions.dart';
+import 'package:cryptbee/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +28,8 @@ class _VerificationCheckerState extends ConsumerState<VerificationChecker> {
       if (value['statusCode'] == 200) {
         clearData().then(
           (info) {
+            value['two_factor'] = false;
+            value["pan_verify"] = false;
             saveData(value).then((value) {
               App.isLoggedIn = true;
               ToastContext().init(context);

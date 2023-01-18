@@ -133,3 +133,11 @@ class NameErrorNotifier extends StateNotifier<String> {
     }
   }
 }
+
+class HomeBottomNavNotifier extends StateNotifier<int> {
+  HomeBottomNavNotifier() : super(0);
+
+  void setPage(int page) {
+    state = page;
+  }
+}
