@@ -12,84 +12,84 @@ class Palette {
   static const neutralGrey = Color(0xFF707070);
 }
 
-TextStyle headlineLarge({Color fontColor = Colors.white}) => TextStyle(
+TextStyle headlineLarge({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 32,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w700,
     );
 
-TextStyle headlineMedium({Color fontColor = Colors.white}) => TextStyle(
+TextStyle headlineMedium({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 28,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle headlineSmall({Color fontColor = Colors.white}) => TextStyle(
+TextStyle headlineSmall({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 24,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle titleLarge({Color fontColor = Colors.white}) => TextStyle(
+TextStyle titleLarge({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 22,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w700,
     );
 
-TextStyle titleMedium({Color fontColor = Colors.white}) => TextStyle(
+TextStyle titleMedium({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 18,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w700,
     );
 
-TextStyle titleSmall({Color fontColor = Colors.white}) => TextStyle(
+TextStyle titleSmall({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 14,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w500,
     );
 
-TextStyle bodyLarge({Color fontColor = Colors.white}) => TextStyle(
+TextStyle bodyLarge({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 16,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle bodyMedium({Color fontColor = Colors.white}) => TextStyle(
+TextStyle bodyMedium({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 14,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle bodySmall({Color fontColor = Colors.white}) => TextStyle(
+TextStyle bodySmall({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 12,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle labelLarge({Color fontColor = Colors.white}) => TextStyle(
+TextStyle labelLarge({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 14,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle labelMedium({Color fontColor = Colors.white}) => TextStyle(
+TextStyle labelMedium({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 12,
       color: fontColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w400,
     );
 
-TextStyle labelSmall({Color fontColor = Colors.white}) => TextStyle(
+TextStyle labelSmall({Color fontColor = Palette.secondaryOffWhiteColor}) => TextStyle(
       fontSize: 10,
       color: fontColor,
       fontFamily: "Poppins",

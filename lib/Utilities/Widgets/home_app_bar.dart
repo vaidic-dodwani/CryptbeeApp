@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 AppBar homeAppBar() {
   return AppBar(
+    elevation: 0,
     leadingWidth: 68,
     backgroundColor: Palette.secondaryBlackColor,
     leading: const Padding(

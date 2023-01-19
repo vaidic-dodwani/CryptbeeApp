@@ -1,0 +1,96 @@
+import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+import 'package:flutter/material.dart';
+
+import '../../Models/coin_model.dart';
+
+Widget investCoinTileBuilder(Coin coin) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
+    child: Container(
+      height: 84,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Palette.secondaryBlackColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 32,
+            backgroundImage: NetworkImage(
+              coin.image,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            coin.fullName,
+                            style: titleMedium(),
+                          ),
+                          Text(
+                            coin.shortForm,
+                            style: labelMedium(),
+                          )
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "\$ ${coin.price}",
+                      style: bodyLarge(),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          coin.changePercent > 0
+                              ? const Icon(Icons.arrow_upward_rounded,
+                                  color: Palette.secondaryCorrectColor)
+                              : const Icon(Icons.arrow_downward_rounded,
+                                  color: Palette.secondaryErrorColor),
+                          Text(
+                            "${coin.changePercent} %",
+                            style: bodyMedium(
+                                fontColor: coin.changePercent > 0
+                                    ? Palette.secondaryCorrectColor
+                                    : Palette.secondaryErrorColor),
+                          ),
+                        ],
+                      ),
+                      Row(children: [
+                        Text(
+                          "View More",
+                          style: bodySmall(),
+                        ),
+                        const Icon(
+                          Icons.chevron_right_sharp,
+                          color: Colors.white,
+                        )
+                      ])
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}

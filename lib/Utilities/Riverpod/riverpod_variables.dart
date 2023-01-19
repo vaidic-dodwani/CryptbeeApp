@@ -209,3 +209,10 @@ HomeBottomNavNotifier homeBottomNavNotifier = HomeBottomNavNotifier();
 
 final homeBottomNavProvider = StateNotifierProvider<HomeBottomNavNotifier, int>(
     (ref) => homeBottomNavNotifier);
+
+//INVEST TAB
+
+InvestTopNavNotifier investTopNavNotifier = InvestTopNavNotifier();
+
+final investTopNavProvider = StateNotifierProvider<InvestTopNavNotifier, int>(
+    (ref) => investTopNavNotifier);

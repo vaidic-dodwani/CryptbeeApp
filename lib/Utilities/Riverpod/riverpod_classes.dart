@@ -141,3 +141,11 @@ class HomeBottomNavNotifier extends StateNotifier<int> {
     state = page;
   }
 }
+
+class InvestTopNavNotifier extends StateNotifier<int> {
+  InvestTopNavNotifier() : super(0);
+
+  void setPage(int page) {
+    state = page;
+  }
+}
