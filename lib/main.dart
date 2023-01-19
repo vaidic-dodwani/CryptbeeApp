@@ -43,11 +43,13 @@ class _MyAppState extends State<MyApp> {
 Future _initAuth() async {
   final prefs = await SharedPreferences.getInstance();
   if (prefs.containsKey('access')) {
-    final String access = prefs.getString('access')!;
+    String access = prefs.getString('access')!;
     if (JwtDecoder.isExpired(access)) {
       await ApiCalls.renewToken();
+      access = prefs.getString('access')!;
     }
     App.isLoggedIn = true;
+    App.acesss = access;
     User.name = prefs.getString('name') ?? '';
   } else {
     App.isLoggedIn = false;

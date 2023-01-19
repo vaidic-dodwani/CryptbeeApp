@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cryptbee/Config/api_links.dart';
 import 'package:cryptbee/Utilities/api_functions.dart';
+import 'package:cryptbee/Utilities/static_classes.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -223,6 +224,7 @@ class ApiCalls {
       final output = jsonDecode(response.body);
       log(output.toString());
       prefs.setString('access', output['access']);
+      App.acesss = output['access'];
     } catch (e) {
       log("$e");
     }
