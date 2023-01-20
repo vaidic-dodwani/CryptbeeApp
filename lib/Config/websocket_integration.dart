@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Config/websocket_link.dart';
-import 'package:cryptbee/Utilities/static_classes.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_socket_channel/io.dart';
 
 final allCoinsSocketProvider =
     StreamProvider.autoDispose<dynamic>((ref) async* {
-  // Open the connection
   IOWebSocketChannel channel =
       IOWebSocketChannel.connect(SocketLinks.allCoinWebSocketLink);
 
@@ -23,23 +23,11 @@ final allCoinsSocketProvider =
       log("send token");
       channel.sink.add(App.acesss);
     } else if (value == "invalid token") {
+      await ApiCalls.renewToken();
+      channel.sink.add(App.acesss);
       log("invalid token");
     } else {
       yield jsonDecode(value);
     }
   }
 });
-
-
-
-
-//  channel.stream.listen(
-//     (data) async {
-//       if (data == "invalid token") {
-//         log(data.toString());
-//         await ApiCalls.renewToken();
-//         channel = IOWebSocketChannel.connect(SocketLinks.allCoinWebSocketLink);
-//         channel.sink.add(App.acesss);
-//       }
-//     },
-//   );

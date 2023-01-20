@@ -1,37 +1,45 @@
-import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
+
 import 'package:flutter/material.dart';
 
-class PanTextArea extends StatelessWidget {
+class PasswordTextArea extends StatefulWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller = TextEditingController();
+  final PassErrorNotifier? passErrorNotifier;
   final Color fontColor = Colors.black;
-  final PanErrorNotifier? panErrorNotifier;
 
-  PanTextArea(
+  PasswordTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.panErrorNotifier});
+      this.passErrorNotifier});
 
+  @override
+  State<PasswordTextArea> createState() => _PasswordTextAreaState();
+}
+
+class _PasswordTextAreaState extends State<PasswordTextArea> {
+  bool _passwordShow = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
-          onChanged: (text) {
-            if (panErrorNotifier != null) {
-              panErrorNotifier!.isValid(text);
+          obscureText: !_passwordShow,
+          controller: widget.controller,
+          style: bodyMedium(),
+          onChanged: (password) {
+            if (widget.passErrorNotifier != null) {
+              widget.passErrorNotifier!.isStrong(password);
             }
           },
-          controller: controller,
-          style: bodyMedium(),
           decoration: InputDecoration(
-            floatingLabelBehavior: FloatingLabelBehavior.always,
             hintStyle: bodyMedium(),
-            labelText: labelText,
-            hintText: hintText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            labelText: widget.labelText,
+            hintText: widget.hintText,
             labelStyle: labelMedium(),
             errorBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -53,6 +61,19 @@ class PanTextArea extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(
                     color: Palette.secondaryOffWhiteColor, width: 2)),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _passwordShow
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: Palette.secondaryOffWhiteColor,
+              ),
+              onPressed: () {
+                setState(() {
+                  _passwordShow = !_passwordShow;
+                });
+              },
+            ),
           )),
     );
   }

@@ -1,6 +1,6 @@
-import 'package:cryptbee/Utilities/Widgets/auth_heading.dart';
-import 'package:cryptbee/Utilities/Widgets/log_in_button.dart';
-import 'package:cryptbee/Utilities/Widgets/logo_with_name.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/auth_heading.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/log_in_button.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';

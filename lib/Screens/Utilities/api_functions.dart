@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cryptbee/Utilities/static_classes.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';

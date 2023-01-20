@@ -1,4 +1,4 @@
-import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //  SIGN IN PAGE

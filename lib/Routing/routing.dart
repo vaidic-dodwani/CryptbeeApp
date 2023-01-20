@@ -10,7 +10,7 @@ import 'package:cryptbee/Screens/AuthScreens/two_factor_page.dart';
 import 'package:cryptbee/Screens/AuthScreens/mail_opener.dart';
 import 'package:cryptbee/Screens/AuthScreens/verification_checker.dart';
 import 'package:cryptbee/Screens/Homepage/home_page.dart';
-import 'package:cryptbee/Utilities/static_classes.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,7 +23,10 @@ class AppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return MaterialPage(
-              child: App.isLoggedIn ? const HomePage() : SignInPage());
+              child: ForgetPassOtpPage(email: "vaidic0503@gmail.com")
+              // App.isLoggedIn ? const HomePage() : SignInPage()
+
+              );
         },
         routes: [
           GoRoute(

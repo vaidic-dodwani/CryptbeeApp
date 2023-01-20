@@ -1,8 +1,8 @@
 import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
-import 'package:cryptbee/Utilities/Widgets/utilities.dart';
-import 'package:cryptbee/Utilities/api_functions.dart';
-import 'package:cryptbee/Utilities/static_classes.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/api_functions.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

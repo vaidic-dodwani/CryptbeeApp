@@ -1,5 +1,5 @@
 import 'package:cryptbee/Routing/route_names.dart';
-import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

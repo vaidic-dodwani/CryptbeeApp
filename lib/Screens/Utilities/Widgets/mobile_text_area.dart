@@ -1,5 +1,5 @@
-import 'package:cryptbee/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 
 import 'package:flutter/material.dart';
 

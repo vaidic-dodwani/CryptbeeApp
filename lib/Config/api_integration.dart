@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:cryptbee/Config/api_links.dart';
-import 'package:cryptbee/Utilities/api_functions.dart';
-import 'package:cryptbee/Utilities/static_classes.dart';
+import 'package:cryptbee/Screens/Utilities/api_functions.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

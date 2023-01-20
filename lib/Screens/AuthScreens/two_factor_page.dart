@@ -1,6 +1,6 @@
-import 'package:cryptbee/Utilities/Riverpod/riverpod_variables.dart';
-import 'package:cryptbee/Utilities/Widgets/logo_with_name.dart';
-import 'package:cryptbee/Utilities/Widgets/otp_box.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/otp_box.dart';
 
 import 'package:flutter/material.dart';
 

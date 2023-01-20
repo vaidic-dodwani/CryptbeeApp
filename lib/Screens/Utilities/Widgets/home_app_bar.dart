@@ -1,5 +1,5 @@
-import 'package:cryptbee/Utilities/Widgets/utilities.dart';
-import 'package:cryptbee/Utilities/static_classes.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 
 AppBar homeAppBar() {

@@ -1,7 +1,7 @@
-import 'package:cryptbee/Utilities/Widgets/utilities.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cryptbee/Models/coin_model.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
-
-import '../../Models/coin_model.dart';
 
 Widget investCoinTileBuilder(Coin coin) {
   return Padding(
@@ -21,7 +21,7 @@ Widget investCoinTileBuilder(Coin coin) {
             CircleAvatar(
               backgroundColor: Colors.transparent,
               radius: 32,
-              backgroundImage: NetworkImage(
+              backgroundImage: CachedNetworkImageProvider(
                 coin.image,
               ),
             ),
@@ -38,7 +38,16 @@ Widget investCoinTileBuilder(Coin coin) {
                           children: [
                             Text(
                               coin.fullName,
-                              style: titleMedium(),
+                              style: TextStyle(
+                                fontSize: coin.fullName.length < 20
+                                    ? coin.fullName.length < 15
+                                        ? 18
+                                        : 12
+                                    : 10,
+                                color: Palette.secondaryOffWhiteColor,
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                             Text(
                               coin.shortForm,
@@ -48,7 +57,7 @@ Widget investCoinTileBuilder(Coin coin) {
                         ),
                       ),
                       Text(
-                        "\$ ${coin.price.toStringAsFixed(2)}",
+                        "₹ ${coin.price.toStringAsFixed(2)}",
                         style: bodyLarge(),
                       )
                     ],
