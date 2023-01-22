@@ -3,11 +3,13 @@ class Coin {
   String shortForm;
   String image;
   double price;
-  double changePercent;
+  double? holding;
+  double? changePercent;
   Coin(
       {required this.fullName,
       required this.shortForm,
       required this.image,
       required this.price,
-      required this.changePercent});
+      this.holding,
+      this.changePercent});
 }

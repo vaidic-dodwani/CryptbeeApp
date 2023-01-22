@@ -24,12 +24,12 @@ Future<void> saveData(Map response) async {
   }
   if (response.containsKey('two_factor')) {
     prefs.setBool('2fa', response['two_factor']);
-    App.twoFactor = response['two_factor'];
+    User.twoFactor = response['two_factor'];
     log("saving two_factor of ${response['two_factor']} ");
   }
   if (response.containsKey('pan_verify')) {
     prefs.setBool('pan_verify', response['pan_verify']);
-    App.panVerify = response['pan_verify'];
+    User.panVerify = response['pan_verify'];
     log("saving pan_verify of ${response['pan_verify']} ");
   }
   if (response.containsKey('is_verified')) {
@@ -45,6 +45,11 @@ Future<void> saveData(Map response) async {
     prefs.setString('email', response['email']);
     User.email = response['email'];
     log("saving name of ${response['email']} ");
+  }
+  if (response.containsKey("pan")) {
+    prefs.setString('pan', response['pan']);
+    User.pan = response['pan'];
+    log("saving pan of ${response['pan']} ");
   }
 }
 
@@ -73,16 +78,19 @@ Future appInstanceInit() async {
     App.refresh = prefs.getString('refresh');
   }
   if (prefs.containsKey('two_factor')) {
-    App.twoFactor = prefs.getBool('2fa');
+    User.twoFactor = prefs.getBool('2fa');
   }
   if (prefs.containsKey('pan_verify')) {
-    App.panVerify = prefs.getBool('pan_verify');
+    User.panVerify = prefs.getBool('pan_verify');
   }
   if (prefs.containsKey('name')) {
     User.name = prefs.getString('name') ?? 'user';
   }
   if (prefs.containsKey('email')) {
     User.email = prefs.getString('email') ?? 'email@email.com';
+  }
+  if (prefs.containsKey('pan')) {
+    User.pan = prefs.getString('pan') ?? 'pan';
   }
 }
 

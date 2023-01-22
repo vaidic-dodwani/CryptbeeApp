@@ -5,7 +5,7 @@ import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/otp_box.dart';
-import 'package:cryptbee/Screens/Utilities/api_functions.dart';
+import 'package:cryptbee/Config/api_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';

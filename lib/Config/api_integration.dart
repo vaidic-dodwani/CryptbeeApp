@@ -1,9 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:cryptbee/Config/api_links.dart';
-import 'package:cryptbee/Screens/Utilities/api_functions.dart';
+import 'package:cryptbee/Routing/route_names.dart';
+import 'package:cryptbee/Config/api_functions.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:cryptbee/Screens/Utilities/static_classes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -175,7 +180,7 @@ class ApiCalls {
           ),
         );
         if (response.statusCode == 200) {
-          App.panVerify = true;
+          User.panVerify = true;
           User.name = name;
         }
       } else if (pan.isEmpty && name.isNotEmpty) {
@@ -204,7 +209,7 @@ class ApiCalls {
           ),
         );
         if (response.statusCode == 200) {
-          App.panVerify = true;
+          User.panVerify = true;
         }
       }
       final output = jsonDecode(response.body);
@@ -233,7 +238,14 @@ class ApiCalls {
           <String, dynamic>{"refresh": refresh},
         ),
       );
+      if (response.statusCode == 401) {
+        prefs.clear();
+        App.isLoggedIn = false;
+        App.navigatorKey.currentContext!.goNamed(RouteNames.root);
+      }
+
       final output = jsonDecode(response.body);
+
       log(output.toString());
       prefs.setString('access', output['access']);
       App.acesss = output['access'];
@@ -244,17 +256,112 @@ class ApiCalls {
 
   static Future<dynamic> getNews() async {
     try {
-      final response = await get(
+      Response response = await get(
         Uri.parse(Links.prefixLink + Links.newsLink),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${App.acesss}'
         },
       );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await get(
+          Uri.parse(Links.prefixLink + Links.newsLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
       final output = jsonDecode(response.body);
       return output;
     } catch (e) {
       log("$e");
+    }
+  }
+
+  static Future<dynamic> changePassword(String oldPass, String newPass) async {
+    try {
+      Response response = await put(
+        Uri.parse(Links.prefixLink + Links.changePasswordLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+        body: jsonEncode(
+          <String, dynamic>{"password": oldPass, 'newpassword': newPass},
+        ),
+      );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await put(
+          Uri.parse(Links.prefixLink + Links.changePasswordLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{"password": oldPass, 'newpassword': newPass},
+          ),
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> sendProfilePhoto(File photo) async {
+    try {
+      Map<String, String> headers = {
+        'Authorization': 'Bearer ${App.acesss}',
+        'Content-Type': 'multipart/form-data'
+      };
+      log("1");
+      MultipartRequest request = MultipartRequest(
+          'PUT', Uri.parse(Links.prefixLink + Links.updateProfilePhoto));
+      log("2");
+
+      request.headers.addAll(headers);
+      log("3");
+
+      request.files.add(
+        MultipartFile('profile_picture', photo.readAsBytes().asStream(),
+            photo.lengthSync(),
+            filename: "${User.name}.jpg",
+            contentType: MediaType('image', 'jpg')),
+      );
+      log("4");
+
+      var result = await request.send();
+      log("5");
+
+      String response = await result.stream.bytesToString();
+      log("6");
+
+      if (result.statusCode == 401) {
+        await renewToken();
+        headers = {'Authorization': 'Bearer ${App.acesss}'};
+        var result = await request.send();
+        response = await result.stream.bytesToString();
+      }
+      log("7");
+
+      final output = jsonDecode(response);
+      log("8");
+
+      output['statusCode'] = result.statusCode;
+      log("9");
+
+      log(output.toString());
+      log("10");
+
+      return output;
+    } catch (e) {
+      log(" error $e");
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class NameTextArea extends StatelessWidget {
   final String labelText;
   final String hintText;
+  final String? defaultControllerText;
   final TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
   final NameErrorNotifier? nameErrorNotifier;
@@ -14,10 +15,14 @@ class NameTextArea extends StatelessWidget {
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.nameErrorNotifier});
+      this.nameErrorNotifier,
+      this.defaultControllerText});
 
   @override
   Widget build(BuildContext context) {
+    if (defaultControllerText != null) {
+      controller.text = defaultControllerText!;
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(

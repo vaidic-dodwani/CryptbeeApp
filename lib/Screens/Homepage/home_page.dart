@@ -2,7 +2,7 @@
 
 import 'package:cryptbee/Screens/Homepage/Home%20Tabs/home_tab_no_pan.dart';
 import 'package:cryptbee/Screens/Homepage/Home%20Tabs/home_tab_pan.dart';
-import 'package:cryptbee/Screens/Homepage/profile_tab.dart';
+import 'package:cryptbee/Screens/Homepage/Profile/profile_tab.dart';
 import 'package:cryptbee/Screens/Homepage/wallet_tab.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/home_app_bar.dart';
@@ -33,8 +33,8 @@ class HomePage extends ConsumerWidget {
 }
 
 List<Widget> homePageWidgets = [
-  if (App.panVerify ?? false) const HomeTabPan() else const HomeTabNoPan(),
+  if (User.panVerify ?? false) const HomeTabPan() else const HomeTabNoPan(),
   const InvestTab(),
   const WalletTab(),
-  const ProfileTab()
+  ProfileTab()
 ];

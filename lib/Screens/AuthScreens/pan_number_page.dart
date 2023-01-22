@@ -10,7 +10,7 @@ import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/name_text_area.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/pan_text_area.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
-import 'package:cryptbee/Screens/Utilities/api_functions.dart';
+import 'package:cryptbee/Config/api_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

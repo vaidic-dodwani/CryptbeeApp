@@ -9,7 +9,6 @@ class HomeBottomNavBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int page = ref.watch(homeBottomNavProvider);
-    // int page = 1;
     return SizedBox(
       height: double.infinity,
       child: Align(

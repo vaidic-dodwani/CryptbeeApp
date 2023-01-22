@@ -20,11 +20,12 @@ class InvestTabAll extends ConsumerWidget {
             return ((index + 1) != (data.length))
                 ? investCoinTileBuilder(
                     Coin(
-                        fullName: data[index]['FullName'],
-                        shortForm: data[index]['Name'],
-                        image: "https://www.${data[index]['ImageURL']}",
-                        price: data[index]['Price'],
-                        changePercent: data[index]['ChangePct']),
+                      fullName: data[index]['FullName'],
+                      shortForm: data[index]['Name'],
+                      image: "https://www.${data[index]['ImageURL']}",
+                      price: data[index]['Price'],
+                      changePercent: data[index]['ChangePct'],
+                    ),
                   )
                 : Container(
                     height: 84,

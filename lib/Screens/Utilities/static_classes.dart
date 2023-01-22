@@ -5,12 +5,15 @@ class App {
   static bool isLoggedIn = false;
   static String? acesss;
   static String? refresh;
-  static bool? twoFactor;
-  static bool? panVerify;
 }
 
 class User {
-  static String photo = "";
+  static String photo = "https://crypt-bee.centralindia.cloudapp.azure.com/media/profile.jpg";
   static String name = "";
   static String email = "";
+  static String pan = "";
+  static String? phone;
+  static bool mobileVerified = false;
+  static bool? twoFactor;
+  static bool? panVerify;
 }

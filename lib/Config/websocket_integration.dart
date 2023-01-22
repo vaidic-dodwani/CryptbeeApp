@@ -17,8 +17,6 @@ final allCoinsSocketProvider =
   });
 
   await for (final value in channel.stream) {
-    // log(value.toString());
-
     if (value == "connection established, send token to recieve data") {
       log("send token");
       channel.sink.add(App.acesss);
@@ -26,6 +24,9 @@ final allCoinsSocketProvider =
       await ApiCalls.renewToken();
       channel.sink.add(App.acesss);
       log("invalid token");
+    } else if (value == "authorised, enter ALL or name of the coin") {
+      log("sending all");
+      channel.sink.add("ALL");
     } else {
       yield jsonDecode(value);
     }

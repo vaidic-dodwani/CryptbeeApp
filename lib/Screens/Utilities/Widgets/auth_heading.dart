@@ -49,3 +49,40 @@ Align authTitleMediumText(String text) {
     ),
   );
 }
+
+Align authLabelLargeText(String text) {
+  return Align(
+    alignment: Alignment.center,
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      style: labelLarge(),
+    ),
+  );
+}
+
+Align authTitleSmallText(String text) {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      style: labelLarge(),
+    ),
+  );
+}
+
+
+Align authlabelMedium(String text) {
+  return Align(
+    alignment: Alignment.center,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: labelMedium(),
+      ),
+    ),
+  );
+}

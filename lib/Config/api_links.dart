@@ -10,4 +10,6 @@ class Links {
   static const String panLink = "auth/verifyPAN/";
   static const String renewTokenLink = "auth/token/";
   static const String newsLink = "invest/news/";
+  static const String changePasswordLink = "auth/changepassword/";
+  static const String updateProfilePhoto = "auth/profile_picture/";
 }

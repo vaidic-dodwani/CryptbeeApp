@@ -223,3 +223,79 @@ final investTopNavProvider = StateNotifierProvider<InvestTopNavNotifier, int>(
 final getNewsProvider = FutureProvider<dynamic>((ref) async {
   return ApiCalls.getNews();
 });
+
+//Profile Pan
+
+PanErrorNotifier profilePanPanErrorNotifier = PanErrorNotifier();
+
+final profilePanPanErrorProvider =
+    StateNotifierProvider.autoDispose<PanErrorNotifier, String>((ref) {
+  ref.onDispose(() {
+    profilePanPanErrorNotifier = PanErrorNotifier();
+  });
+  return profilePanPanErrorNotifier;
+});
+
+NameErrorNotifier profilePanNameErrorNotifier = NameErrorNotifier();
+
+final profilePanNameErrorProvider =
+    StateNotifierProvider.autoDispose<NameErrorNotifier, String>((ref) {
+  ref.onDispose(() {
+    profilePanNameErrorNotifier = NameErrorNotifier();
+  });
+  return profilePanNameErrorNotifier;
+});
+
+//CHANGE PASSWORD
+
+ButtonLoaderNotifier changePasswordEmailButtonLoaderNotifier =
+    ButtonLoaderNotifier();
+
+final changePasswordEmailButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    changePasswordEmailButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+  return changePasswordEmailButtonLoaderNotifier;
+});
+
+PassErrorNotifier changePasswordPasswordErrorNotifer = PassErrorNotifier();
+
+final changePasswordPasswordErrorProvider =
+    StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
+  ref.onDispose(() {
+    changePasswordPasswordErrorNotifer = PassErrorNotifier();
+  });
+
+  return changePasswordPasswordErrorNotifer;
+});
+
+PassErrorNotifier changePasswordConfirmPasswordErrorNotifer =
+    PassErrorNotifier();
+
+final changePasswordConfirmPasswordErrorProvider =
+    StateNotifierProvider.autoDispose<PassErrorNotifier, String>((ref) {
+  ref.onDispose(() {
+    changePasswordConfirmPasswordErrorNotifer = PassErrorNotifier();
+  });
+  return changePasswordConfirmPasswordErrorNotifer;
+});
+
+// ProfilePhoto
+
+ProfilePhotoNotifier profilePhoto = ProfilePhotoNotifier();
+
+final profilePhotoProvider =
+    StateNotifierProvider<ProfilePhotoNotifier, String?>((ref) {
+  return profilePhoto;
+});
+
+blurLoaderNotifier profileTabBlurLoaderNotifier = blurLoaderNotifier();
+
+final profileTabBlurLoaderProvider =
+    StateNotifierProvider.autoDispose<blurLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    profileTabBlurLoaderNotifier = blurLoaderNotifier();
+  });
+  return profileTabBlurLoaderNotifier;
+});

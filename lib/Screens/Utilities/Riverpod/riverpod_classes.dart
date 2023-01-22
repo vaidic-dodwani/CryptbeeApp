@@ -135,7 +135,7 @@ class NameErrorNotifier extends StateNotifier<String> {
 }
 
 class HomeBottomNavNotifier extends StateNotifier<int> {
-  HomeBottomNavNotifier() : super(0);
+  HomeBottomNavNotifier() : super(3);
 
   void setPage(int page) {
     state = page;
@@ -147,5 +147,21 @@ class InvestTopNavNotifier extends StateNotifier<int> {
 
   void setPage(int page) {
     state = page;
+  }
+}
+
+class ProfilePhotoNotifier extends StateNotifier<String?> {
+  ProfilePhotoNotifier() : super(null);
+
+  void updateProfilePhoto(path) {
+    state = path;
+  }
+}
+
+class blurLoaderNotifier extends StateNotifier<bool> {
+  blurLoaderNotifier() : super(false);
+
+  void toggle() {
+    state = !state;
   }
 }

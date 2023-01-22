@@ -8,15 +8,21 @@ class PanTextArea extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
   final PanErrorNotifier? panErrorNotifier;
+  final String? defaultControllerText;
 
   PanTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.panErrorNotifier});
+      this.panErrorNotifier,
+      this.defaultControllerText});
 
   @override
   Widget build(BuildContext context) {
+    if (defaultControllerText != null) {
+      controller.text = defaultControllerText!;
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(

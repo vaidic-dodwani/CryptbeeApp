@@ -11,7 +11,7 @@ import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/o_auth_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/password_text_area.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/sign_in_up_tabs.dart';
-import 'package:cryptbee/Screens/Utilities/api_functions.dart';
+import 'package:cryptbee/Config/api_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

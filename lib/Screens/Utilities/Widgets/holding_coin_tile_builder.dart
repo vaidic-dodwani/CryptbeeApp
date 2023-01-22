@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cryptbee/Models/coin_model.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
 
-Widget investCoinTileBuilder(Coin coin) {
-  
+Widget holdingCoinTileBuilder(Coin coin) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
     child: SizedBox(
@@ -60,7 +57,7 @@ Widget investCoinTileBuilder(Coin coin) {
                         ),
                       ),
                       Text(
-                        "₹ ${coin.price.toStringAsFixed(2)}",
+                        "₹ ${coin.holding!.toStringAsFixed(2)}",
                         style: bodyLarge(),
                       )
                     ],
@@ -72,15 +69,12 @@ Widget investCoinTileBuilder(Coin coin) {
                       children: [
                         Row(
                           children: [
-                            coin.changePercent! > 0
-                                ? const Icon(Icons.arrow_upward_rounded,
-                                    color: Palette.secondaryCorrectColor)
-                                : const Icon(Icons.arrow_downward_rounded,
-                                    color: Palette.secondaryErrorColor),
+                            const Icon(Icons.money,
+                                color: Palette.secondaryOffWhiteColor),
                             Text(
-                              "${coin.changePercent!.toStringAsFixed(2)} %",
+                              "${coin.price.toStringAsFixed(2)} %",
                               style: bodyMedium(
-                                  fontColor: coin.changePercent! > 0
+                                  fontColor: coin.price > 0
                                       ? Palette.secondaryCorrectColor
                                       : Palette.secondaryErrorColor),
                             ),

@@ -9,6 +9,9 @@ import 'package:cryptbee/Screens/AuthScreens/sign_up_page.dart';
 import 'package:cryptbee/Screens/AuthScreens/two_factor_page.dart';
 import 'package:cryptbee/Screens/AuthScreens/mail_opener.dart';
 import 'package:cryptbee/Screens/AuthScreens/verification_checker.dart';
+import 'package:cryptbee/Screens/Homepage/Profile/change_password.dart';
+import 'package:cryptbee/Screens/Homepage/Profile/profile_pan.dart';
+import 'package:cryptbee/Screens/Homepage/Profile/security.dart';
 import 'package:cryptbee/Screens/Homepage/home_page.dart';
 import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
@@ -133,14 +136,43 @@ class AppRouter {
             },
           ),
           GoRoute(
-            name: RouteNames.homePage,
-            path: 'homepage',
-            pageBuilder: (context, state) {
-              return const MaterialPage(
-                child: HomePage(),
-              );
-            },
-          ),
+              name: RouteNames.homePage,
+              path: 'homepage',
+              pageBuilder: (context, state) {
+                return const MaterialPage(
+                  child: HomePage(),
+                );
+              },
+              routes: [
+                GoRoute(
+                  name: RouteNames.personalDetails,
+                  path: 'personaldetails',
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      child: ProfilePan(),
+                    );
+                  },
+                ),
+                GoRoute(
+                    name: RouteNames.security,
+                    path: 'security',
+                    pageBuilder: (context, state) {
+                      return const MaterialPage(
+                        child: Security(),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        name: RouteNames.changePassword,
+                        path: 'changepassword',
+                        pageBuilder: (context, state) {
+                          return MaterialPage(
+                            child: ChangePassword(),
+                          );
+                        },
+                      )
+                    ])
+              ]),
         ],
       ),
     ],
