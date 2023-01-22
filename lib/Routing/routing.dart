@@ -12,6 +12,7 @@ import 'package:cryptbee/Screens/AuthScreens/verification_checker.dart';
 import 'package:cryptbee/Screens/Homepage/Profile/change_password.dart';
 import 'package:cryptbee/Screens/Homepage/Profile/profile_pan.dart';
 import 'package:cryptbee/Screens/Homepage/Profile/security.dart';
+import 'package:cryptbee/Screens/Homepage/coin_page.dart';
 import 'package:cryptbee/Screens/Homepage/home_page.dart';
 import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
@@ -144,6 +145,17 @@ class AppRouter {
                 );
               },
               routes: [
+                GoRoute(
+                  name: RouteNames.coinPage,
+                  path: 'coinpage/:shortName',
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      child: CoinPage(
+                        shortName: state.params['shortName']!,
+                      ),
+                    );
+                  },
+                ),
                 GoRoute(
                   name: RouteNames.personalDetails,
                   path: 'personaldetails',

@@ -72,7 +72,6 @@ Align authTitleSmallText(String text) {
   );
 }
 
-
 Align authlabelMedium(String text) {
   return Align(
     alignment: Alignment.center,
@@ -82,6 +81,20 @@ Align authlabelMedium(String text) {
         text,
         textAlign: TextAlign.center,
         style: labelMedium(),
+      ),
+    ),
+  );
+}
+
+Align authBodyLarge(String text) {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.left,
+        style: bodyLarge(),
       ),
     ),
   );

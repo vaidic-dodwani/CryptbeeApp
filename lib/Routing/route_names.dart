@@ -13,6 +13,7 @@ class RouteNames {
   static const String twoFactor = "twofactor";
   static const String panNumber = "pannumber";
   static const String homePage = "homepage";
+  static const String coinPage = "coinpage";
   static const String personalDetails = "personaldetails";
   static const String security = "security";
   static const String changePassword = "changepassword";

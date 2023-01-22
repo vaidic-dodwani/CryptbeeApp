@@ -18,8 +18,8 @@ class InvestTabAll extends ConsumerWidget {
           itemCount: data.length,
           itemBuilder: (context, index) {
             return ((index + 1) != (data.length))
-                ? investCoinTileBuilder(
-                    Coin(
+                ? InvestCoinTileBuilder(
+                    coin: Coin(
                       fullName: data[index]['FullName'],
                       shortForm: data[index]['Name'],
                       image: "https://www.${data[index]['ImageURL']}",
