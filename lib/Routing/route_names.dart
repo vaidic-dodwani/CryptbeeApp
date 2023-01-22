@@ -12,6 +12,5 @@ class RouteNames {
   static const String mailOpener = "mailopener";
   static const String twoFactor = "twofactor";
   static const String panNumber = "pannumber";
-
   static const String homePage = "homepage";
 }

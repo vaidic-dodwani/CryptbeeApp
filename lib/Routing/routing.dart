@@ -23,64 +23,62 @@ class AppRouter {
         path: '/',
         pageBuilder: (context, state) {
           return MaterialPage(
-              child: ForgetPassOtpPage(email: "vaidic0503@gmail.com")
-              // App.isLoggedIn ? const HomePage() : SignInPage()
-
-              );
+              child: App.isLoggedIn ? const HomePage() : SignInPage());
         },
         routes: [
           GoRoute(
-              name: RouteNames.signIn,
-              path: 'signin',
-              pageBuilder: (context, state) {
-                return MaterialPage(
-                  child: SignInPage(),
-                );
-              },
-              routes: [
-                GoRoute(
-                    name: RouteNames.forgetPassword,
-                    path: 'forgetpassword',
-                    pageBuilder: (context, state) {
-                      return MaterialPage(
-                        child: ForgetPasswordPage(),
-                      );
-                    },
-                    routes: [
-                      GoRoute(
-                        name: RouteNames.forgetpassOTP,
-                        path: 'forgetpassotp/:email',
-                        pageBuilder: (context, state) {
-                          return MaterialPage(
-                            child: ForgetPassOtpPage(
-                              email: state.params['email']!,
-                            ),
-                          );
-                        },
-                      ),
-                      GoRoute(
-                        name: RouteNames.setPassword,
-                        path: 'setpassword/:email/:otp',
-                        pageBuilder: (context, state) {
-                          return MaterialPage(
-                            child: SetPasswordPage(
-                              email: state.params['email']!,
-                              otp: state.params['otp']!,
-                            ),
-                          );
-                        },
-                      )
-                    ]),
-                GoRoute(
-                  name: RouteNames.twoFactor,
-                  path: 'twofactor',
+            name: RouteNames.signIn,
+            path: 'signin',
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                child: SignInPage(),
+              );
+            },
+            routes: [
+              GoRoute(
+                  name: RouteNames.forgetPassword,
+                  path: 'forgetpassword',
                   pageBuilder: (context, state) {
-                    return const MaterialPage(
-                      child: TwoFactorPage(),
+                    return MaterialPage(
+                      child: ForgetPasswordPage(),
                     );
                   },
-                ),
-              ]),
+                  routes: [
+                    GoRoute(
+                      name: RouteNames.forgetpassOTP,
+                      path: 'forgetpassotp/:email',
+                      pageBuilder: (context, state) {
+                        return MaterialPage(
+                          child: ForgetPassOtpPage(
+                            email: state.params['email']!,
+                          ),
+                        );
+                      },
+                    ),
+                    GoRoute(
+                      name: RouteNames.setPassword,
+                      path: 'setpassword/:email/:otp',
+                      pageBuilder: (context, state) {
+                        return MaterialPage(
+                          child: SetPasswordPage(
+                            email: state.params['email']!,
+                            otp: state.params['otp']!,
+                          ),
+                        );
+                      },
+                    )
+                  ]),
+              GoRoute(
+                name: RouteNames.twoFactor,
+                path: 'twofactor',
+                pageBuilder: (context, state) {
+                  return const MaterialPage(
+                    child: TwoFactorPage(),
+                  );
+                },
+              ),
+            ],
+          ),
           GoRoute(
             name: RouteNames.signUp,
             path: 'signup',
@@ -114,10 +112,12 @@ class AppRouter {
           ),
           GoRoute(
             name: RouteNames.panNumber,
-            path: 'pannumber',
+            path: 'pannumber/:email',
             pageBuilder: (context, state) {
               return MaterialPage(
-                child: PanNumberPage(),
+                child: PanNumberPage(
+                  email: state.params['email']!,
+                ),
               );
             },
           ),

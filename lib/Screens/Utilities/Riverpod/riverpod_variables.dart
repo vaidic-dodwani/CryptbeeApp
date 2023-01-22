@@ -1,3 +1,4 @@
+import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -216,3 +217,9 @@ InvestTopNavNotifier investTopNavNotifier = InvestTopNavNotifier();
 
 final investTopNavProvider = StateNotifierProvider<InvestTopNavNotifier, int>(
     (ref) => investTopNavNotifier);
+
+//HOME
+
+final getNewsProvider = FutureProvider<dynamic>((ref) async {
+  return ApiCalls.getNews();
+});

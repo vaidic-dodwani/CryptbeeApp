@@ -17,7 +17,8 @@ import 'package:go_router/go_router.dart';
 import 'package:toast/toast.dart';
 
 class PanNumberPage extends ConsumerWidget {
-  PanNumberPage({super.key});
+  final String email;
+  PanNumberPage({super.key, required this.email});
   final nameArea = NameTextArea(
     labelText: "Full Name",
     hintText: "Enter Full Name",
@@ -78,8 +79,9 @@ class PanNumberPage extends ConsumerWidget {
                           if (nameErrorMsg != "Enter Valid Name") {
                             if (panErrorMsg != "Invalid Pan Number") {
                               final response = await ApiCalls.panVerify(
+                                  email: email,
                                   pan: panArea.controller.text,
-                                  name: panArea.controller.text);
+                                  name: nameArea.controller.text);
 
                               if (response == noInternet) {
                                 internetHandler(context);
@@ -103,7 +105,9 @@ class PanNumberPage extends ConsumerWidget {
                       width: 157,
                       child: Center(
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(RouteNames.root);
+                          },
                           child: Text(
                             "Skip",
                             style: titleMedium(),

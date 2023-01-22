@@ -38,3 +38,14 @@ Align authTitleLargeText(String text) {
     ),
   );
 }
+
+Align authTitleMediumText(String text) {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      style: titleMedium(),
+    ),
+  );
+}

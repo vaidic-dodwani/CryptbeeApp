@@ -157,43 +157,55 @@ class ApiCalls {
   }
 
   static Future<dynamic> panVerify(
-      {required String pan, required String name}) async {
+      {required String email,
+      required String pan,
+      required String name}) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final email = prefs.getString('email');
-
       log("Began Pan Connecting Process For $email with pan $pan and name $name");
       final Response response;
       if (pan.isNotEmpty && name.isNotEmpty) {
         response = await post(
-          Uri.parse(Links.prefixLink + Links.resetPassLink),
+          Uri.parse(Links.prefixLink + Links.panLink),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
           },
           body: jsonEncode(
             <String, dynamic>{"email": email, 'pan_number': pan, 'name': name},
           ),
         );
+        if (response.statusCode == 200) {
+          App.panVerify = true;
+          User.name = name;
+        }
       } else if (pan.isEmpty && name.isNotEmpty) {
         response = await post(
-          Uri.parse(Links.prefixLink + Links.resetPassLink),
+          Uri.parse(Links.prefixLink + Links.panLink),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
           },
           body: jsonEncode(
             <String, dynamic>{"email": email, 'name': name},
           ),
         );
+        if (response.statusCode == 200) {
+          User.name = name;
+        }
       } else {
         response = await post(
-          Uri.parse(Links.prefixLink + Links.resetPassLink),
+          Uri.parse(Links.prefixLink + Links.panLink),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
           },
           body: jsonEncode(
             <String, dynamic>{"email": email, 'pan_number': pan},
           ),
         );
+        if (response.statusCode == 200) {
+          App.panVerify = true;
+        }
       }
       final output = jsonDecode(response.body);
       output['statusCode'] = response.statusCode;
@@ -225,6 +237,22 @@ class ApiCalls {
       log(output.toString());
       prefs.setString('access', output['access']);
       App.acesss = output['access'];
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> getNews() async {
+    try {
+      final response = await get(
+        Uri.parse(Links.prefixLink + Links.newsLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      final output = jsonDecode(response.body);
+      return output;
     } catch (e) {
       log("$e");
     }

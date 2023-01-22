@@ -83,6 +83,7 @@ class SignInPage extends ConsumerWidget {
                       internetHandler(context);
                     } else {
                       if (response['statusCode'] == 200) {
+                        response['email'] = emailField.controller.text.toLowerCase();
                         await saveData(response);
                         context.goNamed(RouteNames.homePage);
                       } else {

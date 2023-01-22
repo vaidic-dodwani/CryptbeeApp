@@ -30,13 +30,17 @@ class _VerificationCheckerState extends ConsumerState<VerificationChecker> {
           (info) {
             value['two_factor'] = false;
             value["pan_verify"] = false;
-            saveData(value).then((value) {
-              App.isLoggedIn = true;
-              ToastContext().init(context);
-              Toast.show("Verified Successfully!! ",
-                  duration: 5, gravity: Toast.bottom);
-              context.goNamed(RouteNames.root);
-            });
+            value["email"] = widget.email;
+            saveData(value).then(
+              (value) {
+                App.isLoggedIn = true;
+                ToastContext().init(context);
+                Toast.show("Verified Successfully!! ",
+                    duration: 5, gravity: Toast.bottom);
+                context.goNamed(RouteNames.panNumber,
+                    params: {'email': widget.email});
+              },
+            );
           },
         );
       } else {
