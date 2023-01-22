@@ -22,34 +22,41 @@ Future<void> saveData(Map response) async {
     App.refresh = response['refresh'];
     log("saving refresh of ${response['refresh']} ");
   }
-  if (response.containsKey('two_factor')) {
-    prefs.setBool('2fa', response['two_factor']);
-    User.twoFactor = response['two_factor'];
-    log("saving two_factor of ${response['two_factor']} ");
-  }
-  if (response.containsKey('pan_verify')) {
-    prefs.setBool('pan_verify', response['pan_verify']);
-    User.panVerify = response['pan_verify'];
-    log("saving pan_verify of ${response['pan_verify']} ");
-  }
-  if (response.containsKey('is_verified')) {
-    prefs.setBool('is_verified', response['is_verified']);
-    log("saving is_verified of ${response['is_verified']} ");
+  if (response.containsKey("email")) {
+    prefs.setString('email', response['email']);
+    User.email = response['email'];
+    log("saving name of ${response['email']} ");
   }
   if (response.containsKey("name")) {
     prefs.setString('name', response['name']);
     User.name = response['name'];
     log("saving name of ${response['name']} ");
   }
-  if (response.containsKey("email")) {
-    prefs.setString('email', response['email']);
-    User.email = response['email'];
-    log("saving name of ${response['email']} ");
+  if (response.containsKey("profile_picture")) {
+    prefs.setString('profile_picture', response['profile_picture']);
+    User.photo = response['profile_picture'];
+    log("saving photo of ${response['profile_picture']} ");
   }
-  if (response.containsKey("pan")) {
-    prefs.setString('pan', response['pan']);
-    User.pan = response['pan'];
-    log("saving pan of ${response['pan']} ");
+  if (response.containsKey('two_factor_verification')) {
+    prefs.setBool(
+        'two_factor_verification', response['two_factor_verification']);
+    User.twoFactor = response['two_factor_verification'];
+    log("saving two_factor of ${response['two_factor_verification']} ");
+  }
+  if (response.containsKey('pan_verification')) {
+    prefs.setBool('pan_verification', response['pan_verification']);
+    User.panVerify = response['pan_verification'];
+    log("saving pan_verification of ${response['pan_verification']} ");
+  }
+  if (response.containsKey("pan_number")) {
+    prefs.setString('pan_number', response['pan_number']);
+    User.pan = response['pan_number'];
+    log("saving pan_number of ${response['pan_number']} ");
+  }
+  if (response.containsKey("walltet")) {
+    prefs.setDouble('wallet', response['walltet']);
+    User.wallet = response['walltet'];
+    log("saving walltet of ${response['walltet']} ");
   }
 }
 
@@ -60,11 +67,11 @@ Future initAuth() async {
     if (JwtDecoder.isExpired(access)) {
       await ApiCalls.renewToken();
     }
+    await ApiCalls.getUserDetails();
     await appInstanceInit();
     App.isLoggedIn = true;
   } else {
     App.isLoggedIn = false;
-    // it doesnt exist
   }
 }
 
@@ -73,24 +80,46 @@ Future appInstanceInit() async {
 
   if (prefs.containsKey('access')) {
     App.acesss = prefs.getString('access');
+
+    log("initialised access ${prefs.getString('access')}");
   }
   if (prefs.containsKey('refresh')) {
     App.refresh = prefs.getString('refresh');
-  }
-  if (prefs.containsKey('two_factor')) {
-    User.twoFactor = prefs.getBool('2fa');
-  }
-  if (prefs.containsKey('pan_verify')) {
-    User.panVerify = prefs.getBool('pan_verify');
-  }
-  if (prefs.containsKey('name')) {
-    User.name = prefs.getString('name') ?? 'user';
+    log("initialised refresh ${prefs.getString('refresh')}");
   }
   if (prefs.containsKey('email')) {
     User.email = prefs.getString('email') ?? 'email@email.com';
+    log("initialised email ${prefs.getString('email')}");
   }
-  if (prefs.containsKey('pan')) {
-    User.pan = prefs.getString('pan') ?? 'pan';
+  if (prefs.containsKey('name')) {
+    User.name = prefs.getString('name') ?? 'user';
+    log("initialised name ${prefs.getString('name')}");
+  }
+  if (prefs.containsKey('profile_picture')) {
+    User.photo = prefs.getString('profile_picture') ??
+        '"https://crypt-bee.centralindia.cloudapp.azure.com/media/profile.jpg"';
+    log("initialised photo ${prefs.getString('profile_picture')}");
+  }
+  if (prefs.containsKey('two_factor_verification')) {
+    User.twoFactor = prefs.getBool('two_factor_verification');
+    log("initialised 2fa ${prefs.getBool('two_factor_verification')}");
+  }
+  if (prefs.containsKey('pan_verification')) {
+    User.panVerify = prefs.getBool('pan_verification');
+
+    log("initialised pan_verification ${prefs.getBool('pan_verification')}");
+  } else {
+    User.panVerify = false;
+    log("initialised pan_verification false");
+  }
+
+  if (prefs.containsKey('pan_number')) {
+    User.pan = prefs.getString('pan_number') ?? 'pan';
+    log("initialised pan_number ${prefs.getString('pan_number')}");
+  }
+  if (prefs.containsKey('wallet')) {
+    User.wallet = prefs.getDouble('wallet') ?? 0;
+    log("initialised wallet ${prefs.getDouble('wallet')}");
   }
 }
 

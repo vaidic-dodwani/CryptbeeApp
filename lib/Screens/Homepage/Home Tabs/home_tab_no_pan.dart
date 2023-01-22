@@ -1,7 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:cryptbee/Models/news_model.dart';
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
@@ -38,7 +35,6 @@ class HomeTabNoPan extends ConsumerWidget {
             LogInButton(
               text: "Verify Pan",
               function: () {
-                log("email" + User.email);
                 context.pushNamed(RouteNames.panNumber,
                     params: {'email': User.email});
                 // context.goNamed(RouteNames.panNumberHome,
@@ -53,7 +49,6 @@ class HomeTabNoPan extends ConsumerWidget {
             Expanded(
               child: news.when(
                 data: (data) {
-                  log(data.toString());
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       return ((index) != (data.length))

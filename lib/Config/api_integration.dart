@@ -320,13 +320,10 @@ class ApiCalls {
         'Authorization': 'Bearer ${App.acesss}',
         'Content-Type': 'multipart/form-data'
       };
-      log("1");
       MultipartRequest request = MultipartRequest(
           'PUT', Uri.parse(Links.prefixLink + Links.updateProfilePhoto));
-      log("2");
 
       request.headers.addAll(headers);
-      log("3");
 
       request.files.add(
         MultipartFile('profile_picture', photo.readAsBytes().asStream(),
@@ -334,13 +331,10 @@ class ApiCalls {
             filename: "${User.name}.jpg",
             contentType: MediaType('image', 'jpg')),
       );
-      log("4");
 
       var result = await request.send();
-      log("5");
 
       String response = await result.stream.bytesToString();
-      log("6");
 
       if (result.statusCode == 401) {
         await renewToken();
@@ -348,20 +342,69 @@ class ApiCalls {
         var result = await request.send();
         response = await result.stream.bytesToString();
       }
-      log("7");
 
       final output = jsonDecode(response);
-      log("8");
 
       output['statusCode'] = result.statusCode;
-      log("9");
 
       log(output.toString());
-      log("10");
 
       return output;
     } catch (e) {
       log(" error $e");
+    }
+  }
+
+  static Future<dynamic> getHoldings() async {
+    try {
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.holdingApiLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await get(
+          Uri.parse(Links.prefixLink + Links.holdingApiLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+      final output = jsonDecode(response.body);
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> getUserDetails() async {
+    try {
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.userDetails),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await get(
+          Uri.parse(Links.prefixLink + Links.userDetails),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+      final output = jsonDecode(response.body);
+      await saveData(output);
+      return output;
+    } catch (e) {
+      log("$e");
     }
   }
 }

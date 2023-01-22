@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyyHoldingSmallTileBuilder extends ConsumerWidget {
   final String image;
-  const MyyHoldingSmallTileBuilder({super.key, required this.image});
+  final String shortname;
+  const MyyHoldingSmallTileBuilder(
+      {super.key, required this.image, required this.shortname});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

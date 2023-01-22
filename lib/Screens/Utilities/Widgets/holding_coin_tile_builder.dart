@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cryptbee/Models/coin_model.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/but_sell_button.dart';
+import 'package:cryptbee/Screens/Utilities/Widgets/log_in_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +59,7 @@ Widget holdingCoinTileBuilder(Coin coin) {
                         ),
                       ),
                       Text(
-                        "₹ ${coin.holding!.toStringAsFixed(2)}",
+                        "₹ ${coin.price.toStringAsFixed(2)}",
                         style: bodyLarge(),
                       )
                     ],
@@ -67,29 +69,14 @@ Widget holdingCoinTileBuilder(Coin coin) {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.money,
-                                color: Palette.secondaryOffWhiteColor),
-                            Text(
-                              "${coin.price.toStringAsFixed(2)} %",
-                              style: bodyMedium(
-                                  fontColor: coin.price > 0
-                                      ? Palette.secondaryCorrectColor
-                                      : Palette.secondaryErrorColor),
-                            ),
-                          ],
+                        Text(
+                          "${coin.holding!.toStringAsFixed(2)}",
+                          style: bodyMedium(fontColor: Palette.primaryColor),
                         ),
-                        Row(children: [
-                          Text(
-                            "View More",
-                            style: bodySmall(),
-                          ),
-                          const Icon(
-                            Icons.chevron_right_sharp,
-                            color: Colors.white,
-                          )
-                        ])
+                        BuySellButton(
+                          text: "Sell",
+                          width: 112,
+                        )
                       ],
                     ),
                   )

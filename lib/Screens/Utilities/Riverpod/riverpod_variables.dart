@@ -224,6 +224,10 @@ final getNewsProvider = FutureProvider<dynamic>((ref) async {
   return ApiCalls.getNews();
 });
 
+final getHoldingsProvider = FutureProvider<dynamic>((ref) async {
+  return ApiCalls.getHoldings();
+});
+
 //Profile Pan
 
 PanErrorNotifier profilePanPanErrorNotifier = PanErrorNotifier();

@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:cryptbee/Models/news_model.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/auth_heading.dart';
@@ -15,6 +17,8 @@ class HomeTabPan extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final news = ref.watch(getNewsProvider);
+    final holdings = ref.watch(getHoldingsProvider);
+
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
@@ -25,18 +29,73 @@ class HomeTabPan extends ConsumerWidget {
           children: [
             authTitleMediumText("My Holdings"),
             const SizedBox(height: 24),
-            SizedBox(
-              height: 148,
-              child: Wrap(
-                direction: Axis.vertical,
-                children: List.generate(
-                  15,
-                  (index) {
-                    return const MyyHoldingSmallTileBuilder(
-                      image: 'https://www.' +
-                          'cryptocompare.com/media/37746251/btc.png',
-                    );
-                  },
+            holdings.when(
+              data: (data) {
+                return SizedBox(
+                  height: data['MyHoldings'].length <= 4 ? 74 : 148,
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: List.generate(
+                      data['MyHoldings'].length < 5
+                          ? 4
+                          : min(data['MyHoldings'].length, 8),
+                      (index) {
+                        if (data['MyHoldings'].length == 0) {
+                          return Text(
+                            "No Coins , Go Buy Some",
+                            style: titleMedium(),
+                          );
+                        } else if (data['MyHoldings'].length < 4) {
+                          if ((index + 1) > data['MyHoldings'].length) {
+                            return const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 18.0, vertical: 12),
+                                child: SizedBox(
+                                  width: 40,
+                                ));
+                          } else {
+                            final coinSmallName = data['MyHoldings'][index][0];
+                            final coinImage = data['MyHoldings'][index][1];
+                            return MyyHoldingSmallTileBuilder(
+                              image: 'https://www.$coinImage',
+                              shortname: coinSmallName,
+                            );
+                          }
+                        } else {
+                          final coinSmallName = data['MyHoldings'][index][0];
+                          final coinImage = data['MyHoldings'][index][1];
+                          return MyyHoldingSmallTileBuilder(
+                            image: 'https://www.$coinImage',
+                            shortname: coinSmallName,
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                );
+              },
+              loading: () => const SizedBox(
+                height: 74,
+                child: SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: Center(
+                    child:
+                        CircularProgressIndicator(color: Palette.primaryColor),
+                  ),
+                ),
+              ),
+              error: (error, stackTrace) => SizedBox( 
+                height: 74,
+                child: SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: Center(
+                    child: Text(
+                      error.toString(),
+                      style: titleLarge(),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -70,8 +129,12 @@ class HomeTabPan extends ConsumerWidget {
                   );
                 },
                 loading: () => const Center(
-                  child: CircularProgressIndicator(
-                    color: Palette.primaryColor,
+                  child: SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      color: Palette.primaryColor,
+                    ),
                   ),
                 ),
               ),

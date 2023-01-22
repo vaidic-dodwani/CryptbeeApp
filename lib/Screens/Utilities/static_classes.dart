@@ -8,7 +8,8 @@ class App {
 }
 
 class User {
-  static String photo = "https://crypt-bee.centralindia.cloudapp.azure.com/media/profile.jpg";
+  static String photo =
+      "https://crypt-bee.centralindia.cloudapp.azure.com/media/profile.jpg";
   static String name = "";
   static String email = "";
   static String pan = "";
@@ -16,4 +17,5 @@ class User {
   static bool mobileVerified = false;
   static bool? twoFactor;
   static bool? panVerify;
+  static double wallet = 0;
 }
