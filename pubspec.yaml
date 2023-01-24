@@ -47,6 +47,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   pinput: ^2.2.20
   shared_preferences: ^2.0.15
+  syncfusion_flutter_charts: ^20.4.44
   toast: ^0.3.0
   url_launcher: ^6.1.7
   web_socket_channel: ^2.3.0

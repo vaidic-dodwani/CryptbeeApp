@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cryptbee/Models/coin_model.dart';
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,6 +16,7 @@ class InvestCoinTileBuilder extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
       child: GestureDetector(
         onTap: () {
+          App.currentCoin = coin.shortForm;
           context.goNamed(RouteNames.coinPage,
               params: {'shortName': coin.shortForm});
         },

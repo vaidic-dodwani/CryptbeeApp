@@ -9,7 +9,7 @@ import 'package:toast/toast.dart';
 
 const String noInternet = "App_Error:No_Internet";
 
-Future<void> saveData(Map response) async {
+Future<void> saveData(Map response, bool all) async {
   log("saving response of $response ");
   final prefs = await SharedPreferences.getInstance();
   if (response.containsKey('access')) {
@@ -43,21 +43,38 @@ Future<void> saveData(Map response) async {
     User.twoFactor = response['two_factor_verification'];
     log("saving two_factor of ${response['two_factor_verification']} ");
   }
-  if (response.containsKey('pan_verification')) {
-    prefs.setBool('pan_verification', response['pan_verification']);
-    User.panVerify = response['pan_verification'];
-    log("saving pan_verification of ${response['pan_verification']} ");
-  }
   if (response.containsKey("pan_number")) {
     prefs.setString('pan_number', response['pan_number']);
     User.pan = response['pan_number'];
+    if (all) {
+      User.panVerify = true;
+    }
     log("saving pan_number of ${response['pan_number']} ");
+  } else {
+    if (all) {
+      User.panVerify = false;
+    }
   }
+
+  if (response.containsKey("phone_number")) {
+    prefs.setString('phone_number', response['phone_number'].toString());
+    User.phone = response['phone_number'].toString();
+    if (all) {
+      User.phoneVerified = true;
+    }
+    log("saving phone of ${response['phone_number']} ");
+  } else {
+    if (all) {
+      User.phoneVerified = false;
+    }
+  }
+
   if (response.containsKey("walltet")) {
     prefs.setDouble('wallet', response['walltet']);
     User.wallet = response['walltet'];
     log("saving walltet of ${response['walltet']} ");
   }
+  log("Save Data Mobile veriification ${User.phoneVerified}");
 }
 
 Future initAuth() async {
@@ -104,23 +121,29 @@ Future appInstanceInit() async {
     User.twoFactor = prefs.getBool('two_factor_verification');
     log("initialised 2fa ${prefs.getBool('two_factor_verification')}");
   }
-  if (prefs.containsKey('pan_verification')) {
-    User.panVerify = prefs.getBool('pan_verification');
-
-    log("initialised pan_verification ${prefs.getBool('pan_verification')}");
-  } else {
-    User.panVerify = false;
-    log("initialised pan_verification false");
-  }
 
   if (prefs.containsKey('pan_number')) {
     User.pan = prefs.getString('pan_number') ?? 'pan';
+    User.panVerify = true;
     log("initialised pan_number ${prefs.getString('pan_number')}");
+    log("initialised panVerify true}");
+  } else {
+    User.panVerify = false;
+    log("initialised panVerify false}");
   }
   if (prefs.containsKey('wallet')) {
     User.wallet = prefs.getDouble('wallet') ?? 0;
     log("initialised wallet ${prefs.getDouble('wallet')}");
   }
+  if (prefs.containsKey('phone_number')) {
+    User.phone = prefs.getString('phone_number');
+    User.phoneVerified = true;
+    log("initialised phone ${prefs.getString('phone_number')}");
+  } else {
+    User.phoneVerified = false;
+  }
+
+  log("App Instance Mobile veriification ${User.phoneVerified}");
 }
 
 Future<void> clearData() async {

@@ -85,17 +85,18 @@ class SignInPage extends ConsumerWidget {
                       internetHandler(context);
                     } else {
                       if (response['statusCode'] == 200) {
+                        User.email = emailField.controller.text.toLowerCase();
                         response['email'] =
                             emailField.controller.text.toLowerCase();
-                        await saveData(response);
-                        await ApiCalls.getUserDetails();
-                        final prefs = await SharedPreferences.getInstance();
-                        if (response.containsKey('mobile_number')) {
-                          prefs.setString(
-                              'mobile_number', response['mobile_number']);
-                          User.phone = response['mobile_number'];
+                        await saveData(response, false);
+
+                        if (response['two_factor']) {
+                          context.goNamed(RouteNames.twoFactor);
+                        } else {
+                          await ApiCalls.getUserDetails();
+
+                          context.goNamed(RouteNames.homePage);
                         }
-                        context.goNamed(RouteNames.homePage);
                       } else {
                         signInPasswordErrorNotifer
                             .setVal(response[response.keys.first][0]);

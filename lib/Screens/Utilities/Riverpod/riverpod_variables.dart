@@ -1,5 +1,6 @@
 import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //  SIGN IN PAGE
@@ -157,17 +158,27 @@ final setPassButtonLoaderProvider =
   return setPassButtonLoaderNotifier;
 });
 
-//MOBILENUMBER
+//phoneNUMBER
 
-MobileNumberErrorNotifier mobileNumberMobileErrorNotifier =
-    MobileNumberErrorNotifier();
+PhoneNumberErrorNotifier phoneNumberphoneErrorNotifier =
+    PhoneNumberErrorNotifier();
 
-final mobileNumberMobileErrorProvider =
-    StateNotifierProvider.autoDispose<MobileNumberErrorNotifier, String>((ref) {
+final phoneNumberphoneErrorProvider =
+    StateNotifierProvider.autoDispose<PhoneNumberErrorNotifier, String>((ref) {
   ref.onDispose(() {
-    mobileNumberMobileErrorNotifier = MobileNumberErrorNotifier();
+    phoneNumberphoneErrorNotifier = PhoneNumberErrorNotifier();
   });
-  return mobileNumberMobileErrorNotifier;
+  return phoneNumberphoneErrorNotifier;
+});
+
+ButtonLoaderNotifier phoneNumberButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final phoneNumberButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    phoneNumberButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+  return phoneNumberButtonLoaderNotifier;
 });
 
 //OTP BOX
@@ -180,6 +191,16 @@ final twoFactorTimerProvider =
     twoFactorTimerNotifer = TimerNotifier();
   });
   return twoFactorTimerNotifer;
+});
+
+ButtonLoaderNotifier twoFactorButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final twoFactorButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    twoFactorButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+  return twoFactorButtonLoaderNotifier;
 });
 
 // PanNumberPage
@@ -294,12 +315,56 @@ final profilePhotoProvider =
   return profilePhoto;
 });
 
-blurLoaderNotifier profileTabBlurLoaderNotifier = blurLoaderNotifier();
+BlurLoaderNotifier profileTabBlurLoaderNotifier = BlurLoaderNotifier();
 
 final profileTabBlurLoaderProvider =
-    StateNotifierProvider.autoDispose<blurLoaderNotifier, bool>((ref) {
+    StateNotifierProvider.autoDispose<BlurLoaderNotifier, bool>((ref) {
   ref.onDispose(() {
-    profileTabBlurLoaderNotifier = blurLoaderNotifier();
+    profileTabBlurLoaderNotifier = BlurLoaderNotifier();
   });
   return profileTabBlurLoaderNotifier;
+});
+
+//COIN PAGE
+
+WatchListBool inWatchListBoolNotifier = WatchListBool();
+
+final inWatchlistBoolProvider =
+    StateNotifierProvider<WatchListBool, bool>((ref) {
+  return inWatchListBoolNotifier;
+});
+
+CoinDescNotifier coinPageCoinDescNotifier = CoinDescNotifier();
+
+final coinPageCoinDescProvider =
+    StateNotifierProvider<CoinDescNotifier, String?>((ref) {
+  return coinPageCoinDescNotifier;
+});
+
+// PHONE OTP PAGE
+
+ButtonLoaderNotifier phoneOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final phoneOtpButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    phoneOtpButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+
+  return phoneOtpButtonLoaderNotifier;
+});
+
+//SECUTIRY
+
+SecuritySwitch securitySwitch = SecuritySwitch();
+
+final securitySwitchProvider =
+    StateNotifierProvider<SecuritySwitch, bool>((ref) {
+  return securitySwitch;
+});
+
+//WALLET
+
+final transactionsProvider = FutureProvider<dynamic>((ref) async {
+  return ApiCalls.getTransactions();
 });

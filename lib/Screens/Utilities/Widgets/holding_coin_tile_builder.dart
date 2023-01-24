@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cryptbee/Models/coin_model.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/but_sell_button.dart';
-import 'package:cryptbee/Screens/Utilities/Widgets/log_in_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +69,7 @@ Widget holdingCoinTileBuilder(Coin coin) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${coin.holding!.toStringAsFixed(2)}",
+                          coin.holding!.toStringAsFixed(2),
                           style: bodyMedium(fontColor: Palette.primaryColor),
                         ),
                         BuySellButton(

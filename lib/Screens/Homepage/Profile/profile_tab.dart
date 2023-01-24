@@ -5,7 +5,6 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
-import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/auth_heading.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/profile_tile_builder.dart';

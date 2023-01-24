@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
+import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/auth_heading.dart';
-import 'package:cryptbee/Screens/Utilities/Widgets/log_in_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/security_tile_builder.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 import 'package:cryptbee/Screens/Utilities/static_classes.dart';
@@ -36,10 +36,10 @@ class Security extends ConsumerWidget {
                       },
                       child: Row(
                         children: [
-                          Container(
+                          const SizedBox(
                             height: 28,
                             width: 28,
-                            child: const Icon(
+                            child: Icon(
                               Icons.chevron_left_sharp,
                               color: Palette.secondaryOffWhiteColor,
                             ),
@@ -68,9 +68,69 @@ class Security extends ConsumerWidget {
                                 vertical: 24, horizontal: 16),
                             child: Column(
                               children: [
-                                const SecurityTileBuilder(
-                                  text: "Enable 2-factor authentication",
-                                  route: RouteNames.personalDetails,
+                                GestureDetector(
+                                  onTap: () {
+                                    log("sup");
+                                    if (!(User.phoneVerified ?? false)) {
+                                      context.goNamed(RouteNames.phoneNumber);
+                                    }
+                                  },
+                                  child: SizedBox(
+                                    height: 61,
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 18.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              authTitleSmallText(
+                                                  "Two Factor Authentication"),
+                                              User.phoneVerified ?? false
+                                                  ? SizedBox(
+                                                      height: 12,
+                                                      child: Switch(
+                                                        activeTrackColor:
+                                                            Palette
+                                                                .primaryColor,
+                                                        activeColor:
+                                                            Colors.white,
+                                                        inactiveTrackColor:
+                                                            Palette.neutralGrey,
+                                                        value: ref.watch(
+                                                            securitySwitchProvider),
+                                                        onChanged: (status) {
+                                                          securitySwitch
+                                                              .toggle();
+                                                          if (status) {
+                                                            ApiCalls
+                                                                .enableTwoFactor();
+                                                          } else {
+                                                            ApiCalls
+                                                                .disableTwoFactor();
+                                                          }
+                                                          User.twoFactor =
+                                                              status;
+                                                        },
+                                                      ),
+                                                    )
+                                                  : const Icon(
+                                                      Icons.chevron_right_sharp,
+                                                      color: Palette
+                                                          .secondaryOffWhiteColor,
+                                                    )
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          color: Colors.white,
+                                          height: 1,
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 const SecurityTileBuilder(
                                   text: "Change Password",

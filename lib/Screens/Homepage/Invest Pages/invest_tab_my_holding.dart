@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:cryptbee/Config/websocket_integration.dart';
 import 'package:cryptbee/Models/coin_model.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/holding_coin_tile_builder.dart';
@@ -14,6 +15,8 @@ class InvestTabMyHoldings extends ConsumerWidget {
     return allCoinsAsyncValue.when(
       data: (data) {
         data = data['holdings'];
+        log(data.toString());
+
         return ListView.builder(
           itemCount: data.length + 1,
           itemBuilder: (context, index) {
@@ -26,7 +29,7 @@ class InvestTabMyHoldings extends ConsumerWidget {
                       fullName: data[index]['FullName'],
                       shortForm: data[index]['Name'],
                       image: "https://www.${data[index]['ImageURL']}",
-                      price: double.parse(data[index]['Price']),
+                      price: data[index]['Price'],
                       holding: double.parse(data[index]['Coins']),
                     ),
                   );

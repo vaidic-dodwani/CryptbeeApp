@@ -78,7 +78,7 @@ class ApiCalls {
       output['statusCode'] = response.statusCode;
 
       if (response.statusCode == 200) {
-        await saveData(output);
+        await saveData(output, false);
       }
       log(output.toString());
       return output;
@@ -401,7 +401,332 @@ class ApiCalls {
         );
       }
       final output = jsonDecode(response.body);
-      await saveData(output);
+      await saveData(output, true);
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> newTwoFactor(String phoneNumber) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final access = prefs.getString('access');
+
+      log("Began New Two factor for $phoneNumber");
+      Response response = await post(
+        Uri.parse(Links.prefixLink + Links.newTwoFactor),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+        body: jsonEncode(
+          <String, dynamic>{"phone_number": phoneNumber},
+        ),
+      );
+      if (response.statusCode == 401) {
+        ApiCalls.renewToken();
+
+        response = await post(
+          Uri.parse(Links.prefixLink + Links.newTwoFactor),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{"phone_number": phoneNumber},
+          ),
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> verifyTwoFactor(int pin) async {
+    try {
+      log("Began New Two factor for $pin");
+      Response response = await put(
+        Uri.parse(Links.prefixLink + Links.verifyTwoFactor),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+        body: jsonEncode(
+          <String, dynamic>{"otp": pin},
+        ),
+      );
+      if (response.statusCode == 401) {
+        ApiCalls.renewToken();
+
+        response = await post(
+          Uri.parse(Links.prefixLink + Links.verifyTwoFactor),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{"otp": pin},
+          ),
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> enableTwoFactor() async {
+    try {
+      log("Enabling 2fa");
+      Response response = await put(
+        Uri.parse(Links.prefixLink + Links.enableTwoFactor),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        ApiCalls.renewToken();
+
+        response = await put(
+          Uri.parse(Links.prefixLink + Links.enableTwoFactor),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> disableTwoFactor() async {
+    try {
+      log("Disabling 2fa");
+      Response response = await put(
+        Uri.parse(Links.prefixLink + Links.disableTwoFactor),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        ApiCalls.renewToken();
+
+        response = await put(
+          Uri.parse(Links.prefixLink + Links.disableTwoFactor),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> loginVerifyTwoFactor(int pin) async {
+    try {
+      log("Began New Two factor for ${User.email} with $pin");
+      Response response = await post(
+        Uri.parse(Links.prefixLink + Links.loginTwoFactorVerify),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, dynamic>{"otp": pin, "email": User.email},
+        ),
+      );
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<bool> inWatchlist(String coinSmallName) async {
+    try {
+      log("modify watchlist for $coinSmallName");
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.inWatchlist + coinSmallName),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await get(
+          Uri.parse(Links.prefixLink + Links.inWatchlist + coinSmallName),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+      final output = jsonDecode(response.body);
+      log(output.toString());
+      return output['present'] ?? false;
+    } catch (e) {
+      log("$e");
+      return false;
+    }
+  }
+
+  static Future<dynamic> modifyWatchlist(String choice) async {
+    try {
+      log("modifing watchlist of ${App.currentCoin} by $choice");
+      if (choice == "add") {
+        Response response = await put(
+          Uri.parse(Links.prefixLink + Links.modifyWatchlist),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{
+              "add": true,
+              "watchlist": [App.currentCoin]
+            },
+          ),
+        );
+        if (response.statusCode == 401) {
+          await renewToken();
+          response = await put(
+            Uri.parse(Links.prefixLink + Links.modifyWatchlist),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ${App.acesss}'
+            },
+            body: jsonEncode(
+              <String, dynamic>{
+                "add": true,
+                "watchlist": [App.currentCoin]
+              },
+            ),
+          );
+        }
+
+        final output = jsonDecode(response.body);
+        output['statusCode'] = response.statusCode;
+        log(output.toString());
+        return output;
+      } else {
+        Response response = await put(
+          Uri.parse(Links.prefixLink + Links.modifyWatchlist),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{
+              "remove": true,
+              "watchlist": [App.currentCoin]
+            },
+          ),
+        );
+        if (response.statusCode == 401) {
+          await renewToken();
+          response = await put(
+            Uri.parse(Links.prefixLink + Links.modifyWatchlist),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ${App.acesss}'
+            },
+            body: jsonEncode(
+              <String, dynamic>{
+                "remove": true,
+                "watchlist": [App.currentCoin]
+              },
+            ),
+          );
+        }
+
+        final output = jsonDecode(response.body);
+        output['statusCode'] = response.statusCode;
+        log(output.toString());
+        return output;
+      }
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> getCoinDetails() async {
+    try {
+      log("getting coin details for ${App.currentCoin}");
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.coinDetailsLink + App.currentCoin!),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await get(
+          Uri.parse(
+              Links.prefixLink + Links.coinDetailsLink + App.currentCoin!),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+      final output = jsonDecode(response.body);
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> getTransactions() async {
+    try {
+      log("getting transaction details}");
+      Response response = await get(
+        Uri.parse(Links.prefixLink + Links.transactionLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+      );
+      if (response.statusCode == 401) {
+        await renewToken();
+        response = await get(
+          Uri.parse(Links.prefixLink + Links.transactionLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+        );
+      }
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
       return output;
     } catch (e) {
       log("$e");

@@ -1,120 +1,257 @@
 import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cryptbee/Config/api_integration.dart';
+import 'package:cryptbee/Config/websocket_integration.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:cryptbee/Screens/Utilities/Widgets/auth_heading.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/log_in_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
-class CoinPage extends ConsumerWidget {
+class CoinPage extends ConsumerStatefulWidget {
+  CoinPage({super.key, required this.shortName});
   final String shortName;
-  const CoinPage({super.key, required this.shortName});
+  List<CoinData> chartData = [];
+
+  ChartSeriesController? chartSeriesController;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      backgroundColor: Palette.secondaryBlackColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(children: [
-          const SizedBox(height: 38),
-          GestureDetector(
-              onTap: () {
-                context.pop();
-              },
-              child: Row(
-                children: [
-                  const SizedBox(
-                    height: 28,
-                    width: 28,
-                    child: Icon(
-                      Icons.chevron_left_sharp,
-                      color: Palette.secondaryOffWhiteColor,
-                    ),
-                  ),
-                  authTitleMediumText("Back")
-                ],
-              )),
-          const SizedBox(height: 29),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 19,
-                backgroundImage: CachedNetworkImageProvider(
-                  "https://www." "cryptocompare.com/media/37746251/btc.png",
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  shortName,
-                  style: titleLarge(),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 325,
-          ),
-          const SizedBox(height: 25),
-          SizedBox(
-            height: 25,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  ConsumerState<ConsumerStatefulWidget> createState() => _CoinPageState();
+}
+
+class _CoinPageState extends ConsumerState<CoinPage> {
+  @override
+  void initState() {
+    ApiCalls.inWatchlist(widget.shortName).then((value) {
+      inWatchListBoolNotifier.setBool(value);
+    });
+    ApiCalls.getCoinDetails().then((value) {
+      coinPageCoinDescNotifier.setVal(value['Description']);
+    });
+    ref.listenManual(singleCoinsSocketProvider, (previous, next) {
+      {
+        next.whenData((value) {
+          var data = value['data'];
+          log((data['Price'] >= 0).toString());
+          if (widget.chartData.length < 10) {
+            widget.chartData = [
+              ...widget.chartData,
+              CoinData(DateTime.now(), data['Price'])
+            ];
+          } else {
+            widget.chartData.add(CoinData(DateTime.now(), data['Price']));
+            widget.chartData.removeAt(0);
+          }
+          if (widget.chartSeriesController != null) {
+            if (widget.chartData.length >= 10) {
+              widget.chartSeriesController!.updateDataSource(
+                  addedDataIndex: widget.chartData.length - 1,
+                  removedDataIndex: 0);
+            } else {
+              widget.chartSeriesController!.updateDataSource(
+                  addedDataIndex: widget.chartData.length - 1);
+            }
+          }
+        });
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    App.currentCoin = widget.shortName;
+
+    final singleCoinsAsyncValue = ref.watch(singleCoinsSocketProvider);
+
+    return singleCoinsAsyncValue.when(
+      data: (data) {
+        data = data['data'];
+        return Scaffold(
+          backgroundColor: Palette.secondaryBlackColor,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
               children: [
-                Text("Prices", style: titleMedium()),
-                Text("25.64", style: bodyLarge()),
+                const SizedBox(height: 38),
+                GestureDetector(
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: Icon(
+                            Icons.chevron_left_sharp,
+                            color: Palette.secondaryOffWhiteColor,
+                          ),
+                        ),
+                        authTitleMediumText("Back")
+                      ],
+                    )),
+                const SizedBox(height: 29),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    true
-                        ? const Icon(Icons.arrow_upward_rounded,
-                            color: Palette.secondaryCorrectColor)
-                        : const Icon(Icons.arrow_downward_rounded,
-                            color: Palette.secondaryErrorColor),
-                    Text(
-                      "per",
-                      style: bodyLarge(
-                          fontColor: true
-                              ? Palette.secondaryCorrectColor
-                              : Palette.secondaryErrorColor),
+                    CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: 19,
+                      backgroundImage: CachedNetworkImageProvider(
+                        "https://www.${data['ImageURL']}",
+                      ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        widget.shortName,
+                        style: titleLarge(),
+                      ),
+                    )
                   ],
                 ),
-                IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {},
-                    icon: const Icon(
-                      true ? Icons.bookmark_border_sharp : Icons.bookmark_sharp,
-                      color: Palette.secondaryOffWhiteColor,
-                    ))
+                Center(
+                    child: SizedBox(
+                  height: 325,
+                  child: Center(
+                    child: SfCartesianChart(
+                      enableAxisAnimation: true,
+                      primaryXAxis: DateTimeAxis(
+                        dateFormat: DateFormat.Hms(),
+                        majorGridLines: const MajorGridLines(width: 0),
+                      ),
+                      primaryYAxis: NumericAxis(
+                          isVisible: true,
+                          majorGridLines: const MajorGridLines(width: 0)),
+                      zoomPanBehavior: ZoomPanBehavior(enablePanning: true),
+                      series: <ChartSeries>[
+                        FastLineSeries<CoinData, DateTime>(
+                          onRendererCreated: (series) {
+                            widget.chartSeriesController = series;
+                          },
+                          dataSource: widget.chartData,
+                          xValueMapper: (CoinData data, _) => data.time,
+                          yValueMapper: (CoinData data, _) => data.data,
+                        )
+                      ],
+                    ),
+                  ),
+                )),
+                const SizedBox(height: 25),
+                SizedBox(
+                  height: 25,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Prices", style: titleMedium()),
+                      Text("₹ ${data['ChangePct'].toStringAsFixed(2)}",
+                          style: bodyLarge()),
+                      Row(
+                        children: [
+                          (data['ChangePct'] >= 0)
+                              ? const Icon(Icons.arrow_upward_rounded,
+                                  color: Palette.secondaryCorrectColor)
+                              : const Icon(Icons.arrow_downward_rounded,
+                                  color: Palette.secondaryErrorColor),
+                          Text(
+                            "${data['ChangePct'].toStringAsFixed(2)} %",
+                            style: bodyLarge(
+                                fontColor: (data['ChangePct'] >= 0)
+                                    ? Palette.secondaryCorrectColor
+                                    : Palette.secondaryErrorColor),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          if (ref.watch(inWatchlistBoolProvider)) {
+                            ApiCalls.modifyWatchlist("remove");
+                          } else {
+                            ApiCalls.modifyWatchlist("add");
+                          }
+                          inWatchListBoolNotifier.toggle();
+                        },
+                        icon: Icon(
+                          ref.watch(inWatchlistBoolProvider) ?? false
+                              ? Icons.bookmark_sharp
+                              : Icons.bookmark_border_sharp,
+                          color: Palette.secondaryOffWhiteColor,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                authBodyLarge("About"),
+                const SizedBox(height: 8),
+                SizedBox(
+                  height: 148,
+                  child: SingleChildScrollView(
+                    child: ref.watch(coinPageCoinDescProvider) == null
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Palette.primaryColor,
+                            ),
+                          )
+                        : Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(
+                              ref.watch(coinPageCoinDescProvider).toString(),
+                              style: bodyLarge(),
+                            ),
+                          ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: LogInButton(
+                        text: "Buy Now",
+                        function: () {
+                          log("buying it huh?");
+                        }),
+                  ),
+                )
               ],
             ),
           ),
-          const SizedBox(height: 16),
-          authBodyLarge("About"),
-          SizedBox(
-            height: 148,
-            child: SingleChildScrollView(
-              child: Text(
-                "LOREM Lomomad ada  asd a da da d w  wa adasasdasd asdasdasdasdasd asdasdasdasdasd asdasdasdasdasd asdasdasdasdasd asdasdasdasdasd asdasdasdasdasd asdasdasdasdasd asdasdawda qqqdSD dsa  asdasda dadsasda dasdadwadasd adasdadwaddsdawdasd LOREM Lomomad ada  asd a da da d w  wa dsa  asdasda dadsasda dasdadwadasd adasdadwaddsdawdasd LOREM Lomomad ada  asd a da da d w  wa dsa  asdasda dadsasda dasdadwadasd adasdadwaddsdawdasd LOREM Lomomad ada  asd a da da d w  wa dsa  asdasda dadsasda dasdadwadasd adasdadwaddsdawdasd ",
-                style: bodyLarge(),
-              ),
+        );
+      },
+      error: (error, stackTrace) {
+        return Text(
+          error.toString(),
+          style: titleLarge(),
+        );
+      },
+      loading: () {
+        return const SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Center(
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(color: Palette.primaryColor),
             ),
           ),
-          Expanded(
-            child: Center(
-              child: LogInButton(
-                  text: "Buy Now",
-                  function: () {
-                    log("buying it huh?");
-                  }),
-            ),
-          )
-        ]),
-      ),
+        );
+      },
     );
   }
+}
+
+class CoinData {
+  CoinData(this.time, this.data);
+  final DateTime time;
+  final double data;
 }

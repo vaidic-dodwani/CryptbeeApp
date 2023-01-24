@@ -15,9 +15,9 @@ class InvestTabAll extends ConsumerWidget {
       data: (data) {
         data = data['data'];
         return ListView.builder(
-          itemCount: data.length,
+          itemCount: data.length + 1,
           itemBuilder: (context, index) {
-            return ((index + 1) != (data.length))
+            return ((index) != (data.length))
                 ? InvestCoinTileBuilder(
                     coin: Coin(
                       fullName: data[index]['FullName'],

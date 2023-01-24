@@ -5,6 +5,7 @@ class App {
   static bool isLoggedIn = false;
   static String? acesss;
   static String? refresh;
+  static String? currentCoin;
 }
 
 class User {
@@ -14,7 +15,7 @@ class User {
   static String email = "";
   static String pan = "";
   static String? phone;
-  static bool mobileVerified = false;
+  static bool? phoneVerified;
   static bool? twoFactor;
   static bool? panVerify;
   static double wallet = 0;

@@ -3,18 +3,18 @@ import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 
 import 'package:flutter/material.dart';
 
-class MobileTextArea extends StatelessWidget {
+class PhoneTextArea extends StatelessWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller = TextEditingController();
   final Color fontColor = Colors.black;
-  final MobileNumberErrorNotifier? mobileNumberErrorNotifier;
+  final PhoneNumberErrorNotifier? phoneNumberErrorNotifier;
 
-  MobileTextArea(
+  PhoneTextArea(
       {super.key,
       required this.labelText,
       required this.hintText,
-      this.mobileNumberErrorNotifier});
+      this.phoneNumberErrorNotifier});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,8 @@ class MobileTextArea extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
           onChanged: (text) {
-            if (mobileNumberErrorNotifier != null) {
-              mobileNumberErrorNotifier!.isValid(text);
+            if (phoneNumberErrorNotifier != null) {
+              phoneNumberErrorNotifier!.isValid(text);
             }
           },
           controller: controller,

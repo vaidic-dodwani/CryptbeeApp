@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EmailErrorNotifier extends StateNotifier<String> {
@@ -64,8 +67,8 @@ class PassErrorNotifier extends StateNotifier<String> {
   }
 }
 
-class MobileNumberErrorNotifier extends StateNotifier<String> {
-  MobileNumberErrorNotifier() : super(" ");
+class PhoneNumberErrorNotifier extends StateNotifier<String> {
+  PhoneNumberErrorNotifier() : super(" ");
 
   void isValid(text) {
     if (text.length == 0) {
@@ -73,8 +76,12 @@ class MobileNumberErrorNotifier extends StateNotifier<String> {
     } else if (RegExp(r'^[0-9]{10}$').hasMatch(text)) {
       state = " ";
     } else {
-      state = "Invalid Mobile Number";
+      state = "Invalid Phone Number";
     }
+  }
+
+  void setVal(String text) {
+    state = text;
   }
 }
 
@@ -135,7 +142,7 @@ class NameErrorNotifier extends StateNotifier<String> {
 }
 
 class HomeBottomNavNotifier extends StateNotifier<int> {
-  HomeBottomNavNotifier() : super(3);
+  HomeBottomNavNotifier() : super(0);
 
   void setPage(int page) {
     state = page;
@@ -158,10 +165,46 @@ class ProfilePhotoNotifier extends StateNotifier<String?> {
   }
 }
 
-class blurLoaderNotifier extends StateNotifier<bool> {
-  blurLoaderNotifier() : super(false);
+class BlurLoaderNotifier extends StateNotifier<bool> {
+  BlurLoaderNotifier() : super(false);
 
   void toggle() {
     state = !state;
+  }
+}
+
+class GraphVisibleNotifier extends StateNotifier<bool> {
+  GraphVisibleNotifier() : super(false);
+
+  void toggle() {
+    state = !state;
+  }
+}
+
+class SecuritySwitch extends StateNotifier<bool> {
+  SecuritySwitch() : super(User.phoneVerified ?? false);
+
+  void toggle() {
+    state = !state;
+  }
+}
+
+class WatchListBool extends StateNotifier<bool> {
+  WatchListBool() : super(false);
+
+  void setBool(bool bool) {
+    state = bool;
+  }
+
+  void toggle() {
+    state = !state;
+  }
+}
+
+class CoinDescNotifier extends StateNotifier<String?> {
+  CoinDescNotifier() : super(null);
+
+  void setVal(String val) {
+    state = val;
   }
 }

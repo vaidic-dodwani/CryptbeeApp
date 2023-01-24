@@ -7,7 +7,8 @@ class RouteNames {
   static const String forgetPassword = "forgetpassword";
   static const String forgetpassOTP = "forgetpassotp";
   static const String setPassword = "setpassword";
-  static const String mobileNumber = "mobileNumber";
+  static const String phoneNumber = "phoneNumber";
+  static const String phoneNumberOTP = "phoneNumberOTP";
   static const String verifier = "verifier";
   static const String mailOpener = "mailopener";
   static const String twoFactor = "twofactor";

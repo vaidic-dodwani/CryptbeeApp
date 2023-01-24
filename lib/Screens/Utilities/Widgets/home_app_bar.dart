@@ -71,19 +71,20 @@ class test extends ConsumerWidget {
         style: bodyMedium(),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20.0),
-          child: CircleAvatar(
-              backgroundColor: Palette.neutralDarkGrey,
-              radius: 24,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.notifications_active,
-                  color: Colors.white,
-                ),
-                onPressed: (() {}),
-              )),
-        )
+        // Padding(
+        //   padding: const EdgeInsets.only(right: 20.0),
+        //   child: CircleAvatar(
+        //     backgroundColor: Palette.neutralDarkGrey,
+        //     radius: 24,
+        //     child: IconButton(
+        //       icon: const Icon(
+        //         Icons.notifications_active,
+        //         color: Colors.white,
+        //       ),
+        //       onPressed: (() {}),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }
