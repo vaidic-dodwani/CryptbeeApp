@@ -41,10 +41,21 @@ class HomeTabPan extends ConsumerWidget {
                           : min(data['MyHoldings'].length, 8),
                       (index) {
                         if (data['MyHoldings'].length == 0) {
-                          return Text(
-                            "No Coins , Go Buy Some",
-                            style: titleMedium(),
-                          );
+                          if (index == 0) {
+                            return Center(
+                              child: Text(
+                                "No Coins , Go Buy Some",
+                                style: titleMedium(),
+                              ),
+                            );
+                          } else {
+                            return const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 18.0, vertical: 12),
+                                child: SizedBox(
+                                  width: 40,
+                                ));
+                          }
                         } else if (data['MyHoldings'].length < 4) {
                           if ((index + 1) > data['MyHoldings'].length) {
                             return const Padding(
@@ -85,7 +96,7 @@ class HomeTabPan extends ConsumerWidget {
                   ),
                 ),
               ),
-              error: (error, stackTrace) => SizedBox( 
+              error: (error, stackTrace) => SizedBox(
                 height: 74,
                 child: SizedBox(
                   height: 20,

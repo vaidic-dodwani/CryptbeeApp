@@ -27,65 +27,7 @@ PreferredSize homeAppBar() {
           User.name.toUpperCase(),
           style: bodyMedium(),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: CircleAvatar(
-                backgroundColor: Palette.neutralDarkGrey,
-                radius: 24,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.notifications_active,
-                    color: Colors.white,
-                  ),
-                  onPressed: (() {}),
-                )),
-          )
-        ],
       ),
     ),
   );
-}
-
-class test extends ConsumerWidget {
-  const test({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return AppBar(
-      elevation: 0,
-      leadingWidth: 68,
-      backgroundColor: Palette.secondaryBlackColor,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 24,
-          backgroundImage: CachedNetworkImageProvider(
-            User.photo,
-          ),
-        ),
-      ),
-      title: Text(
-        User.name.toUpperCase(),
-        style: bodyMedium(),
-      ),
-      actions: [
-        // Padding(
-        //   padding: const EdgeInsets.only(right: 20.0),
-        //   child: CircleAvatar(
-        //     backgroundColor: Palette.neutralDarkGrey,
-        //     radius: 24,
-        //     child: IconButton(
-        //       icon: const Icon(
-        //         Icons.notifications_active,
-        //         color: Colors.white,
-        //       ),
-        //       onPressed: (() {}),
-        //     ),
-        //   ),
-        // )
-      ],
-    );
-  }
 }

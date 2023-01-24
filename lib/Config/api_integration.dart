@@ -732,4 +732,94 @@ class ApiCalls {
       log("$e");
     }
   }
+
+  static Future<dynamic> buyCoin(int buy_amount) async {
+    try {
+      log("Began Coin Buy For ${App.currentCoin} + $buy_amount");
+      Response response = await post(
+        Uri.parse(Links.prefixLink + Links.buyCoinLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            "coin_name": App.currentCoin,
+            "buy_amount": buy_amount
+          },
+        ),
+      );
+
+      if (response.statusCode == 401) {
+        await ApiCalls.renewToken();
+        response = await post(
+          Uri.parse(Links.prefixLink + Links.buyCoinLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{
+              "coin_name": App.currentCoin,
+              "buy_amount": buy_amount
+            },
+          ),
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> sellCoin(double sell_quantity, double price) async {
+    try {
+      log("Began Coin Sell For ${App.currentCoin} + $sell_quantity +$price");
+      Response response = await patch(
+        Uri.parse(Links.prefixLink + Links.sellCoinLink),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${App.acesss}'
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            "coin_name": App.currentCoin,
+            "sell_quantity": sell_quantity,
+            "price": price
+          },
+        ),
+      );
+
+      if (response.statusCode == 401) {
+        await ApiCalls.renewToken();
+        response = await patch(
+          Uri.parse(Links.prefixLink + Links.sellCoinLink),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${App.acesss}'
+          },
+          body: jsonEncode(
+            <String, dynamic>{
+              "coin_name": App.currentCoin,
+              "sell_quantity": sell_quantity,
+              "price": price
+            },
+          ),
+        );
+      }
+
+      final output = jsonDecode(response.body);
+      output['statusCode'] = response.statusCode;
+      log(response.statusCode.toString());
+
+      log(output.toString());
+      return output;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

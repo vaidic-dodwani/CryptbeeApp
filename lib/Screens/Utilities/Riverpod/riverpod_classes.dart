@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -189,6 +190,14 @@ class SecuritySwitch extends StateNotifier<bool> {
   }
 }
 
+class PopupNotifier extends StateNotifier<bool> {
+  PopupNotifier() : super(false);
+
+  void toggle() {
+    state = !state;
+  }
+}
+
 class WatchListBool extends StateNotifier<bool> {
   WatchListBool() : super(false);
 
@@ -206,5 +215,21 @@ class CoinDescNotifier extends StateNotifier<String?> {
 
   void setVal(String val) {
     state = val;
+  }
+}
+
+class CoinControllerNotifier extends StateNotifier<int?> {
+  CoinControllerNotifier() : super(null);
+
+  void setVal(String val) {
+    state = int.parse(val);
+  }
+}
+
+class HoldingCoinControllerNotifier extends StateNotifier<double?> {
+  HoldingCoinControllerNotifier() : super(null);
+
+  void setVal(String val) {
+    state = double.parse(val);
   }
 }

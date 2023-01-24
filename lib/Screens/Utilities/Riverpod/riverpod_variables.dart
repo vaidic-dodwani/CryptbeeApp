@@ -341,6 +341,34 @@ final coinPageCoinDescProvider =
   return coinPageCoinDescNotifier;
 });
 
+CoinControllerNotifier coinPageCoinControllerNotifier =
+    CoinControllerNotifier();
+
+final coinPageCoinControllerProvider =
+    StateNotifierProvider<CoinControllerNotifier, int?>((ref) {
+  return coinPageCoinControllerNotifier;
+});
+
+PopupNotifier coinPagePopupNotifier = PopupNotifier();
+
+final coinPagePopUpProvider =
+    StateNotifierProvider.autoDispose<PopupNotifier, bool>((ref) {
+  ref.onDispose(() {
+    coinPagePopupNotifier = PopupNotifier();
+  });
+  return coinPagePopupNotifier;
+});
+
+ButtonLoaderNotifier coinPageButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final coinPageButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    coinPageButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+  return coinPageButtonLoaderNotifier;
+});
+
 // PHONE OTP PAGE
 
 ButtonLoaderNotifier phoneOtpButtonLoaderNotifier = ButtonLoaderNotifier();
@@ -367,4 +395,64 @@ final securitySwitchProvider =
 
 final transactionsProvider = FutureProvider<dynamic>((ref) async {
   return ApiCalls.getTransactions();
+});
+
+//HOLDING TAB
+
+HoldingCoinControllerNotifier holdingTabCoinControllerNotifier =
+    HoldingCoinControllerNotifier();
+
+final holdingTabCoinControllerProvider =
+    StateNotifierProvider<HoldingCoinControllerNotifier, double?>((ref) {
+  return holdingTabCoinControllerNotifier;
+});
+
+PopupNotifier holdingTabPopupNotifier = PopupNotifier();
+
+final holdingTabPopUpProvider =
+    StateNotifierProvider.autoDispose<PopupNotifier, bool>((ref) {
+  ref.onDispose(() {
+    holdingTabPopupNotifier = PopupNotifier();
+  });
+  return holdingTabPopupNotifier;
+});
+
+ButtonLoaderNotifier holdingTabButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final holdingTabButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    holdingTabButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+  return holdingTabButtonLoaderNotifier;
+});
+
+//WATCHLIST
+
+CoinControllerNotifier watchlistCoinControllerNotifier =
+    CoinControllerNotifier();
+
+final watchlistCoinControllerProvider =
+    StateNotifierProvider<CoinControllerNotifier, int?>((ref) {
+  return watchlistCoinControllerNotifier;
+});
+
+PopupNotifier watchlistPopupNotifier = PopupNotifier();
+
+final watchlistPopUpProvider =
+    StateNotifierProvider.autoDispose<PopupNotifier, bool>((ref) {
+  ref.onDispose(() {
+    watchlistPopupNotifier = PopupNotifier();
+  });
+  return watchlistPopupNotifier;
+});
+
+ButtonLoaderNotifier watchlistButtonLoaderNotifier = ButtonLoaderNotifier();
+
+final watchlistButtonLoaderProvider =
+    StateNotifierProvider.autoDispose<ButtonLoaderNotifier, bool>((ref) {
+  ref.onDispose(() {
+    watchlistButtonLoaderNotifier = ButtonLoaderNotifier();
+  });
+  return watchlistButtonLoaderNotifier;
 });

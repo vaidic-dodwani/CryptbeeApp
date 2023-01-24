@@ -6,6 +6,8 @@ class App {
   static String? acesss;
   static String? refresh;
   static String? currentCoin;
+  static int? holdingIndex;
+  static int? watchlistIndex;
 }
 
 class User {

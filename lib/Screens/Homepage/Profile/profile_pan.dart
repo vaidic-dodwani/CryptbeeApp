@@ -99,7 +99,7 @@ class ProfilePan extends ConsumerWidget {
                           ),
                           const SizedBox(height: 29),
                           authlabelMedium(
-                              "We get your personal information from the verification process"),
+                            "We get your personal information from the verification process"),
                           const SizedBox(height: 44),
                           nameArea,
                           nameErrorLines,

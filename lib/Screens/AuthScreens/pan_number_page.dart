@@ -88,6 +88,8 @@ class PanNumberPage extends ConsumerWidget {
                               } else if (response['statusCode'] == 200) {
                                 Toast.show("Successfully Updated Details",
                                     duration: 5, gravity: Toast.bottom);
+                                await ApiCalls.getUserDetails();
+                                await appInstanceInit();
                                 context.goNamed(RouteNames.homePage);
                               } else {
                                 Toast.show(response[response.keys.first][0],

@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cryptbee/Models/coin_model.dart';
+import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/but_sell_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
+import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter/material.dart';
 
-Widget holdingCoinTileBuilder(Coin coin) {
+Widget holdingCoinTileBuilder(Coin coin, int index) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
     child: SizedBox(
@@ -72,10 +74,19 @@ Widget holdingCoinTileBuilder(Coin coin) {
                           coin.holding!.toStringAsFixed(2),
                           style: bodyMedium(fontColor: Palette.primaryColor),
                         ),
-                        BuySellButton(
-                          text: "Sell",
-                          width: 112,
-                        )
+                        User.panVerify ?? false
+                            ? BuySellButton(
+                                text: "Sell",
+                                width: 112,
+                                function: () {
+                                  App.holdingIndex = index;
+                                  App.currentCoin = coin.shortForm;
+                                  holdingTabPopupNotifier.toggle();
+                                },
+                              )
+                            : Container(
+                                width: 112,
+                              )
                       ],
                     ),
                   )

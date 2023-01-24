@@ -23,4 +23,6 @@ class Links {
   static const String modifyWatchlist = "invest/mywatchlist/";
   static const String coinDetailsLink = "invest/coindetails/?coin=";
   static const String transactionLink = "invest/transactions/";
+  static const String buyCoinLink = "invest/buy/";
+  static const String sellCoinLink = "invest/sell/";
 }
