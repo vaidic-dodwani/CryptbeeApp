@@ -8,7 +8,6 @@ import 'package:cryptbee/Screens/Utilities/Widgets/email_text_area.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/form_errors.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/log_in_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
-import 'package:cryptbee/Screens/Utilities/Widgets/o_auth_button.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/password_text_area.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/sign_in_up_tabs.dart';
 import 'package:cryptbee/Config/api_functions.dart';
