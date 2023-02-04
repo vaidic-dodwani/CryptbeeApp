@@ -18,6 +18,7 @@ class HomeTabPan extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final news = ref.watch(getNewsProvider);
     final holdings = ref.watch(getHoldingsProvider);
+    ref.refresh(getHoldingsProvider);
 
     return SizedBox(
       height: double.infinity,

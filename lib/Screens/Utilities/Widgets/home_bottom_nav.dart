@@ -40,6 +40,7 @@ List<Widget> bottomnavbaritems(int page) {
   return [
     InkWell(
       onTap: () {
+        
         homeBottomNavNotifier.setPage(0);
       },
       child: Column(
