@@ -57,7 +57,7 @@ class AppRouter {
                   pageBuilder: (context, state) {
                     return MaterialPage(
                       child: ForgetPassOtpPage(
-                        email: state.params['email']!,
+                        email: state.pathParameters['email']!,
                       ),
                     );
                   },
@@ -68,8 +68,8 @@ class AppRouter {
                   pageBuilder: (context, state) {
                     return MaterialPage(
                       child: SetPasswordPage(
-                        email: state.params['email']!,
-                        otp: state.params['otp']!,
+                        email: state.pathParameters['email']!,
+                        otp: state.pathParameters['otp']!,
                       ),
                     );
                   },
@@ -101,7 +101,7 @@ class AppRouter {
             pageBuilder: (context, state) {
               return MaterialPage(
                 child: MailOpener(
-                  email: state.params['email']!,
+                  email: state.pathParameters['email']!,
                 ),
               );
             },
@@ -114,7 +114,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return MaterialPage(
             child: PanNumberPage(
-              email: state.params['email']!,
+              email: state.pathParameters['email']!,
             ),
           );
         },
@@ -125,7 +125,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return MaterialPage(
             child: VerificationChecker(
-                email: state.params['email']!, token: state.params['token']!),
+                email: state.pathParameters['email']!, token: state.pathParameters['token']!),
           );
         },
       ),
@@ -142,10 +142,10 @@ class AppRouter {
             name: RouteNames.coinPage,
             path: 'coinpage/:shortName',
             pageBuilder: (context, state) {
-              log(state.params.toString());
+              log(state.pathParameters.toString());
               return MaterialPage(
                 child: CoinPage(
-                  shortName: state.params['shortName']!,
+                  shortName: state.pathParameters['shortName']!,
                 ),
               );
             },
@@ -192,7 +192,7 @@ class AppRouter {
                     pageBuilder: (context, state) {
                       return MaterialPage(
                         child: PhoneOtpPage(
-                          phoneNumber: state.params['phone_number']!,
+                          phoneNumber: state.pathParameters['phone_number']!,
                         ),
                       );
                     },

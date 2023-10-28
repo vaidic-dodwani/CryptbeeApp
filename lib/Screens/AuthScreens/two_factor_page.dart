@@ -5,7 +5,6 @@ import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Routing/route_names.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/logo_with_name.dart';
-import 'package:cryptbee/Screens/Utilities/Widgets/otp_box.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/two_factor_otp_page.dart';
 import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 

@@ -90,7 +90,7 @@ class PanNumberPage extends ConsumerWidget {
                                     duration: 5, gravity: Toast.bottom);
                                 await ApiCalls.getUserDetails();
                                 await appInstanceInit();
-                                context.goNamed(RouteNames.homePage);
+                                context.goNamed(RouteNames.root);
                               } else {
                                 Toast.show(response[response.keys.first][0],
                                     duration: 5, gravity: Toast.bottom);

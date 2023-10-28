@@ -126,10 +126,10 @@ Future appInstanceInit() async {
     User.pan = prefs.getString('pan_number') ?? 'pan';
     User.panVerify = true;
     log("initialised pan_number ${prefs.getString('pan_number')}");
-    log("initialised panVerify true}");
+    log("initialised panVerify true");
   } else {
     User.panVerify = false;
-    log("initialised panVerify false}");
+    log("initialised panVerify false");
   }
   if (prefs.containsKey('wallet')) {
     User.wallet = prefs.getDouble('wallet') ?? 0;

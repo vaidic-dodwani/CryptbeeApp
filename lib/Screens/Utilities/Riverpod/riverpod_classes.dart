@@ -146,7 +146,6 @@ class HomeBottomNavNotifier extends StateNotifier<int> {
   HomeBottomNavNotifier() : super(0);
 
   void setPage(int page) {
-    
     state = page;
   }
 }
@@ -195,6 +194,7 @@ class PopupNotifier extends StateNotifier<bool> {
   PopupNotifier() : super(false);
 
   void toggle() {
+    log("bool pagepop");
     state = !state;
   }
 }

@@ -2,7 +2,6 @@ import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_variables.dart';
 import 'package:cryptbee/Screens/Utilities/Widgets/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 class HomeBottomNavBar extends ConsumerWidget {
   const HomeBottomNavBar({super.key});
 
@@ -10,7 +9,6 @@ class HomeBottomNavBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int page = ref.watch(homeBottomNavProvider);
     return SizedBox(
-      height: double.infinity,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
@@ -40,7 +38,6 @@ List<Widget> bottomnavbaritems(int page) {
   return [
     InkWell(
       onTap: () {
-        
         homeBottomNavNotifier.setPage(0);
       },
       child: Column(

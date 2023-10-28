@@ -102,7 +102,7 @@ class SignUpPage extends ConsumerWidget {
                         prefs.setString(
                             'password', confirmPassArea.controller.text);
                         context.goNamed(RouteNames.mailOpener,
-                            params: {'email': emailField.controller.text});
+                            pathParameters: {'email': emailField.controller.text});
                       } else {
                         signUpConfirmPasswordErrorNotifer.setVal(
                             response[response.keys.first][0].toString());

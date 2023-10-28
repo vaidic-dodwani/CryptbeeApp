@@ -410,9 +410,6 @@ class ApiCalls {
 
   static Future<dynamic> newTwoFactor(String phoneNumber) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final access = prefs.getString('access');
-
       log("Began New Two factor for $phoneNumber");
       Response response = await post(
         Uri.parse(Links.prefixLink + Links.newTwoFactor),
@@ -733,9 +730,9 @@ class ApiCalls {
     }
   }
 
-  static Future<dynamic> buyCoin(int buy_amount) async {
+  static Future<dynamic> buyCoin(int buyAmount) async {
     try {
-      log("Began Coin Buy For ${App.currentCoin} + $buy_amount");
+      log("Began Coin Buy For ${App.currentCoin} + $buyAmount");
       Response response = await post(
         Uri.parse(Links.prefixLink + Links.buyCoinLink),
         headers: <String, String>{
@@ -745,7 +742,7 @@ class ApiCalls {
         body: jsonEncode(
           <String, dynamic>{
             "coin_name": App.currentCoin,
-            "buy_amount": buy_amount
+            "buy_amount": buyAmount
           },
         ),
       );
@@ -761,7 +758,7 @@ class ApiCalls {
           body: jsonEncode(
             <String, dynamic>{
               "coin_name": App.currentCoin,
-              "buy_amount": buy_amount
+              "buy_amount": buyAmount
             },
           ),
         );
@@ -776,9 +773,9 @@ class ApiCalls {
     }
   }
 
-  static Future<dynamic> sellCoin(double sell_quantity, double price) async {
+  static Future<dynamic> sellCoin(double sellQuantity, double price) async {
     try {
-      log("Began Coin Sell For ${App.currentCoin} + $sell_quantity +$price");
+      log("Began Coin Sell For ${App.currentCoin} + $sellQuantity +$price");
       Response response = await patch(
         Uri.parse(Links.prefixLink + Links.sellCoinLink),
         headers: <String, String>{
@@ -788,7 +785,7 @@ class ApiCalls {
         body: jsonEncode(
           <String, dynamic>{
             "coin_name": App.currentCoin,
-            "sell_quantity": sell_quantity,
+            "sell_quantity": sellQuantity,
             "price": price
           },
         ),
@@ -805,7 +802,7 @@ class ApiCalls {
           body: jsonEncode(
             <String, dynamic>{
               "coin_name": App.currentCoin,
-              "sell_quantity": sell_quantity,
+              "sell_quantity": sellQuantity,
               "price": price
             },
           ),

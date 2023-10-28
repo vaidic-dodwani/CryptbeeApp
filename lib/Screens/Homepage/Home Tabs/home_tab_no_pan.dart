@@ -36,9 +36,9 @@ class HomeTabNoPan extends ConsumerWidget {
               text: "Verify Pan",
               function: () {
                 context.pushNamed(RouteNames.panNumber,
-                    params: {'email': User.email});
+                    pathParameters: {'email': User.email});
                 // context.goNamed(RouteNames.panNumberHome,
-                //     params: {'email': User.email});
+                //     pathParameters: {'email': User.email});
               },
             ),
             const SizedBox(

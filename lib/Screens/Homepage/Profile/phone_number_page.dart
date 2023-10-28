@@ -59,7 +59,7 @@ class PhoneNumberPage extends ConsumerWidget {
                     mobileNumberArea.controller.text);
 
                 if (output['statusCode'] == 201) {
-                  context.goNamed(RouteNames.phoneNumberOTP, params: {
+                  context.goNamed(RouteNames.phoneNumberOTP, pathParameters: {
                     'phone_number': mobileNumberArea.controller.text
                   });
                 } else {

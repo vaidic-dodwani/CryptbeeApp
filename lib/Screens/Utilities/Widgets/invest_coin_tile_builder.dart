@@ -18,7 +18,7 @@ class InvestCoinTileBuilder extends StatelessWidget {
         onTap: () {
           App.currentCoin = coin.shortForm;
           context.goNamed(RouteNames.coinPage,
-              params: {'shortName': coin.shortForm});
+              pathParameters: {'shortName': coin.shortForm});
         },
         child: SizedBox(
           child: Container(

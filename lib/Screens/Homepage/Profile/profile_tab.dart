@@ -94,11 +94,11 @@ class ProfileTab extends ConsumerWidget {
                     authTitleLargeText(User.name),
                     const SizedBox(height: 8),
                     authLabelLargeText(User.email),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 24, horizontal: 16),
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                       child: Column(
-                        children: const [
+                        children: [
                           ProfileTileBuilder(
                             text: "Personal Details",
                             route: RouteNames.personalDetails,

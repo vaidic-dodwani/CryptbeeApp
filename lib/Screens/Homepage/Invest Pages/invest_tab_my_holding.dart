@@ -40,7 +40,7 @@ class InvestTabMyHoldings extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     return ((index) == (data.length))
                         ? (index == 0)
-                            ? Container(
+                            ? SizedBox(
                                 height: 84,
                                 child: Center(
                                   child: Text(
@@ -55,7 +55,9 @@ class InvestTabMyHoldings extends ConsumerWidget {
                         : GestureDetector(
                             onTap: () {
                               context.goNamed(RouteNames.coinPage,
-                                  params: {"shortName": App.currentCoin!});
+                                  pathParameters: {
+                                    "shortName": App.currentCoin!
+                                  });
                             },
                             child: holdingCoinTileBuilder(
                                 Coin(
@@ -72,11 +74,16 @@ class InvestTabMyHoldings extends ConsumerWidget {
                 ),
                 ref.watch(holdingTabPopUpProvider)
                     ? SizedBox(
-                        height: MediaQuery.of(context).size.height - 168,
-                        width: MediaQuery.of(context).size.width,
+                        // height: MediaQuery.of(context).size.height - 168,
+                        // width: MediaQuery.of(context).size.width,
+
+                        height: double.infinity,
+                        width: double.infinity,
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                           child: Container(
+                            height: double.infinity,
+                            width: double.infinity,
                             decoration: BoxDecoration(
                                 color: Colors.grey.withOpacity(0.05)),
                             child: Center(

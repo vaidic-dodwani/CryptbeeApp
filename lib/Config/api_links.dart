@@ -1,6 +1,7 @@
 class Links {
-  static const String prefixLink =
-      "enter_your_hosted_link_here";
+  static const String prefixLink = "https://cryptbee.anshumannandan.tech/";
+  // static const String prefixLink =
+  //     "http://cryptbee.centralindia.cloudapp.azure.com/";
   static const String signInLink = "auth/login/";
   static const String signUpLink = "auth/sendemailLINK/";
   static const String verificationCheckerLink = "auth/verifyemailLINK/";

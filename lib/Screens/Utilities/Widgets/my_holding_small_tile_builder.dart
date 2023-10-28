@@ -19,7 +19,7 @@ class MyyHoldingSmallTileBuilder extends ConsumerWidget {
         onTap: () {
           App.currentCoin = shortname;
           context
-              .goNamed(RouteNames.coinPage, params: {"shortName": shortname});
+              .goNamed(RouteNames.coinPage, pathParameters: {"shortName": shortname});
         },
         child: CircleAvatar(
             backgroundColor: Colors.transparent,

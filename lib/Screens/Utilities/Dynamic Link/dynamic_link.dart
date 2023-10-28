@@ -23,7 +23,7 @@ Future<void> initDynamicLink() async {
     email = data!.link.queryParameters['email'] ?? 'somthing';
     token = data!.link.queryParameters['token'] ?? 'sample token';
 
-    App.navigatorKey.currentContext!.goNamed(RouteNames.verifier, params: {
+    App.navigatorKey.currentContext!.goNamed(RouteNames.verifier, pathParameters: {
       'email': email.toString().toLowerCase(),
       'token': token.toString().toLowerCase()
     });
@@ -32,6 +32,6 @@ Future<void> initDynamicLink() async {
     email = data!.link.queryParameters['email'] ?? 'somthing';
     token = data!.link.queryParameters['token'] ?? 'sample token';
     App.navigatorKey.currentContext!.goNamed(RouteNames.verifier,
-        params: {'email': email.toString(), 'token': token.toString()});
+        pathParameters: {'email': email.toString(), 'token': token.toString()});
   }
 }

@@ -42,7 +42,9 @@ class InvestTabWatchlist extends ConsumerWidget {
                         ? GestureDetector(
                             onTap: () {
                               context.goNamed(RouteNames.coinPage,
-                                  params: {"shortName": App.currentCoin!});
+                                  pathParameters: {
+                                    "shortName": App.currentCoin!
+                                  });
                             },
                             child: WatchlistCoinTileBuilder(
                                 coin: Coin(
@@ -56,7 +58,7 @@ class InvestTabWatchlist extends ConsumerWidget {
                                 index: index),
                           )
                         : (index == 0)
-                            ? Container(
+                            ? SizedBox(
                                 height: 84,
                                 child: Center(
                                   child: Text(

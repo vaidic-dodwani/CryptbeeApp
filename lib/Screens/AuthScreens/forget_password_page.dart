@@ -65,7 +65,7 @@ class ForgetPasswordPage extends ConsumerWidget {
                   forgetPassButtonLoaderNotifier.toggle();
                   if (response['statusCode'] == 200) {
                     context.goNamed(RouteNames.forgetpassOTP,
-                        params: {'email': emailTextArea.controller.text});
+                        pathParameters: {'email': emailTextArea.controller.text});
                   } else {
                     forgetPassSignUpEmailErrorNotifer
                         .setVal(response[response.keys.first][0]);

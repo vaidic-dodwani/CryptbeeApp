@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cryptbee/Screens/Homepage/Invest%20Pages/invest_tab_all.dart';
 import 'package:cryptbee/Screens/Homepage/Invest%20Pages/invest_tab_my_holding.dart';
 import 'package:cryptbee/Screens/Homepage/Invest%20Pages/invest_tab_watchlist.dart';
@@ -12,14 +14,16 @@ class InvestTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final investTabIndex = ref.watch(investTopNavProvider);
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Column(
-        children: [
-          const InvestTabTopNav(),
-          Expanded(child: investTabWidgets[investTabIndex]),
-        ],
+    final size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: size.height,
+        child: Column(
+          children: [
+            const InvestTabTopNav(),
+            Expanded(child: investTabWidgets[investTabIndex]),
+          ],
+        ),
       ),
     );
   }
@@ -27,6 +31,6 @@ class InvestTab extends ConsumerWidget {
 
 List<Widget> investTabWidgets = [
   const InvestTabAll(),
-   InvestTabMyHoldings(), 
-   InvestTabWatchlist()
+  InvestTabMyHoldings(),
+  InvestTabWatchlist()
 ];

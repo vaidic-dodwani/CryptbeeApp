@@ -8,13 +8,13 @@ class InvestTabTopNav extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
       child: SizedBox(
         height: 40,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             InvestTopNavItemGenerator(text: "All", index: 0),
             InvestTopNavItemGenerator(text: "My Holdings", index: 1),
             InvestTopNavItemGenerator(text: "Watchlist", index: 2),

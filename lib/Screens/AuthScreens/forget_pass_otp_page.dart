@@ -50,7 +50,7 @@ class ForgetPassOtpPage extends StatelessWidget {
                         Toast.show("Remember the password this time",
                             duration: 5, gravity: Toast.bottom);
                         context.goNamed(RouteNames.setPassword,
-                            params: {'email': email, 'otp': pin.toString()});
+                            pathParameters: {'email': email, 'otp': pin.toString()});
                       } else {
                         Toast.show(response[response.keys.first][0],
                             duration: 5, gravity: Toast.bottom);

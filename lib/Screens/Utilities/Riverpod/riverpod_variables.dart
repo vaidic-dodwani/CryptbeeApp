@@ -1,6 +1,5 @@
 import 'package:cryptbee/Config/api_integration.dart';
 import 'package:cryptbee/Screens/Utilities/Riverpod/riverpod_classes.dart';
-import 'package:cryptbee/Screens/Utilities/static_classes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //  SIGN IN PAGE
@@ -229,8 +228,16 @@ final panNumberNameErrorProvider =
 
 HomeBottomNavNotifier homeBottomNavNotifier = HomeBottomNavNotifier();
 
-final homeBottomNavProvider = StateNotifierProvider<HomeBottomNavNotifier, int>(
-    (ref) => homeBottomNavNotifier);
+final homeBottomNavProvider =
+    StateNotifierProvider.autoDispose<HomeBottomNavNotifier, int>(
+        (ref) {
+
+          ref.onDispose(() {
+            homeBottomNavNotifier = HomeBottomNavNotifier();
+          });
+
+          return homeBottomNavNotifier;
+        });
 
 //INVEST TAB
 

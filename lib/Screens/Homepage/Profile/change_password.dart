@@ -57,10 +57,10 @@ class ChangePassword extends ConsumerWidget {
                       },
                       child: Row(
                         children: [
-                          Container(
+                          const SizedBox(
                             height: 28,
                             width: 28,
-                            child: const Icon(
+                            child: Icon(
                               Icons.chevron_left_sharp,
                               color: Palette.secondaryOffWhiteColor,
                             ),
@@ -114,7 +114,7 @@ class ChangePassword extends ConsumerWidget {
                                                   confirmPassArea
                                                       .controller.text);
                                           changePasswordEmailButtonLoaderNotifier
-                                              .toggle(); 
+                                              .toggle();
 
                                           if (output['statusCode'] == 200) {
                                             ToastContext().init(context);

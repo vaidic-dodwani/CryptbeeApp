@@ -20,6 +20,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Palette.secondaryBlackColor,
       appBar: homeAppBar(),
       body: Stack(

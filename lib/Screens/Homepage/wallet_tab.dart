@@ -56,7 +56,7 @@ class WalletTab extends ConsumerWidget {
                             style: headlineLarge(),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(

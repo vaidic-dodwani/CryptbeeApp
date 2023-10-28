@@ -40,7 +40,7 @@ class _VerificationCheckerState extends ConsumerState<VerificationChecker> {
                         Toast.show("Verified Successfully!! ",
                             duration: 5, gravity: Toast.bottom);
                         context.goNamed(RouteNames.panNumber,
-                            params: {'email': widget.email});
+                            pathParameters: {'email': widget.email});
                       },
                     );
                   },
@@ -50,7 +50,7 @@ class _VerificationCheckerState extends ConsumerState<VerificationChecker> {
                 Toast.show("Verified Successfully!! ",
                     duration: 5, gravity: Toast.bottom);
                 context.goNamed(RouteNames.panNumber,
-                    params: {'email': widget.email});
+                    pathParameters: {'email': widget.email});
               },
             );
           },
